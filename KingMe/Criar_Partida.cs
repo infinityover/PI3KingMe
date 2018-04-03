@@ -16,6 +16,7 @@ namespace KingMe
         public string idJogador { get; set; }
         public string senhaJogador { get; set; }
         public string jogadorDaVez { get; set; }
+        public Boolean kill { get; set; }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -52,12 +53,24 @@ namespace KingMe
         private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
             jogadorDaVez = MePresidentaServidor.Jogo.Iniciar(Convert.ToInt32(this.idPartida), this.senhaPartida);
+            kill = false;
             this.Close();
         }
 
         private void txtSenha_TextChanged(object sender, EventArgs e)
         {
             this.senhaPartida = this.txtSenha.Text;
+        }
+
+        private void Criar_Partida_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            kill = true;
+            this.Close();
+        }
+
+        private void txtPartidas_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

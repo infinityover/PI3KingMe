@@ -115,8 +115,5 @@
   <ItemGroup>
     <None Include="Resources\nn-coroa1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Microsoft\VisualBasic\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

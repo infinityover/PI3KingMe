@@ -23,6 +23,8 @@ namespace KingMe
         public string idJogador { get; set; }
         public string senhaJogador { get; set; }
         public string jogadorDaVez { get; set; }
+        public Boolean kill { get; set; }
+
 
         private void Entrar_Nova_Load(object sender, EventArgs e)
         {
@@ -65,7 +67,7 @@ namespace KingMe
 
         private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
-            if (this.txtNomeJogador.Text != "" )
+            if (this.txtNomeJogador.Text != "")
             {
                 string Aux1;
                 string[] Aux2;
@@ -79,19 +81,12 @@ namespace KingMe
                 }
 
                 Aux1 = MePresidentaServidor.Jogo.Entrar(Convert.ToInt32(this.idPartida), this.txtNomeJogador.Text, this.senhaPartida);
-                if (Aux1.Substring(0, 4) == "ERRO")
-                {
-                    MessageBox.Show("Quantidade máxima de jogadores atingida.");
-                    return;
-                }
-
-                //Clipboard.SetText(Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)));
-                //MessageBox.Show(Aux1);
                 Aux2 = Aux1.Split(',');
 
                 this.idJogador = Aux2[0];
                 this.senhaJogador = Aux2[1];
 
+                kill = false;
                 this.Close();
     }
             else
@@ -105,12 +100,15 @@ namespace KingMe
             this.senhaPartida = this.txtSenhaPartida.Text;
         }
 
-        private void txtNomeJogador_KeyPress(object sender, KeyPressEventArgs e)
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+
+        }
+
+        private void Entrar_Nova_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            kill = true;
+            this.Close();
         }
     }
 }

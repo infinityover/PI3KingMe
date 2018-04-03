@@ -74,6 +74,7 @@
             this.listView1.Size = new System.Drawing.Size(291, 217);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // btnIniciarJogo
             // 
@@ -107,7 +108,6 @@
             this.txtNomeJogador.Name = "txtNomeJogador";
             this.txtNomeJogador.Size = new System.Drawing.Size(291, 31);
             this.txtNomeJogador.TabIndex = 6;
-            this.txtNomeJogador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNomeJogador_KeyPress);
             // 
             // label1
             // 
@@ -159,6 +159,7 @@
             this.Name = "Entrar_Nova";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Entrar em Partida Nova";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Entrar_Nova_FormClosed);
             this.Load += new System.EventHandler(this.Entrar_Nova_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

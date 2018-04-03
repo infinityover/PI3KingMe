@@ -107,6 +107,7 @@
             this.txtPartidas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPartidas.Size = new System.Drawing.Size(269, 157);
             this.txtPartidas.TabIndex = 0;
+            this.txtPartidas.TextChanged += new System.EventHandler(this.txtPartidas_TextChanged);
             // 
             // btnListarPartidas
             // 
@@ -240,6 +241,7 @@
             this.Name = "Criar_Partida";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nova Partida";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Criar_Partida_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

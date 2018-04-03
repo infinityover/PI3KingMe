@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Tabuleiro));
             this.pos50 = new System.Windows.Forms.PictureBox();
             this.pos51 = new System.Windows.Forms.PictureBox();
@@ -69,8 +70,10 @@
             this.cmbPersonagens = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbDestino = new System.Windows.Forms.ComboBox();
-            this.btnVerificarVez = new System.Windows.Forms.Button();
             this.btnConfirmarJogada = new System.Windows.Forms.Button();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.txtSenha = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -316,6 +319,7 @@
             this.A.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.A.TabIndex = 1;
             this.A.TabStop = false;
+            this.A.Tag = "A";
             // 
             // B
             // 
@@ -327,6 +331,7 @@
             this.B.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.B.TabIndex = 1;
             this.B.TabStop = false;
+            this.B.Tag = "B";
             // 
             // C
             // 
@@ -338,6 +343,7 @@
             this.C.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.C.TabIndex = 1;
             this.C.TabStop = false;
+            this.C.Tag = "C";
             // 
             // D
             // 
@@ -349,6 +355,7 @@
             this.D.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.D.TabIndex = 1;
             this.D.TabStop = false;
+            this.D.Tag = "D";
             // 
             // E
             // 
@@ -360,6 +367,7 @@
             this.E.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.E.TabIndex = 1;
             this.E.TabStop = false;
+            this.E.Tag = "E";
             // 
             // G
             // 
@@ -371,6 +379,7 @@
             this.G.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.G.TabIndex = 1;
             this.G.TabStop = false;
+            this.G.Tag = "G";
             // 
             // F
             // 
@@ -382,6 +391,8 @@
             this.F.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.F.TabIndex = 1;
             this.F.TabStop = false;
+            this.F.Tag = "F";
+            this.F.UseWaitCursor = true;
             // 
             // H
             // 
@@ -393,6 +404,7 @@
             this.H.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.H.TabIndex = 1;
             this.H.TabStop = false;
+            this.H.Tag = "H";
             // 
             // I
             // 
@@ -404,6 +416,7 @@
             this.I.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.I.TabIndex = 1;
             this.I.TabStop = false;
+            this.I.Tag = "I";
             // 
             // K
             // 
@@ -415,6 +428,7 @@
             this.K.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.K.TabIndex = 1;
             this.K.TabStop = false;
+            this.K.Tag = "K";
             // 
             // J
             // 
@@ -426,6 +440,7 @@
             this.J.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.J.TabIndex = 1;
             this.J.TabStop = false;
+            this.J.Tag = "J";
             // 
             // L
             // 
@@ -437,6 +452,7 @@
             this.L.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.L.TabIndex = 1;
             this.L.TabStop = false;
+            this.L.Tag = "L";
             // 
             // M
             // 
@@ -448,6 +464,7 @@
             this.M.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.M.TabIndex = 1;
             this.M.TabStop = false;
+            this.M.Tag = "M";
             // 
             // mensagem
             // 
@@ -457,9 +474,8 @@
             this.mensagem.Location = new System.Drawing.Point(368, 270);
             this.mensagem.Name = "mensagem";
             this.mensagem.Size = new System.Drawing.Size(138, 18);
-            this.mensagem.TabIndex = 2;
+            this.mensagem.TabIndex = 0;
             this.mensagem.Text = "Aguarde sua Vez!";
-            this.mensagem.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -468,7 +484,7 @@
             this.label2.Location = new System.Drawing.Point(368, 359);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(138, 15);
-            this.label2.TabIndex = 4;
+            this.label2.TabIndex = 2;
             this.label2.Text = "Escolha o Personagem";
             // 
             // cmbPersonagens
@@ -480,7 +496,7 @@
             this.cmbPersonagens.MaxDropDownItems = 20;
             this.cmbPersonagens.Name = "cmbPersonagens";
             this.cmbPersonagens.Size = new System.Drawing.Size(206, 21);
-            this.cmbPersonagens.TabIndex = 5;
+            this.cmbPersonagens.TabIndex = 3;
             // 
             // label3
             // 
@@ -503,20 +519,6 @@
             this.cmbDestino.Size = new System.Drawing.Size(206, 21);
             this.cmbDestino.TabIndex = 5;
             // 
-            // btnVerificarVez
-            // 
-            this.btnVerificarVez.BackColor = System.Drawing.Color.DarkCyan;
-            this.btnVerificarVez.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVerificarVez.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerificarVez.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnVerificarVez.Location = new System.Drawing.Point(371, 309);
-            this.btnVerificarVez.Name = "btnVerificarVez";
-            this.btnVerificarVez.Size = new System.Drawing.Size(206, 32);
-            this.btnVerificarVez.TabIndex = 22;
-            this.btnVerificarVez.Text = "VERIFICAR VEZ";
-            this.btnVerificarVez.UseVisualStyleBackColor = false;
-            this.btnVerificarVez.Click += new System.EventHandler(this.btnVerificarVez_Click);
-            // 
             // btnConfirmarJogada
             // 
             this.btnConfirmarJogada.BackColor = System.Drawing.Color.DarkCyan;
@@ -526,10 +528,29 @@
             this.btnConfirmarJogada.Location = new System.Drawing.Point(371, 466);
             this.btnConfirmarJogada.Name = "btnConfirmarJogada";
             this.btnConfirmarJogada.Size = new System.Drawing.Size(206, 32);
-            this.btnConfirmarJogada.TabIndex = 22;
+            this.btnConfirmarJogada.TabIndex = 6;
             this.btnConfirmarJogada.Text = "CONFIRMAR JOGADA";
             this.btnConfirmarJogada.UseVisualStyleBackColor = false;
             this.btnConfirmarJogada.Click += new System.EventHandler(this.btnConfirmarJogada_Click);
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(3, 3);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(100, 20);
+            this.txtId.TabIndex = 7;
+            // 
+            // txtSenha
+            // 
+            this.txtSenha.Location = new System.Drawing.Point(3, 29);
+            this.txtSenha.Name = "txtSenha";
+            this.txtSenha.Size = new System.Drawing.Size(100, 20);
+            this.txtSenha.TabIndex = 7;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Tabuleiro
             // 
@@ -539,18 +560,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(594, 526);
-            this.Controls.Add(this.btnConfirmarJogada);
-            this.Controls.Add(this.btnVerificarVez);
-            this.Controls.Add(this.cmbDestino);
-            this.Controls.Add(this.cmbPersonagens);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.mensagem);
-            this.Controls.Add(this.pos13);
-            this.Controls.Add(this.pos23);
-            this.Controls.Add(this.pos33);
-            this.Controls.Add(this.pos43);
-            this.Controls.Add(this.pos53);
+            this.Controls.Add(this.txtSenha);
+            this.Controls.Add(this.txtId);
             this.Controls.Add(this.L);
             this.Controls.Add(this.H);
             this.Controls.Add(this.D);
@@ -564,6 +575,17 @@
             this.Controls.Add(this.I);
             this.Controls.Add(this.E);
             this.Controls.Add(this.A);
+            this.Controls.Add(this.btnConfirmarJogada);
+            this.Controls.Add(this.cmbDestino);
+            this.Controls.Add(this.cmbPersonagens);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.mensagem);
+            this.Controls.Add(this.pos13);
+            this.Controls.Add(this.pos23);
+            this.Controls.Add(this.pos33);
+            this.Controls.Add(this.pos43);
+            this.Controls.Add(this.pos53);
             this.Controls.Add(this.posRei);
             this.Controls.Add(this.posOperario);
             this.Controls.Add(this.pos12);
@@ -667,7 +689,9 @@
         private System.Windows.Forms.ComboBox cmbPersonagens;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbDestino;
-        private System.Windows.Forms.Button btnVerificarVez;
         private System.Windows.Forms.Button btnConfirmarJogada;
+        private System.Windows.Forms.TextBox txtId;
+        private System.Windows.Forms.TextBox txtSenha;
+        private System.Windows.Forms.Timer timer1;
     }
 }

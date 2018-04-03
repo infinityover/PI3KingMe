@@ -21,8 +21,9 @@ namespace KingMe
         {
             this.Visible = false;
             string nome = "Criar_Partida";
-            Tabuleiro form = new Tabuleiro(nome);            
-            form.Show();
+            Tabuleiro form = new Tabuleiro(nome);
+            form.ShowDialog();
+            this.Close();
         }
 
         private void btnEntrarPartidaNova_Click(object sender, EventArgs e)
@@ -30,9 +31,14 @@ namespace KingMe
             this.Visible = false;
             string nome = "Entrar_Nova";
             Tabuleiro form = new Tabuleiro(nome);
-            form.Show();
+            form.ShowDialog();
             form.Close();
-            this.Visible = true;
+            this.Close();
+        }
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

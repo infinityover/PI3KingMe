@@ -11,18 +11,9 @@ using MePresidentaServidor;
 
 namespace KingMe
 {
-
     public partial class Tabuleiro : Form
     {
-
-       //public class posicao
-       // {
-       //     public int pos_x, pos_y;
-       //     private bool ocupado;
-       //     private PictureBox imagem;
-       //
-       // }
-
+        Boolean inGame = false;
         public Tabuleiro(string Form)
         {
             InitializeComponent();
@@ -30,22 +21,26 @@ namespace KingMe
             {
                 Criar_Partida formulario = new Criar_Partida();
                 formulario.ShowDialog();
-                if (formulario.idJogador == "") this.Close();
                 this.idPartida = formulario.idPartida;
                 this.senhaPartida = formulario.senhaPartida;
                 this.idJogador = formulario.idJogador;
                 this.senhaJogador = formulario.senhaJogador;
                 this.jogadorDaVez = formulario.jogadorDaVez;
+                timer1.Enabled = true;
             } else if (Form == "Entrar_Nova")
             {
                 Entrar_Nova formulario2 = new Entrar_Nova();
                 formulario2.ShowDialog();
-                if (formulario2.idJogador== null) this.DestroyHandle();
                 this.idPartida = formulario2.idPartida;
                 this.senhaPartida = formulario2.senhaPartida;
                 this.idJogador = formulario2.idJogador;
                 this.senhaJogador = formulario2.senhaJogador;
                 this.jogadorDaVez = formulario2.jogadorDaVez;
+                timer1.Enabled = true;
+            }
+            if (String.IsNullOrEmpty(this.idPartida))
+            {
+                this.Visible = false;
             }
         }
 
@@ -56,23 +51,41 @@ namespace KingMe
         public string jogadorDaVez { get; set; }
         public string[,] matrizTabuleiro { get; set; } = new string[20,4];
         public string posicaoOperario { get; set; }
-
-        //private posicao[,] matriz = new posicao[5,4];
-        //
-        //public posicao[,] GetMatriz()
-        //{
-        //    return GetMatriz();
-        //}
-        //
-        //public void SetMatriz(posicao[,] value)
-        //{
-        //    SetMatriz(value);
-        //}
-
-        private void Tabuleiro_Load(object sender, EventArgs e)
+        public int movimentaPersonagem(string personagem, int nivel)
         {
-            //GetMatriz()[0, 0].pos_x = 10;
-            //MessageBox.Show(GetMatriz()[0, 0].pos_x.ToString());
+            MessageBox.Show(MePresidentaServidor.Jogo.ColocarPersonagem(Convert.ToInt32(this.idPartida), this.senhaJogador, nivel, personagem));
+            string[] aux = { };
+            Control persona = null;
+            foreach (Control con in this.Controls) {
+                if (con is PictureBox)
+                {
+                   if (Convert.ToString(con.Tag) == personagem)
+                    {
+                        persona = con;
+                        break;
+                    }
+                }
+            }
+            if (persona is null)
+            {
+                return -1;
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                aux = this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i].Split(',');
+                if (aux[2] == "false")
+                {
+                    persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
+                    this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i] = aux[0] + ',' + aux[0] + ',' + cmbPersonagens.Text;
+                    this.cmbPersonagens.Items.Remove(this.cmbPersonagens.Text);
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+    private void Tabuleiro_Load(object sender, EventArgs e)
+        {
             cmbPersonagens.Items.Add("A");
             cmbPersonagens.Items.Add("B");
             cmbPersonagens.Items.Add("C");
@@ -91,7 +104,6 @@ namespace KingMe
             cmbDestino.Items.Add("2");
             cmbDestino.Items.Add("3");
             cmbDestino.Items.Add("4");
-
 
             this.matrizTabuleiro[0,0] = Convert.ToString(this.pos10.Location.X) + "," + Convert.ToString(this.pos10.Location.Y) + ",false";
             this.matrizTabuleiro[0,1] = Convert.ToString(this.pos11.Location.X) + "," + Convert.ToString(this.pos11.Location.Y) + ",false";
@@ -114,136 +126,54 @@ namespace KingMe
             this.matrizTabuleiro[4,2] = Convert.ToString(this.pos52.Location.X) + "," + Convert.ToString(this.pos52.Location.Y) + ",false";
             this.matrizTabuleiro[4,3] = Convert.ToString(this.pos53.Location.X) + "," + Convert.ToString(this.pos53.Location.Y) + ",false";
 
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnVerificarVez_Click(object sender, EventArgs e)
-        {
-            this.jogadorDaVez = MePresidentaServidor.Jogo.VerificarVez(Convert.ToInt32(this.idPartida));
-            if (this.jogadorDaVez == this.idJogador)
-            {
-                mensagem.Text = "Sua Vez, Faça uma Jogada";
-                mensagem.ForeColor = Color.LimeGreen;
-            } else
-            {
-                mensagem.Text = "Aguarde sua Vez!";
-                mensagem.ForeColor = Color.Red;
-
-            }
+            txtId.Text = this.idJogador;
+            txtSenha.Text = this.senhaJogador;
         }
 
         private void btnConfirmarJogada_Click(object sender, EventArgs e)
         {
+            movimentaPersonagem(this.cmbPersonagens.Text,Convert.ToInt32(this.cmbDestino.Text));
+          
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (this.inGame == false)
+            { 
+                string Aux1;
+                string[] Aux2;
+                string[] Aux3;
+                Aux1 = Jogo.ListarPartidas();
             
-            MessageBox.Show(MePresidentaServidor.Jogo.ColocarPersonagem(Convert.ToInt32(this.idPartida), this.senhaJogador, Convert.ToInt32(this.cmbDestino.Text), this.cmbPersonagens.Text));
-            string[] aux;
-            for (int i=0; i<4; i++)
+                Aux1 = Aux1.Replace("\r", "");
+                Aux2 = Aux1.Split('\n');
+
+                for (int i = 0; i< Aux2.Length; i++)
+                {
+                    Aux3 = Aux2[i].Split(',');
+                    if (Aux3[1] == idPartida)
+                    {
+                        MessageBox.Show("Começou a partida");
+                        this.inGame = true;
+                        break;
+                    }
+                }
+            } else
             {
-                
-                aux = this.matrizTabuleiro[(Convert.ToInt32(this.cmbDestino.Text) - 1),i].Split(',');
+                MessageBox.Show(Jogo.VerificarVez(Convert.ToInt32(this.idJogador)));
 
-                if (this.cmbPersonagens.Text == "A")
-                {                    
-                    if (aux[2] == "false")
-                    {
-                        this.A.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "B")
+                if (this.jogadorDaVez == this.idJogador)
                 {
-                    if (aux[2] == "false")
-                    {
-                        this.B.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
+                    mensagem.Text = "Sua Vez, Faça uma Jogada" + this.jogadorDaVez;
+                    mensagem.ForeColor = Color.LimeGreen;
                 }
-                else if (this.cmbPersonagens.Text == "C")
+                else
                 {
-                    if (aux[2] == "false")
-                    {
-                        this.C.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
+                    mensagem.Text = "Aguarde sua Vez!" + this.jogadorDaVez;
+                    mensagem.ForeColor = Color.Red;
                 }
-                else if (this.cmbPersonagens.Text == "D")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.D.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "E")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.E.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "F")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.F.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "G")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.G.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "H")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.H.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "I")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.I.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "J")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.J.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "K")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.K.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "L")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.L.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-                else if (this.cmbPersonagens.Text == "M")
-                {
-                    if (aux[2] == "false")
-                    {
-                        this.M.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    }
-                }
-
             }
-
             
-
-
-
         }
     }
 }
