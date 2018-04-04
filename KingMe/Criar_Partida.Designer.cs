@@ -41,11 +41,11 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnIniciarJogo = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtIdPartida = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnEntrarJogo = new System.Windows.Forms.Button();
             this.txtNomeJogador = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtIdPartida = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -198,6 +198,25 @@
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             // 
+            // txtIdPartida
+            // 
+            this.txtIdPartida.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIdPartida.Location = new System.Drawing.Point(21, 102);
+            this.txtIdPartida.Multiline = true;
+            this.txtIdPartida.Name = "txtIdPartida";
+            this.txtIdPartida.Size = new System.Drawing.Size(274, 31);
+            this.txtIdPartida.TabIndex = 19;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(18, 84);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 15);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Id da partida";
+            // 
             // btnEntrarJogo
             // 
             this.btnEntrarJogo.BackColor = System.Drawing.Color.Teal;
@@ -220,6 +239,7 @@
             this.txtNomeJogador.Name = "txtNomeJogador";
             this.txtNomeJogador.Size = new System.Drawing.Size(274, 31);
             this.txtNomeJogador.TabIndex = 6;
+            this.txtNomeJogador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNomeJogador_KeyPress);
             // 
             // label5
             // 
@@ -230,25 +250,6 @@
             this.label5.Size = new System.Drawing.Size(107, 15);
             this.label5.TabIndex = 5;
             this.label5.Text = "Nome do Jogador";
-            // 
-            // txtIdPartida
-            // 
-            this.txtIdPartida.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIdPartida.Location = new System.Drawing.Point(21, 102);
-            this.txtIdPartida.Multiline = true;
-            this.txtIdPartida.Name = "txtIdPartida";
-            this.txtIdPartida.Size = new System.Drawing.Size(274, 31);
-            this.txtIdPartida.TabIndex = 19;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(18, 84);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 15);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Id da partida";
             // 
             // Criar_Partida
             // 

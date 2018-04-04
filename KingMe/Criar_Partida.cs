@@ -80,6 +80,13 @@ namespace KingMe
             kill = true;
             this.Close();
         }
-        
+
+        private void txtNomeJogador_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }
