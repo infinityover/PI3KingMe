@@ -44,6 +44,8 @@
             this.btnEntrarJogo = new System.Windows.Forms.Button();
             this.txtNomeJogador = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.txtIdPartida = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -64,9 +66,9 @@
             this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(19, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 15);
+            this.label1.Size = new System.Drawing.Size(93, 15);
             this.label1.TabIndex = 1;
-            this.label1.Text = "De um nome a partida";
+            this.label1.Text = "Nome a partida";
             // 
             // txtSenha
             // 
@@ -84,9 +86,9 @@
             this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(19, 84);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 15);
+            this.label2.Size = new System.Drawing.Size(43, 15);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Defina uma Senha";
+            this.label2.Text = "Senha";
             // 
             // label3
             // 
@@ -104,10 +106,10 @@
             this.txtPartidas.Location = new System.Drawing.Point(22, 81);
             this.txtPartidas.Multiline = true;
             this.txtPartidas.Name = "txtPartidas";
+            this.txtPartidas.ReadOnly = true;
             this.txtPartidas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPartidas.Size = new System.Drawing.Size(269, 157);
             this.txtPartidas.TabIndex = 0;
-            this.txtPartidas.TextChanged += new System.EventHandler(this.txtPartidas_TextChanged);
             // 
             // btnListarPartidas
             // 
@@ -174,9 +176,9 @@
             this.btnIniciarJogo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIniciarJogo.Font = new System.Drawing.Font("Arial", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciarJogo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnIniciarJogo.Location = new System.Drawing.Point(357, 221);
+            this.btnIniciarJogo.Location = new System.Drawing.Point(357, 281);
             this.btnIniciarJogo.Name = "btnIniciarJogo";
-            this.btnIniciarJogo.Size = new System.Drawing.Size(313, 255);
+            this.btnIniciarJogo.Size = new System.Drawing.Size(313, 191);
             this.btnIniciarJogo.TabIndex = 17;
             this.btnIniciarJogo.Text = "INICIAR GAME";
             this.btnIniciarJogo.UseVisualStyleBackColor = false;
@@ -184,13 +186,15 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.txtIdPartida);
+            this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.btnEntrarJogo);
             this.groupBox3.Controls.Add(this.txtNomeJogador);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(357, 53);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(313, 155);
+            this.groupBox3.Size = new System.Drawing.Size(313, 222);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             // 
@@ -200,7 +204,7 @@
             this.btnEntrarJogo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEntrarJogo.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEntrarJogo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEntrarJogo.Location = new System.Drawing.Point(21, 84);
+            this.btnEntrarJogo.Location = new System.Drawing.Point(21, 161);
             this.btnEntrarJogo.Name = "btnEntrarJogo";
             this.btnEntrarJogo.Size = new System.Drawing.Size(274, 49);
             this.btnEntrarJogo.TabIndex = 17;
@@ -223,9 +227,28 @@
             this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(18, 26);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(152, 15);
+            this.label5.Size = new System.Drawing.Size(107, 15);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Digite o Nome do Jogador";
+            this.label5.Text = "Nome do Jogador";
+            // 
+            // txtIdPartida
+            // 
+            this.txtIdPartida.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIdPartida.Location = new System.Drawing.Point(21, 102);
+            this.txtIdPartida.Multiline = true;
+            this.txtIdPartida.Name = "txtIdPartida";
+            this.txtIdPartida.Size = new System.Drawing.Size(274, 31);
+            this.txtIdPartida.TabIndex = 19;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(18, 84);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 15);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Id da partida";
             // 
             // Criar_Partida
             // 
@@ -272,6 +295,8 @@
         private System.Windows.Forms.Button btnEntrarJogo;
         private System.Windows.Forms.TextBox txtNomeJogador;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtIdPartida;
+        private System.Windows.Forms.Label label4;
     }
 }
 

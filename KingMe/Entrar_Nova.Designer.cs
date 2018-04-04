@@ -108,6 +108,8 @@
             this.txtNomeJogador.Name = "txtNomeJogador";
             this.txtNomeJogador.Size = new System.Drawing.Size(291, 31);
             this.txtNomeJogador.TabIndex = 6;
+            this.txtNomeJogador.TextChanged += new System.EventHandler(this.txtNomeJogador_TextChanged);
+            this.txtNomeJogador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNomeJogador_KeyPress);
             // 
             // label1
             // 

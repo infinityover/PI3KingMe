@@ -110,5 +110,21 @@ namespace KingMe
             kill = true;
             this.Close();
         }
+
+        private void txtNomeJogador_TextChanged(object sender, EventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(txtNomeJogador.Text, "^[a-zA-Z ]"))
+            {
+                txtNomeJogador.Text.Remove(txtNomeJogador.Text.Length - 1);
+            }
+        }
+
+        private void txtNomeJogador_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

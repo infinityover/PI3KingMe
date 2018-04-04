@@ -12,3 +12,17 @@ C:\Users\lmarquesc\source\repos\KingMe\KingMe\obj\Debug\KingMe.Criar_Partida.res
 C:\Users\lmarquesc\source\repos\KingMe\KingMe\obj\Debug\KingMe.Inicio.resources
 C:\Users\lmarquesc\source\repos\KingMe\KingMe\obj\Debug\KingMe.Entrar_Nova.resources
 C:\Users\lmarquesc\source\repos\KingMe\KingMe\obj\Debug\KingMe.Tabuleiro.resources
+C:\GitHub\PI3KingMe\KingMe\bin\Debug\KingMe.exe.config
+C:\GitHub\PI3KingMe\KingMe\bin\Debug\KingMe.exe
+C:\GitHub\PI3KingMe\KingMe\bin\Debug\KingMe.pdb
+C:\GitHub\PI3KingMe\KingMe\bin\Debug\MePresidentaServidor.dll
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.csprojResolveAssemblyReference.cache
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.Criar_Partida.resources
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.Entrar_Nova.resources
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.Tabuleiro.resources
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.Inicio.resources
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.Properties.Resources.resources
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.csproj.GenerateResource.Cache
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.csproj.CoreCompileInputs.cache
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.exe
+C:\GitHub\PI3KingMe\KingMe\obj\Debug\KingMe.pdb

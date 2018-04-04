@@ -25,7 +25,15 @@ namespace KingMe
 
         private void btnCriarPartida_Click(object sender, EventArgs e)
         {
-           this.idPartida = MePresidentaServidor.Jogo.CriarPartida(this.txtNomePartida.Text, this.senhaPartida);
+           if(String.IsNullOrEmpty(this.txtNomePartida.Text)|| String.IsNullOrEmpty(this.senhaPartida))
+            {
+                MessageBox.Show("Verifique os valores digitados");
+                return;
+            }
+           
+            this.idPartida = MePresidentaServidor.Jogo.CriarPartida(this.txtNomePartida.Text, this.senhaPartida);
+            this.txtIdPartida.Text = this.idPartida;
+            this.txtIdPartida.Enabled = false;
         }
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
@@ -35,7 +43,7 @@ namespace KingMe
 
         private void btnEntrarJogo_Click(object sender, EventArgs e)
         {
-            if (this.txtNomeJogador.Text != "")
+            if (this.txtNomeJogador.Text != "" && this.idPartida != String.Empty)
             {
                 string Aux1;
                 string[] Aux2;
@@ -52,6 +60,11 @@ namespace KingMe
 
         private void btnIniciarJogo_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrEmpty(this.idPartida)|| String.IsNullOrEmpty(this.senhaPartida))
+            {
+                MessageBox.Show("Partida não encontrada.");
+                return;
+            }
             jogadorDaVez = MePresidentaServidor.Jogo.Iniciar(Convert.ToInt32(this.idPartida), this.senhaPartida);
             kill = false;
             this.Close();
@@ -67,10 +80,6 @@ namespace KingMe
             kill = true;
             this.Close();
         }
-
-        private void txtPartidas_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

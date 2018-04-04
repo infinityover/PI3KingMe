@@ -40,7 +40,7 @@ namespace KingMe
             }
             if (String.IsNullOrEmpty(this.idPartida))
             {
-                this.Visible = false;
+                this.Close();
             }
         }
 
@@ -160,7 +160,18 @@ namespace KingMe
                 }
             } else
             {
-                MessageBox.Show(Jogo.VerificarVez(Convert.ToInt32(this.idJogador)));
+                //MessageBox.Show(Jogo.VerificarVez(Convert.ToInt32(this.idJogador)));
+                string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+                string[] ocorreu_erro = verificavez.Split(':');
+                if (ocorreu_erro[0] == "Erro")
+                {
+                    MessageBox.Show(verificavez);
+                    return;
+                }
+
+                string[] tabuleiro = verificavez.Split('\n');
+                
+
 
                 if (this.jogadorDaVez == this.idJogador)
                 {
