@@ -51,9 +51,18 @@ namespace KingMe
         public string jogadorDaVez { get; set; }
         public string[,] matrizTabuleiro { get; set; } = new string[20,4];
         public string posicaoOperario { get; set; }
-        public int movimentaPersonagem(string personagem, int nivel)
+        
+        public int movimentaPersonagem(string personagem, int nivel, bool servidor)
         {
-            MessageBox.Show(MePresidentaServidor.Jogo.ColocarPersonagem(Convert.ToInt32(this.idPartida), this.senhaJogador, nivel, personagem));
+            if (servidor)
+            {
+                string Tabuleiro =  Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, nivel, personagem);
+                if (Tabuleiro.Contains("ERRO"))
+                {
+                    MessageBox.Show(Tabuleiro);
+                    return -1;
+                }
+            }
             string[] aux = { };
             Control persona = null;
             foreach (Control con in this.Controls) {
@@ -77,7 +86,7 @@ namespace KingMe
                 {
                     persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
                     this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i] = aux[0] + ',' + aux[0] + ',' + cmbPersonagens.Text;
-                    this.cmbPersonagens.Items.Remove(this.cmbPersonagens.Text);
+                    this.cmbPersonagens.Items.Remove(personagem);
                     return 1;
                 }
             }
@@ -137,7 +146,7 @@ namespace KingMe
                 MessageBox.Show("Selecione o personagem e o destino.");
                 return;
             }
-            movimentaPersonagem(this.cmbPersonagens.Text,Convert.ToInt32(this.cmbDestino.Text));
+            movimentaPersonagem(this.cmbPersonagens.Text,Convert.ToInt32(this.cmbDestino.Text),true);
           
         }
 
@@ -156,34 +165,47 @@ namespace KingMe
                 for (int i = 0; i< Lista.Length-1; i++)
                 {
                     Game = Lista[i].Split(',');
-                    if (Game[1] == idPartida && Game[2] == "J")
+                    if (Game[1] == idPartida && Game[0] == "J")
                     {
-                        MessageBox.Show("Começou a partida");
+                        this.btnIniciar_partida.Visible = false;
+                        this.afterInitialize.Visible = true;
                         this.inGame = true;
                         break;
                     }
+                        
                 }
             } else
             {
                 //MessageBox.Show(Jogo.VerificarVez(Convert.ToInt32(this.idJogador)));
                 string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-                string[] ocorreu_erro = verificavez.Split(':');
-                if (ocorreu_erro[0] == "Erro")
+                
+                if (verificavez.Contains("ERRO"))
                 {
                     MessageBox.Show(verificavez);
                     return;
                 }
+                verificavez = verificavez.Replace("\r", "");
                 string[] tabuleiro = verificavez.Split('\n');
-                
-                if (this.jogadorDaVez == this.idJogador)
+                this.jogadorDaVez = tabuleiro[0];
+                if (this.jogadorDaVez.Contains(this.idJogador))
                 {
                     mensagem.Text = "Sua Vez, Faça uma Jogada" + this.jogadorDaVez;
                     mensagem.ForeColor = Color.LimeGreen;
+                    this.btnConfirmarJogada.Enabled = true;
                 }
                 else
                 {
                     mensagem.Text = "Aguarde sua Vez!" + this.jogadorDaVez;
                     mensagem.ForeColor = Color.Red;
+                    this.btnConfirmarJogada.Enabled = false;
+                }
+                string[] personagem;
+                if (tabuleiro.Length > 2) { 
+                    for(int i = 1; i < tabuleiro.Length-1; i++)
+                    {
+                        personagem = tabuleiro[i].Split(',');
+                        if (this.cmbPersonagens.Items.Contains(personagem[1])) movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
+                    }
                 }
             }
             

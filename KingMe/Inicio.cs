@@ -22,7 +22,13 @@ namespace KingMe
             this.Visible = false;
             string nome = "Criar_Partida";
             Tabuleiro form = new Tabuleiro(nome);
-            form.ShowDialog();
+            try
+            {
+                form.ShowDialog();
+            }
+            catch (Exception EX)
+            {
+            }
             this.Close();
         }
 
