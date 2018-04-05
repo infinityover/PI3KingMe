@@ -31,7 +31,13 @@ namespace KingMe
             this.Visible = false;
             string nome = "Entrar_Nova";
             Tabuleiro form = new Tabuleiro(nome);
-            form.ShowDialog();
+            try{
+                form.ShowDialog();
+            }
+            catch( Exception EX)
+            {
+            }
+            
             form.Close();
             this.Close();
         }

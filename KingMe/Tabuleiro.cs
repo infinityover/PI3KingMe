@@ -192,6 +192,12 @@ namespace KingMe
         private void btnIniciar_partida_Click(object sender, EventArgs e)
         {
             jogadorDaVez = Jogo.Iniciar(Convert.ToInt32(this.idPartida), this.senhaPartida);
+            if (jogadorDaVez.Contains("ERRO"))
+            {
+                MessageBox.Show(jogadorDaVez);
+                jogadorDaVez = "";
+                return;
+            }
             this.btnIniciar_partida.Visible = false;
             this.afterInitialize.Visible = true;
             //this.cmbDestino.Visible = true;

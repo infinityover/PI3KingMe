@@ -82,6 +82,11 @@ namespace KingMe
 
                 Aux1 = MePresidentaServidor.Jogo.Entrar(Convert.ToInt32(this.idPartida), this.txtNomeJogador.Text, this.senhaPartida);
                 Aux2 = Aux1.Split(',');
+                if (Aux1.Substring(0,4) == "ERRO")
+                {
+                    MessageBox.Show("Não foi possivel entrar na partida");
+                    return;
+                }
 
                 this.idJogador = Aux2[0];
                 this.senhaJogador = Aux2[1];
@@ -109,14 +114,6 @@ namespace KingMe
         {
             kill = true;
             this.Close();
-        }
-
-        private void txtNomeJogador_TextChanged(object sender, EventArgs e)
-        {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(txtNomeJogador.Text, "^[a-zA-Z ]"))
-            {
-                txtNomeJogador.Text.Remove(txtNomeJogador.Text.Length - 1);
-            }
         }
 
         private void txtNomeJogador_KeyPress(object sender, KeyPressEventArgs e)
