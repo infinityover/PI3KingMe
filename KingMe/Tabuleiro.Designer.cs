@@ -59,10 +59,10 @@
             this.E = new System.Windows.Forms.PictureBox();
             this.G = new System.Windows.Forms.PictureBox();
             this.F = new System.Windows.Forms.PictureBox();
-            this.H = new System.Windows.Forms.PictureBox();
+            this.P = new System.Windows.Forms.PictureBox();
             this.I = new System.Windows.Forms.PictureBox();
-            this.K = new System.Windows.Forms.PictureBox();
-            this.J = new System.Windows.Forms.PictureBox();
+            this.O = new System.Windows.Forms.PictureBox();
+            this.N = new System.Windows.Forms.PictureBox();
             this.L = new System.Windows.Forms.PictureBox();
             this.M = new System.Windows.Forms.PictureBox();
             this.mensagem = new System.Windows.Forms.Label();
@@ -105,10 +105,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.E)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.G)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.F)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.H)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.P)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.I)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.K)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.J)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.N)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.L)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.M)).BeginInit();
             this.afterInitialize.SuspendLayout();
@@ -314,7 +314,7 @@
             // 
             // A
             // 
-            this.A.BackColor = System.Drawing.Color.DarkRed;
+            this.A.BackColor = System.Drawing.Color.Transparent;
             this.A.Image = ((System.Drawing.Image)(resources.GetObject("A.Image")));
             this.A.Location = new System.Drawing.Point(371, 16);
             this.A.Name = "A";
@@ -326,7 +326,7 @@
             // 
             // B
             // 
-            this.B.BackColor = System.Drawing.Color.DarkRed;
+            this.B.BackColor = System.Drawing.Color.Transparent;
             this.B.Image = ((System.Drawing.Image)(resources.GetObject("B.Image")));
             this.B.Location = new System.Drawing.Point(424, 16);
             this.B.Name = "B";
@@ -338,7 +338,7 @@
             // 
             // C
             // 
-            this.C.BackColor = System.Drawing.Color.DarkRed;
+            this.C.BackColor = System.Drawing.Color.Transparent;
             this.C.Image = ((System.Drawing.Image)(resources.GetObject("C.Image")));
             this.C.Location = new System.Drawing.Point(477, 16);
             this.C.Name = "C";
@@ -350,7 +350,7 @@
             // 
             // D
             // 
-            this.D.BackColor = System.Drawing.Color.DarkRed;
+            this.D.BackColor = System.Drawing.Color.Transparent;
             this.D.Image = ((System.Drawing.Image)(resources.GetObject("D.Image")));
             this.D.Location = new System.Drawing.Point(530, 16);
             this.D.Name = "D";
@@ -362,7 +362,7 @@
             // 
             // E
             // 
-            this.E.BackColor = System.Drawing.Color.DarkRed;
+            this.E.BackColor = System.Drawing.Color.Transparent;
             this.E.Image = ((System.Drawing.Image)(resources.GetObject("E.Image")));
             this.E.Location = new System.Drawing.Point(371, 72);
             this.E.Name = "E";
@@ -374,7 +374,7 @@
             // 
             // G
             // 
-            this.G.BackColor = System.Drawing.Color.DarkRed;
+            this.G.BackColor = System.Drawing.Color.Transparent;
             this.G.Image = ((System.Drawing.Image)(resources.GetObject("G.Image")));
             this.G.Location = new System.Drawing.Point(477, 72);
             this.G.Name = "G";
@@ -386,7 +386,7 @@
             // 
             // F
             // 
-            this.F.BackColor = System.Drawing.Color.DarkRed;
+            this.F.BackColor = System.Drawing.Color.Transparent;
             this.F.Image = ((System.Drawing.Image)(resources.GetObject("F.Image")));
             this.F.Location = new System.Drawing.Point(424, 72);
             this.F.Name = "F";
@@ -397,23 +397,23 @@
             this.F.Tag = "F";
             this.F.UseWaitCursor = true;
             // 
-            // H
+            // P
             // 
-            this.H.BackColor = System.Drawing.Color.DarkRed;
-            this.H.Image = ((System.Drawing.Image)(resources.GetObject("H.Image")));
-            this.H.Location = new System.Drawing.Point(530, 72);
-            this.H.Name = "H";
-            this.H.Size = new System.Drawing.Size(47, 50);
-            this.H.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.H.TabIndex = 1;
-            this.H.TabStop = false;
-            this.H.Tag = "H";
+            this.P.BackColor = System.Drawing.Color.Chartreuse;
+            this.P.Image = ((System.Drawing.Image)(resources.GetObject("P.Image")));
+            this.P.Location = new System.Drawing.Point(371, 184);
+            this.P.Name = "P";
+            this.P.Size = new System.Drawing.Size(47, 50);
+            this.P.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.P.TabIndex = 1;
+            this.P.TabStop = false;
+            this.P.Tag = "P";
             // 
             // I
             // 
-            this.I.BackColor = System.Drawing.Color.DarkRed;
+            this.I.BackColor = System.Drawing.Color.Transparent;
             this.I.Image = ((System.Drawing.Image)(resources.GetObject("I.Image")));
-            this.I.Location = new System.Drawing.Point(371, 128);
+            this.I.Location = new System.Drawing.Point(533, 72);
             this.I.Name = "I";
             this.I.Size = new System.Drawing.Size(47, 50);
             this.I.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -421,35 +421,35 @@
             this.I.TabStop = false;
             this.I.Tag = "I";
             // 
-            // K
+            // O
             // 
-            this.K.BackColor = System.Drawing.Color.DarkRed;
-            this.K.Image = ((System.Drawing.Image)(resources.GetObject("K.Image")));
-            this.K.Location = new System.Drawing.Point(477, 128);
-            this.K.Name = "K";
-            this.K.Size = new System.Drawing.Size(47, 50);
-            this.K.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.K.TabIndex = 1;
-            this.K.TabStop = false;
-            this.K.Tag = "K";
+            this.O.BackColor = System.Drawing.Color.Orange;
+            this.O.Image = ((System.Drawing.Image)(resources.GetObject("O.Image")));
+            this.O.Location = new System.Drawing.Point(533, 128);
+            this.O.Name = "O";
+            this.O.Size = new System.Drawing.Size(47, 50);
+            this.O.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.O.TabIndex = 1;
+            this.O.TabStop = false;
+            this.O.Tag = "O";
             // 
-            // J
+            // N
             // 
-            this.J.BackColor = System.Drawing.Color.DarkRed;
-            this.J.Image = ((System.Drawing.Image)(resources.GetObject("J.Image")));
-            this.J.Location = new System.Drawing.Point(424, 128);
-            this.J.Name = "J";
-            this.J.Size = new System.Drawing.Size(47, 50);
-            this.J.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.J.TabIndex = 1;
-            this.J.TabStop = false;
-            this.J.Tag = "J";
+            this.N.BackColor = System.Drawing.Color.Yellow;
+            this.N.Image = ((System.Drawing.Image)(resources.GetObject("N.Image")));
+            this.N.Location = new System.Drawing.Point(477, 128);
+            this.N.Name = "N";
+            this.N.Size = new System.Drawing.Size(47, 50);
+            this.N.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.N.TabIndex = 1;
+            this.N.TabStop = false;
+            this.N.Tag = "N";
             // 
             // L
             // 
-            this.L.BackColor = System.Drawing.Color.DarkRed;
+            this.L.BackColor = System.Drawing.Color.Transparent;
             this.L.Image = ((System.Drawing.Image)(resources.GetObject("L.Image")));
-            this.L.Location = new System.Drawing.Point(530, 128);
+            this.L.Location = new System.Drawing.Point(371, 128);
             this.L.Name = "L";
             this.L.Size = new System.Drawing.Size(47, 50);
             this.L.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -459,9 +459,9 @@
             // 
             // M
             // 
-            this.M.BackColor = System.Drawing.Color.DarkRed;
+            this.M.BackColor = System.Drawing.Color.Transparent;
             this.M.Image = ((System.Drawing.Image)(resources.GetObject("M.Image")));
-            this.M.Location = new System.Drawing.Point(371, 184);
+            this.M.Location = new System.Drawing.Point(424, 128);
             this.M.Name = "M";
             this.M.Size = new System.Drawing.Size(47, 50);
             this.M.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -474,7 +474,7 @@
             this.mensagem.AutoSize = true;
             this.mensagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mensagem.ForeColor = System.Drawing.Color.Red;
-            this.mensagem.Location = new System.Drawing.Point(376, 252);
+            this.mensagem.Location = new System.Drawing.Point(368, 252);
             this.mensagem.Name = "mensagem";
             this.mensagem.Size = new System.Drawing.Size(138, 18);
             this.mensagem.TabIndex = 0;
@@ -599,12 +599,12 @@
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.L);
-            this.Controls.Add(this.H);
+            this.Controls.Add(this.P);
             this.Controls.Add(this.D);
-            this.Controls.Add(this.J);
+            this.Controls.Add(this.N);
             this.Controls.Add(this.F);
             this.Controls.Add(this.B);
-            this.Controls.Add(this.K);
+            this.Controls.Add(this.O);
             this.Controls.Add(this.G);
             this.Controls.Add(this.C);
             this.Controls.Add(this.M);
@@ -666,10 +666,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.E)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.G)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.F)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.H)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.P)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.I)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.K)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.J)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.O)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.N)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.L)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.M)).EndInit();
             this.afterInitialize.ResumeLayout(false);
@@ -710,10 +710,10 @@
         private System.Windows.Forms.PictureBox E;
         private System.Windows.Forms.PictureBox G;
         private System.Windows.Forms.PictureBox F;
-        private System.Windows.Forms.PictureBox H;
+        private System.Windows.Forms.PictureBox P;
         private System.Windows.Forms.PictureBox I;
-        private System.Windows.Forms.PictureBox K;
-        private System.Windows.Forms.PictureBox J;
+        private System.Windows.Forms.PictureBox O;
+        private System.Windows.Forms.PictureBox N;
         private System.Windows.Forms.PictureBox L;
         private System.Windows.Forms.PictureBox M;
         private System.Windows.Forms.Label mensagem;

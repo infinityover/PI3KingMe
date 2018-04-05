@@ -39,7 +39,7 @@ namespace KingMe
             listView1.MultiSelect = false;
 
             //Add column header
-            listView1.Columns.Add("ID", 40, HorizontalAlignment.Center);
+            listView1.Columns.Add("ID", 60, HorizontalAlignment.Center);
             listView1.Columns.Add("NOME", 150, HorizontalAlignment.Center);
             listView1.Columns.Add("CRIAÇÃO", 78, HorizontalAlignment.Center);
 
@@ -74,9 +74,10 @@ namespace KingMe
 
                 for (int i=0; i<listView1.Items.Count; i++)
                 {
-                    if (listView1.Items[i].Checked == true)
+                    if (listView1.Items[i].Focused == true)
                     {
                         this.idPartida = listView1.Items[i].Text;
+                        break;
                     }
                 }
 
@@ -103,11 +104,6 @@ namespace KingMe
         private void txtSenhaPartida_TextChanged(object sender, EventArgs e)
         {
             this.senhaPartida = this.txtSenhaPartida.Text;
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Entrar_Nova_FormClosed(object sender, FormClosedEventArgs e)

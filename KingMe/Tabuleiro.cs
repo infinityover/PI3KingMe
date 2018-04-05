@@ -13,7 +13,15 @@ namespace KingMe
 {
     public partial class Tabuleiro : Form
     {
-        Boolean inGame = false;
+        public Boolean inGame = false;
+        public string idPartida { get; set; }
+        public string senhaPartida { get; set; }
+        public string idJogador { get; set; }
+        public string senhaJogador { get; set; }
+        public string jogadorDaVez { get; set; }
+        public string[,] matrizTabuleiro { get; set; } = new string[20, 4];
+        public string posicaoOperario { get; set; }
+
         public Tabuleiro(string Form)
         {
             InitializeComponent();
@@ -43,14 +51,6 @@ namespace KingMe
                 this.Close();
             }
         }
-
-        public string idPartida { get; set; }
-        public string senhaPartida { get; set; }
-        public string idJogador { get; set; }
-        public string senhaJogador { get; set; }
-        public string jogadorDaVez { get; set; }
-        public string[,] matrizTabuleiro { get; set; } = new string[20,4];
-        public string posicaoOperario { get; set; }
         
         public int movimentaPersonagem(string personagem, int nivel, bool servidor)
         {
@@ -95,6 +95,8 @@ namespace KingMe
 
     private void Tabuleiro_Load(object sender, EventArgs e)
         {
+            MessageBox.Show(Jogo.ListarPersonagens());
+
             cmbPersonagens.Items.Add("A");
             cmbPersonagens.Items.Add("B");
             cmbPersonagens.Items.Add("C");
@@ -102,12 +104,13 @@ namespace KingMe
             cmbPersonagens.Items.Add("E");
             cmbPersonagens.Items.Add("F");
             cmbPersonagens.Items.Add("G");
-            cmbPersonagens.Items.Add("H");
             cmbPersonagens.Items.Add("I");
-            cmbPersonagens.Items.Add("J");
             cmbPersonagens.Items.Add("K");
             cmbPersonagens.Items.Add("L");
             cmbPersonagens.Items.Add("M");
+            cmbPersonagens.Items.Add("N");
+            cmbPersonagens.Items.Add("O");
+            cmbPersonagens.Items.Add("P");
 
             cmbDestino.Items.Add("1");
             cmbDestino.Items.Add("2");
@@ -176,7 +179,6 @@ namespace KingMe
                 }
             } else
             {
-                //MessageBox.Show(Jogo.VerificarVez(Convert.ToInt32(this.idJogador)));
                 string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
                 
                 if (verificavez.Contains("ERRO"))
@@ -222,8 +224,6 @@ namespace KingMe
             }
             this.btnIniciar_partida.Visible = false;
             this.afterInitialize.Visible = true;
-            //this.cmbDestino.Visible = true;
-            //this.cmbPersonagens.Visible = true;
         }
     }
 }

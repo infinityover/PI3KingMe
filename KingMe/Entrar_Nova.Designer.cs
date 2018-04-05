@@ -62,11 +62,10 @@
             this.listView1.AllowDrop = true;
             this.listView1.BackColor = System.Drawing.Color.DarkSlateGray;
             this.listView1.CausesValidation = false;
-            this.listView1.CheckBoxes = true;
             this.listView1.ForeColor = System.Drawing.SystemColors.Window;
             this.listView1.FullRowSelect = true;
+            this.listView1.HideSelection = false;
             this.listView1.HoverSelection = true;
-            this.listView1.LabelWrap = false;
             this.listView1.Location = new System.Drawing.Point(22, 44);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
@@ -74,7 +73,6 @@
             this.listView1.Size = new System.Drawing.Size(291, 217);
             this.listView1.TabIndex = 6;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // btnIniciarJogo
             // 
@@ -154,7 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 532);
+            this.ClientSize = new System.Drawing.Size(378, 541);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label3);
             this.Name = "Entrar_Nova";

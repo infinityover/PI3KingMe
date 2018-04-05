@@ -39,7 +39,6 @@
             this.Inicio = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnIniciarJogo = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtIdPartida = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -94,7 +93,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(225, 13);
+            this.label3.Location = new System.Drawing.Point(209, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(250, 37);
             this.label3.TabIndex = 0;
@@ -108,18 +107,18 @@
             this.txtPartidas.Name = "txtPartidas";
             this.txtPartidas.ReadOnly = true;
             this.txtPartidas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtPartidas.Size = new System.Drawing.Size(269, 157);
+            this.txtPartidas.Size = new System.Drawing.Size(587, 157);
             this.txtPartidas.TabIndex = 0;
             // 
             // btnListarPartidas
             // 
-            this.btnListarPartidas.BackColor = System.Drawing.Color.Teal;
+            this.btnListarPartidas.BackColor = System.Drawing.Color.DarkSlateGray;
             this.btnListarPartidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnListarPartidas.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnListarPartidas.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnListarPartidas.Location = new System.Drawing.Point(22, 27);
             this.btnListarPartidas.Name = "btnListarPartidas";
-            this.btnListarPartidas.Size = new System.Drawing.Size(269, 48);
+            this.btnListarPartidas.Size = new System.Drawing.Size(587, 48);
             this.btnListarPartidas.TabIndex = 17;
             this.btnListarPartidas.Text = "LISTAR PARTIDAS";
             this.btnListarPartidas.UseVisualStyleBackColor = false;
@@ -166,23 +165,9 @@
             this.groupBox2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(21, 214);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(313, 262);
+            this.groupBox2.Size = new System.Drawing.Size(631, 262);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
-            // 
-            // btnIniciarJogo
-            // 
-            this.btnIniciarJogo.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.btnIniciarJogo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIniciarJogo.Font = new System.Drawing.Font("Arial", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIniciarJogo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnIniciarJogo.Location = new System.Drawing.Point(357, 281);
-            this.btnIniciarJogo.Name = "btnIniciarJogo";
-            this.btnIniciarJogo.Size = new System.Drawing.Size(313, 191);
-            this.btnIniciarJogo.TabIndex = 17;
-            this.btnIniciarJogo.Text = "INICIAR GAME";
-            this.btnIniciarJogo.UseVisualStyleBackColor = false;
-            this.btnIniciarJogo.Click += new System.EventHandler(this.btnIniciarJogo_Click);
             // 
             // groupBox3
             // 
@@ -194,7 +179,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(357, 53);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(313, 222);
+            this.groupBox3.Size = new System.Drawing.Size(295, 155);
             this.groupBox3.TabIndex = 18;
             this.groupBox3.TabStop = false;
             // 
@@ -204,7 +189,7 @@
             this.txtIdPartida.Location = new System.Drawing.Point(21, 102);
             this.txtIdPartida.Multiline = true;
             this.txtIdPartida.Name = "txtIdPartida";
-            this.txtIdPartida.Size = new System.Drawing.Size(274, 31);
+            this.txtIdPartida.Size = new System.Drawing.Size(157, 31);
             this.txtIdPartida.TabIndex = 19;
             // 
             // label4
@@ -223,9 +208,9 @@
             this.btnEntrarJogo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEntrarJogo.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEntrarJogo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnEntrarJogo.Location = new System.Drawing.Point(21, 161);
+            this.btnEntrarJogo.Location = new System.Drawing.Point(184, 44);
             this.btnEntrarJogo.Name = "btnEntrarJogo";
-            this.btnEntrarJogo.Size = new System.Drawing.Size(274, 49);
+            this.btnEntrarJogo.Size = new System.Drawing.Size(89, 89);
             this.btnEntrarJogo.TabIndex = 17;
             this.btnEntrarJogo.Text = "ENTRAR NA PARTIDA";
             this.btnEntrarJogo.UseVisualStyleBackColor = false;
@@ -237,7 +222,7 @@
             this.txtNomeJogador.Location = new System.Drawing.Point(21, 44);
             this.txtNomeJogador.Multiline = true;
             this.txtNomeJogador.Name = "txtNomeJogador";
-            this.txtNomeJogador.Size = new System.Drawing.Size(274, 31);
+            this.txtNomeJogador.Size = new System.Drawing.Size(157, 31);
             this.txtNomeJogador.TabIndex = 6;
             this.txtNomeJogador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNomeJogador_KeyPress);
             // 
@@ -256,9 +241,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(692, 493);
+            this.ClientSize = new System.Drawing.Size(669, 493);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.btnIniciarJogo);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label3);
@@ -291,7 +275,6 @@
         private System.Windows.Forms.ToolStripMenuItem Inicio;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnIniciarJogo;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnEntrarJogo;
         private System.Windows.Forms.TextBox txtNomeJogador;
