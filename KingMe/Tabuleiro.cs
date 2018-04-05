@@ -132,6 +132,11 @@ namespace KingMe
 
         private void btnConfirmarJogada_Click(object sender, EventArgs e)
         {
+            if(String.IsNullOrEmpty(this.cmbPersonagens.Text) || String.IsNullOrEmpty(this.cmbDestino.Text))
+            {
+                MessageBox.Show("Selecione o personagem e o destino.");
+                return;
+            }
             movimentaPersonagem(this.cmbPersonagens.Text,Convert.ToInt32(this.cmbDestino.Text));
           
         }
@@ -140,18 +145,18 @@ namespace KingMe
         {
             if (this.inGame == false)
             { 
-                string Aux1;
-                string[] Aux2;
-                string[] Aux3;
-                Aux1 = Jogo.ListarPartidas();
-            
-                Aux1 = Aux1.Replace("\r", "");
-                Aux2 = Aux1.Split('\n');
+                string Partidas;
+                string[] Lista;
+                string[] Game;
+                Partidas = Jogo.ListarPartidas();
 
-                for (int i = 0; i< Aux2.Length; i++)
+                Partidas = Partidas.Replace("\r", "");
+                Lista = Partidas.Split('\n');
+
+                for (int i = 0; i< Lista.Length-1; i++)
                 {
-                    Aux3 = Aux2[i].Split(',');
-                    if (Aux3[1] == idPartida)
+                    Game = Lista[i].Split(',');
+                    if (Game[1] == idPartida && Game[2] == "J")
                     {
                         MessageBox.Show("Começou a partida");
                         this.inGame = true;
@@ -168,11 +173,8 @@ namespace KingMe
                     MessageBox.Show(verificavez);
                     return;
                 }
-
                 string[] tabuleiro = verificavez.Split('\n');
                 
-
-
                 if (this.jogadorDaVez == this.idJogador)
                 {
                     mensagem.Text = "Sua Vez, Faça uma Jogada" + this.jogadorDaVez;
@@ -185,6 +187,15 @@ namespace KingMe
                 }
             }
             
+        }
+
+        private void btnIniciar_partida_Click(object sender, EventArgs e)
+        {
+            jogadorDaVez = Jogo.Iniciar(Convert.ToInt32(this.idPartida), this.senhaPartida);
+            this.btnIniciar_partida.Visible = false;
+            this.afterInitialize.Visible = true;
+            //this.cmbDestino.Visible = true;
+            //this.cmbPersonagens.Visible = true;
         }
     }
 }

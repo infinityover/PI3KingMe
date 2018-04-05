@@ -74,6 +74,8 @@
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnIniciar_partida = new System.Windows.Forms.Button();
+            this.afterInitialize = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -109,6 +111,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.J)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.L)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.M)).BeginInit();
+            this.afterInitialize.SuspendLayout();
             this.SuspendLayout();
             // 
             // pos50
@@ -471,7 +474,7 @@
             this.mensagem.AutoSize = true;
             this.mensagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mensagem.ForeColor = System.Drawing.Color.Red;
-            this.mensagem.Location = new System.Drawing.Point(368, 270);
+            this.mensagem.Location = new System.Drawing.Point(376, 252);
             this.mensagem.Name = "mensagem";
             this.mensagem.Size = new System.Drawing.Size(138, 18);
             this.mensagem.TabIndex = 0;
@@ -481,7 +484,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(368, 359);
+            this.label2.Location = new System.Drawing.Point(8, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(138, 15);
             this.label2.TabIndex = 2;
@@ -492,7 +495,7 @@
             this.cmbPersonagens.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPersonagens.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbPersonagens.FormattingEnabled = true;
-            this.cmbPersonagens.Location = new System.Drawing.Point(371, 377);
+            this.cmbPersonagens.Location = new System.Drawing.Point(11, 35);
             this.cmbPersonagens.MaxDropDownItems = 20;
             this.cmbPersonagens.Name = "cmbPersonagens";
             this.cmbPersonagens.Size = new System.Drawing.Size(206, 21);
@@ -502,7 +505,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(368, 410);
+            this.label3.Location = new System.Drawing.Point(8, 68);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 15);
             this.label3.TabIndex = 4;
@@ -513,7 +516,7 @@
             this.cmbDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDestino.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbDestino.FormattingEnabled = true;
-            this.cmbDestino.Location = new System.Drawing.Point(371, 428);
+            this.cmbDestino.Location = new System.Drawing.Point(11, 86);
             this.cmbDestino.MaxDropDownItems = 20;
             this.cmbDestino.Name = "cmbDestino";
             this.cmbDestino.Size = new System.Drawing.Size(206, 21);
@@ -525,7 +528,7 @@
             this.btnConfirmarJogada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirmarJogada.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmarJogada.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnConfirmarJogada.Location = new System.Drawing.Point(371, 466);
+            this.btnConfirmarJogada.Location = new System.Drawing.Point(11, 129);
             this.btnConfirmarJogada.Name = "btnConfirmarJogada";
             this.btnConfirmarJogada.Size = new System.Drawing.Size(206, 32);
             this.btnConfirmarJogada.TabIndex = 6;
@@ -552,6 +555,36 @@
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnIniciar_partida
+            // 
+            this.btnIniciar_partida.BackColor = System.Drawing.Color.DarkCyan;
+            this.btnIniciar_partida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIniciar_partida.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnIniciar_partida.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnIniciar_partida.Location = new System.Drawing.Point(371, 309);
+            this.btnIniciar_partida.Name = "btnIniciar_partida";
+            this.btnIniciar_partida.Size = new System.Drawing.Size(206, 32);
+            this.btnIniciar_partida.TabIndex = 8;
+            this.btnIniciar_partida.Text = "Iniciar Partida";
+            this.btnIniciar_partida.UseVisualStyleBackColor = false;
+            this.btnIniciar_partida.Click += new System.EventHandler(this.btnIniciar_partida_Click);
+            // 
+            // afterInitialize
+            // 
+            this.afterInitialize.BackColor = System.Drawing.SystemColors.Window;
+            this.afterInitialize.Controls.Add(this.label3);
+            this.afterInitialize.Controls.Add(this.label2);
+            this.afterInitialize.Controls.Add(this.cmbPersonagens);
+            this.afterInitialize.Controls.Add(this.cmbDestino);
+            this.afterInitialize.Controls.Add(this.btnConfirmarJogada);
+            this.afterInitialize.Location = new System.Drawing.Point(363, 283);
+            this.afterInitialize.Margin = new System.Windows.Forms.Padding(0);
+            this.afterInitialize.Name = "afterInitialize";
+            this.afterInitialize.Size = new System.Drawing.Size(225, 167);
+            this.afterInitialize.TabIndex = 9;
+            this.afterInitialize.TabStop = false;
+            this.afterInitialize.Visible = false;
+            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -560,6 +593,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(594, 526);
+            this.Controls.Add(this.mensagem);
+            this.Controls.Add(this.afterInitialize);
+            this.Controls.Add(this.btnIniciar_partida);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.L);
@@ -575,12 +611,6 @@
             this.Controls.Add(this.I);
             this.Controls.Add(this.E);
             this.Controls.Add(this.A);
-            this.Controls.Add(this.btnConfirmarJogada);
-            this.Controls.Add(this.cmbDestino);
-            this.Controls.Add(this.cmbPersonagens);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.mensagem);
             this.Controls.Add(this.pos13);
             this.Controls.Add(this.pos23);
             this.Controls.Add(this.pos33);
@@ -642,6 +672,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.J)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.L)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.M)).EndInit();
+            this.afterInitialize.ResumeLayout(false);
+            this.afterInitialize.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -693,5 +725,7 @@
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnIniciar_partida;
+        private System.Windows.Forms.GroupBox afterInitialize;
     }
 }
