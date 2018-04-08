@@ -13,7 +13,7 @@ namespace KingMe
 {
     public partial class Tabuleiro : Form
     {
-        public Boolean inGame = false;
+        public int inGame = 0;
         public string idPartida { get; set; }
         public string senhaPartida { get; set; }
         public string idJogador { get; set; }
@@ -35,7 +35,8 @@ namespace KingMe
                 this.senhaJogador = formulario.senhaJogador;
                 this.jogadorDaVez = formulario.jogadorDaVez;
                 timer1.Enabled = true;
-            } else if (Form == "Entrar_Nova")
+            }
+            else if (Form == "Entrar_Nova")
             {
                 Entrar_Nova formulario2 = new Entrar_Nova();
                 formulario2.ShowDialog();
@@ -51,12 +52,106 @@ namespace KingMe
                 this.Close();
             }
         }
-        
+
+        public int promovePersonagem(string personagem)
+        {
+            string tabuleiro = Jogo.Promover(Convert.ToInt32(this.idJogador), this.senhaJogador, personagem);
+            if (tabuleiro.Contains("ERRO"))
+            {
+                MessageBox.Show(tabuleiro);
+                return -1;
+            }
+            setaTabuleiro(tabuleiro);
+
+            return 0;
+        }
+
+        public void setaTabuleiro(string tabuleiro)
+        {
+            tabuleiro = tabuleiro.Replace("\r", "");
+            string[] posicoes = tabuleiro.Split('\n');
+            string[] personagem;
+            if (tabuleiro.Length > 2)
+            {
+                for (int i = 0; i < tabuleiro.Length - 1; i++)
+                {
+                    personagem = posicoes[i].Split(',');
+                    movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
+                }
+            }
+        }
+
+        public void verificaInicio()
+        {
+            string Partidas;
+            string[] Lista;
+            string[] Game;
+            Partidas = Jogo.ListarPartidas();
+
+            Partidas = Partidas.Replace("\r", "");
+            Lista = Partidas.Split('\n');
+
+            for (int i = 0; i < Lista.Length - 1; i++)
+            {
+                Game = Lista[i].Split(',');
+                if (Game[1] == idPartida && Game[0] == "J")
+                {
+                    this.btnIniciar_partida.Visible = false;
+                    this.afterInitialize.Visible = true;
+                    this.inGame = 1;
+                    break;
+                }
+
+            }
+        }
+        public void verificaPosicionar()
+        {
+            if (this.cmbPersonagens.Items.Count == 0)
+            {
+                this.inGame = 2;
+                return;
+            }
+
+            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            if (verificavez.Contains("ERRO"))
+            {
+                MessageBox.Show(verificavez);
+                return;
+            }
+
+            verificavez = verificavez.Replace("\r", "");
+            string[] tabuleiro = verificavez.Split('\n');
+            this.jogadorDaVez = tabuleiro[0];
+
+            if (this.jogadorDaVez.Contains(this.idJogador))
+            {
+                mensagem.Text = "Sua Vez, Faça uma Jogada";
+                mensagem.ForeColor = Color.LimeGreen;
+                this.btnConfirmarJogada.Enabled = true;
+            }
+            else
+            {
+                mensagem.Text = "Aguarde sua Vez!";
+                mensagem.ForeColor = Color.Red;
+                this.btnConfirmarJogada.Enabled = false;
+            }
+
+            string[] personagem;
+            if (tabuleiro.Length > 2)
+            {
+                for (int i = 1; i < tabuleiro.Length - 1; i++)
+                {
+                    personagem = tabuleiro[i].Split(',');
+                    if (this.cmbPersonagens.Items.Contains(personagem[1])) movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
+                }
+            }
+        }
+
         public int movimentaPersonagem(string personagem, int nivel, bool servidor)
         {
             if (servidor)
             {
-                string Tabuleiro =  Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, nivel, personagem);
+                string Tabuleiro = Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, nivel, personagem);
                 if (Tabuleiro.Contains("ERRO"))
                 {
                     MessageBox.Show(Tabuleiro);
@@ -65,10 +160,11 @@ namespace KingMe
             }
             string[] aux = { };
             Control persona = null;
-            foreach (Control con in this.Controls) {
+            foreach (Control con in this.Controls)
+            {
                 if (con is PictureBox)
                 {
-                   if (Convert.ToString(con.Tag) == personagem)
+                    if (Convert.ToString(con.Tag) == personagem)
                     {
                         persona = con;
                         break;
@@ -93,50 +189,50 @@ namespace KingMe
             return 0;
         }
 
-    private void Tabuleiro_Load(object sender, EventArgs e)
+        public void criaPersonagens (){
+
+            string personagens = Jogo.ListarPersonagens();
+            personagens = personagens.Replace("\r","");
+            string[] aux = personagens.Split('\n');
+
+            for(int i = 0; i < aux.Length-1; i++)
+            {
+                cmbPersonagens.Items.Add(aux[i].Substring(0,1));
+            }
+            
+        }
+
+        private void Tabuleiro_Load(object sender, EventArgs e)
         {
             MessageBox.Show(Jogo.ListarPersonagens());
 
-            cmbPersonagens.Items.Add("A");
-            cmbPersonagens.Items.Add("B");
-            cmbPersonagens.Items.Add("C");
-            cmbPersonagens.Items.Add("D");
-            cmbPersonagens.Items.Add("E");
-            cmbPersonagens.Items.Add("F");
-            cmbPersonagens.Items.Add("G");
-            cmbPersonagens.Items.Add("I");
-            cmbPersonagens.Items.Add("K");
-            cmbPersonagens.Items.Add("L");
-            cmbPersonagens.Items.Add("M");
-            cmbPersonagens.Items.Add("N");
-            cmbPersonagens.Items.Add("O");
-            cmbPersonagens.Items.Add("P");
+            criaPersonagens();
 
             cmbDestino.Items.Add("1");
             cmbDestino.Items.Add("2");
             cmbDestino.Items.Add("3");
             cmbDestino.Items.Add("4");
 
-            this.matrizTabuleiro[0,0] = Convert.ToString(this.pos10.Location.X) + "," + Convert.ToString(this.pos10.Location.Y) + ",false";
-            this.matrizTabuleiro[0,1] = Convert.ToString(this.pos11.Location.X) + "," + Convert.ToString(this.pos11.Location.Y) + ",false";
-            this.matrizTabuleiro[0,2] = Convert.ToString(this.pos12.Location.X) + "," + Convert.ToString(this.pos12.Location.Y) + ",false";
-            this.matrizTabuleiro[0,3] = Convert.ToString(this.pos13.Location.X) + "," + Convert.ToString(this.pos13.Location.Y) + ",false";
-            this.matrizTabuleiro[1,0] = Convert.ToString(this.pos20.Location.X) + "," + Convert.ToString(this.pos20.Location.Y) + ",false";
-            this.matrizTabuleiro[1,1] = Convert.ToString(this.pos21.Location.X) + "," + Convert.ToString(this.pos21.Location.Y) + ",false";
-            this.matrizTabuleiro[1,2] = Convert.ToString(this.pos22.Location.X) + "," + Convert.ToString(this.pos22.Location.Y) + ",false";
-            this.matrizTabuleiro[1,3] = Convert.ToString(this.pos23.Location.X) + "," + Convert.ToString(this.pos23.Location.Y) + ",false";
-            this.matrizTabuleiro[2,0] = Convert.ToString(this.pos30.Location.X) + "," + Convert.ToString(this.pos30.Location.Y) + ",false";
-            this.matrizTabuleiro[2,1] = Convert.ToString(this.pos31.Location.X) + "," + Convert.ToString(this.pos31.Location.Y) + ",false";
-            this.matrizTabuleiro[2,2] = Convert.ToString(this.pos32.Location.X) + "," + Convert.ToString(this.pos32.Location.Y) + ",false";
-            this.matrizTabuleiro[2,3] = Convert.ToString(this.pos33.Location.X) + "," + Convert.ToString(this.pos33.Location.Y) + ",false";
-            this.matrizTabuleiro[3,0] = Convert.ToString(this.pos40.Location.X) + "," + Convert.ToString(this.pos40.Location.Y) + ",false";
-            this.matrizTabuleiro[3,1] = Convert.ToString(this.pos41.Location.X) + "," + Convert.ToString(this.pos41.Location.Y) + ",false";
-            this.matrizTabuleiro[3,2] = Convert.ToString(this.pos42.Location.X) + "," + Convert.ToString(this.pos42.Location.Y) + ",false";
-            this.matrizTabuleiro[3,3] = Convert.ToString(this.pos43.Location.X) + "," + Convert.ToString(this.pos43.Location.Y) + ",false";
-            this.matrizTabuleiro[4,0] = Convert.ToString(this.pos50.Location.X) + "," + Convert.ToString(this.pos50.Location.Y) + ",false";
-            this.matrizTabuleiro[4,1] = Convert.ToString(this.pos51.Location.X) + "," + Convert.ToString(this.pos51.Location.Y) + ",false";
-            this.matrizTabuleiro[4,2] = Convert.ToString(this.pos52.Location.X) + "," + Convert.ToString(this.pos52.Location.Y) + ",false";
-            this.matrizTabuleiro[4,3] = Convert.ToString(this.pos53.Location.X) + "," + Convert.ToString(this.pos53.Location.Y) + ",false";
+            this.matrizTabuleiro[0, 0] = Convert.ToString(this.pos10.Location.X) + "," + Convert.ToString(this.pos10.Location.Y) + ",false";
+            this.matrizTabuleiro[0, 1] = Convert.ToString(this.pos11.Location.X) + "," + Convert.ToString(this.pos11.Location.Y) + ",false";
+            this.matrizTabuleiro[0, 2] = Convert.ToString(this.pos12.Location.X) + "," + Convert.ToString(this.pos12.Location.Y) + ",false";
+            this.matrizTabuleiro[0, 3] = Convert.ToString(this.pos13.Location.X) + "," + Convert.ToString(this.pos13.Location.Y) + ",false";
+            this.matrizTabuleiro[1, 0] = Convert.ToString(this.pos20.Location.X) + "," + Convert.ToString(this.pos20.Location.Y) + ",false";
+            this.matrizTabuleiro[1, 1] = Convert.ToString(this.pos21.Location.X) + "," + Convert.ToString(this.pos21.Location.Y) + ",false";
+            this.matrizTabuleiro[1, 2] = Convert.ToString(this.pos22.Location.X) + "," + Convert.ToString(this.pos22.Location.Y) + ",false";
+            this.matrizTabuleiro[1, 3] = Convert.ToString(this.pos23.Location.X) + "," + Convert.ToString(this.pos23.Location.Y) + ",false";
+            this.matrizTabuleiro[2, 0] = Convert.ToString(this.pos30.Location.X) + "," + Convert.ToString(this.pos30.Location.Y) + ",false";
+            this.matrizTabuleiro[2, 1] = Convert.ToString(this.pos31.Location.X) + "," + Convert.ToString(this.pos31.Location.Y) + ",false";
+            this.matrizTabuleiro[2, 2] = Convert.ToString(this.pos32.Location.X) + "," + Convert.ToString(this.pos32.Location.Y) + ",false";
+            this.matrizTabuleiro[2, 3] = Convert.ToString(this.pos33.Location.X) + "," + Convert.ToString(this.pos33.Location.Y) + ",false";
+            this.matrizTabuleiro[3, 0] = Convert.ToString(this.pos40.Location.X) + "," + Convert.ToString(this.pos40.Location.Y) + ",false";
+            this.matrizTabuleiro[3, 1] = Convert.ToString(this.pos41.Location.X) + "," + Convert.ToString(this.pos41.Location.Y) + ",false";
+            this.matrizTabuleiro[3, 2] = Convert.ToString(this.pos42.Location.X) + "," + Convert.ToString(this.pos42.Location.Y) + ",false";
+            this.matrizTabuleiro[3, 3] = Convert.ToString(this.pos43.Location.X) + "," + Convert.ToString(this.pos43.Location.Y) + ",false";
+            this.matrizTabuleiro[4, 0] = Convert.ToString(this.pos50.Location.X) + "," + Convert.ToString(this.pos50.Location.Y) + ",false";
+            this.matrizTabuleiro[4, 1] = Convert.ToString(this.pos51.Location.X) + "," + Convert.ToString(this.pos51.Location.Y) + ",false";
+            this.matrizTabuleiro[4, 2] = Convert.ToString(this.pos52.Location.X) + "," + Convert.ToString(this.pos52.Location.Y) + ",false";
+            this.matrizTabuleiro[4, 3] = Convert.ToString(this.pos53.Location.X) + "," + Convert.ToString(this.pos53.Location.Y) + ",false";
 
             txtId.Text = this.idJogador;
             txtSenha.Text = this.senhaJogador;
@@ -144,73 +240,34 @@ namespace KingMe
 
         private void btnConfirmarJogada_Click(object sender, EventArgs e)
         {
-            if(String.IsNullOrEmpty(this.cmbPersonagens.Text) || String.IsNullOrEmpty(this.cmbDestino.Text))
+            if (String.IsNullOrEmpty(this.cmbPersonagens.Text) || String.IsNullOrEmpty(this.cmbDestino.Text))
             {
                 MessageBox.Show("Selecione o personagem e o destino.");
                 return;
             }
-            movimentaPersonagem(this.cmbPersonagens.Text,Convert.ToInt32(this.cmbDestino.Text),true);
-          
+            movimentaPersonagem(this.cmbPersonagens.Text.Substring(0,1), Convert.ToInt32(this.cmbDestino.Text), true);
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (this.inGame == false)
-            { 
-                string Partidas;
-                string[] Lista;
-                string[] Game;
-                Partidas = Jogo.ListarPartidas();
-
-                Partidas = Partidas.Replace("\r", "");
-                Lista = Partidas.Split('\n');
-
-                for (int i = 0; i< Lista.Length-1; i++)
-                {
-                    Game = Lista[i].Split(',');
-                    if (Game[1] == idPartida && Game[0] == "J")
-                    {
-                        this.btnIniciar_partida.Visible = false;
-                        this.afterInitialize.Visible = true;
-                        this.inGame = true;
-                        break;
-                    }
-                        
-                }
-            } else
+            switch (inGame)
             {
-                string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-                
-                if (verificavez.Contains("ERRO"))
-                {
-                    MessageBox.Show(verificavez);
-                    return;
-                }
-                verificavez = verificavez.Replace("\r", "");
-                string[] tabuleiro = verificavez.Split('\n');
-                this.jogadorDaVez = tabuleiro[0];
-                if (this.jogadorDaVez.Contains(this.idJogador))
-                {
-                    mensagem.Text = "Sua Vez, Faça uma Jogada" + this.jogadorDaVez;
-                    mensagem.ForeColor = Color.LimeGreen;
-                    this.btnConfirmarJogada.Enabled = true;
-                }
-                else
-                {
-                    mensagem.Text = "Aguarde sua Vez!" + this.jogadorDaVez;
-                    mensagem.ForeColor = Color.Red;
-                    this.btnConfirmarJogada.Enabled = false;
-                }
-                string[] personagem;
-                if (tabuleiro.Length > 2) { 
-                    for(int i = 1; i < tabuleiro.Length-1; i++)
-                    {
-                        personagem = tabuleiro[i].Split(',');
-                        if (this.cmbPersonagens.Items.Contains(personagem[1])) movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
-                    }
-                }
+                case 0:
+                    //caso ingame = 0, verifica o inicio da partida
+                    //aguardando inicio da partida
+                    verificaInicio();
+                    break;
+                case 1:
+                    //case ingame = 1, verifica se é a vez do jogador de posicionar o personagem
+                    //fase de setup
+                    verificaPosicionar();
+                    break;
+                case 2:
+                    //caso ingame = 2, verifica se é a vez do jogador de promover um personagem
+                    //fase promoção dos personagens
+                    break;
             }
-            
         }
 
         private void btnIniciar_partida_Click(object sender, EventArgs e)

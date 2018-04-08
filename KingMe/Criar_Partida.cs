@@ -51,23 +51,12 @@ namespace KingMe
                 Aux2 = Aux1.Split(',');
                 this.idJogador = Aux2[0];
                 this.senhaJogador = Aux2[1];
+                this.Close();
             }
             else
             {
                 MessageBox.Show("Digite um Nome e Senha para entrar na partida");
             }
-        }
-
-        private void btnIniciarJogo_Click(object sender, EventArgs e)
-        {
-            if (String.IsNullOrEmpty(this.idPartida)|| String.IsNullOrEmpty(this.senhaPartida))
-            {
-                MessageBox.Show("Partida não encontrada.");
-                return;
-            }
-            jogadorDaVez = MePresidentaServidor.Jogo.Iniciar(Convert.ToInt32(this.idPartida), this.senhaPartida);
-            kill = false;
-            this.Close();
         }
 
         private void txtSenha_TextChanged(object sender, EventArgs e)
