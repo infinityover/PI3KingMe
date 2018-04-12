@@ -21,6 +21,7 @@ namespace KingMe
         public string jogadorDaVez { get; set; }
         public string[,] matrizTabuleiro { get; set; } = new string[20, 4];
         public string posicaoOperario { get; set; }
+        public string Rei { get; private set; }
 
         public Tabuleiro(string Form)
         {
@@ -187,16 +188,29 @@ namespace KingMe
             if (persona is null)
             {
                 return -1;
-            }
-            for (int i = 0; i < 4; i++)
+            } else if (nivel == 10)
             {
-                aux = this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i].Split(',');
-                if (aux[2] == "false")
+                Rei = personagem;
+                persona.Location = posRei.Location;
+                this.cmbPersonagens.Items.Remove(personagem);
+
+            } else if (nivel == 0)
+            {
+                posicaoOperario = personagem;
+                persona.Location = posOperario.Location;
+                this.cmbPersonagens.Items.Remove(personagem);
+            } else
+            {
+                for (int i = 0; i < 4; i++)
                 {
-                    persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                    this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i] = aux[0] + ',' + aux[0] + ',' + cmbPersonagens.Text;
-                    this.cmbPersonagens.Items.Remove(personagem);
-                    return 1;
+                    aux = this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i].Split(',');
+                    if (aux[2] == "false")
+                    {
+                        persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
+                        this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i] = aux[0] + ',' + aux[0] + ',' + cmbPersonagens.Text;
+                        this.cmbPersonagens.Items.Remove(personagem);
+                        return 1;
+                    }
                 }
             }
             return 0;
