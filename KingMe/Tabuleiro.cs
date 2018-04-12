@@ -112,6 +112,8 @@ namespace KingMe
                 return;
             }
 
+            
+
             string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
             if (verificavez.Contains("ERRO"))
             {
@@ -128,6 +130,7 @@ namespace KingMe
                 mensagem.Text = "Sua Vez, Faça uma Jogada";
                 mensagem.ForeColor = Color.LimeGreen;
                 this.btnConfirmarJogada.Enabled = true;
+                if (this.chkAuto.Checked) autoMovePersonagem();
             }
             else
             {
@@ -145,6 +148,16 @@ namespace KingMe
                     if (this.cmbPersonagens.Items.Contains(personagem[1])) movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
                 }
             }
+        }
+
+        private void autoMovePersonagem()
+        {
+            Random rnd = new Random();
+            int rand = rnd.Next(1,cmbPersonagens.Items.Count);
+            cmbPersonagens.SelectedIndex = rand;
+            rand = rnd.Next(1,cmbDestino.Items.Count);
+            cmbDestino.SelectedIndex = rand;
+            btnConfirmarJogada_Click(new object(), new EventArgs());
         }
 
         public int movimentaPersonagem(string personagem, int nivel, bool servidor)
@@ -204,7 +217,8 @@ namespace KingMe
 
         private void Tabuleiro_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(Jogo.ListarPersonagens());
+            //PORRA LEO ASSIM VC ME FODE
+            //MessageBox.Show(Jogo.ListarPersonagens());
 
             criaPersonagens();
 

@@ -76,6 +76,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnIniciar_partida = new System.Windows.Forms.Button();
             this.afterInitialize = new System.Windows.Forms.GroupBox();
+            this.chkAuto = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -585,6 +586,16 @@
             this.afterInitialize.TabStop = false;
             this.afterInitialize.Visible = false;
             // 
+            // chkAuto
+            // 
+            this.chkAuto.AutoSize = true;
+            this.chkAuto.Location = new System.Drawing.Point(363, 481);
+            this.chkAuto.Name = "chkAuto";
+            this.chkAuto.Size = new System.Drawing.Size(79, 17);
+            this.chkAuto.TabIndex = 10;
+            this.chkAuto.Text = "Automatico";
+            this.chkAuto.UseVisualStyleBackColor = true;
+            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -593,6 +604,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(594, 526);
+            this.Controls.Add(this.chkAuto);
             this.Controls.Add(this.mensagem);
             this.Controls.Add(this.afterInitialize);
             this.Controls.Add(this.btnIniciar_partida);
@@ -727,5 +739,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnIniciar_partida;
         private System.Windows.Forms.GroupBox afterInitialize;
+        private System.Windows.Forms.CheckBox chkAuto;
     }
 }
