@@ -74,10 +74,16 @@ namespace KingMe
             string[] personagem;
             if (tabuleiro.Length > 2)
             {
-                for (int i = 0; i < tabuleiro.Length - 1; i++)
+                for (int i = 0; i < posicoes.Length - 1; i++)
                 {
                     personagem = posicoes[i].Split(',');
-                    movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
+                    if(inGame == 1) {
+                        movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]),false);
+                    }else
+                    {
+                        movePersonagem(personagem[1], Convert.ToInt32(personagem[0]));
+                    }
+
                 }
             }
         }
@@ -110,6 +116,9 @@ namespace KingMe
             if (this.cmbPersonagens.Items.Count == 0)
             {
                 this.inGame = 2;
+                this.label3.Visible = false;
+                this.cmbDestino.Visible = false;
+                criaPersonagens();
                 return;
             }
 
@@ -131,7 +140,7 @@ namespace KingMe
                 mensagem.Text = "Sua Vez, Faça uma Jogada";
                 mensagem.ForeColor = Color.LimeGreen;
                 this.btnConfirmarJogada.Enabled = true;
-                if (this.chkAuto.Checked) autoMovePersonagem();
+                if (this.chkAuto.Checked && inGame== 1) autoMovePersonagem();
             }
             else
             {
@@ -146,7 +155,8 @@ namespace KingMe
                 for (int i = 1; i < tabuleiro.Length - 1; i++)
                 {
                     personagem = tabuleiro[i].Split(',');
-                    if (this.cmbPersonagens.Items.Contains(personagem[1])) movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
+                    if (this.cmbPersonagens.Items.Contains(personagem[1]) && inGame == 2) movePersonagem(personagem[1], Convert.ToInt32(personagem[0]));
+                    else if (this.cmbPersonagens.Items.Contains(personagem[1])) movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
                 }
             }
         }
@@ -159,6 +169,48 @@ namespace KingMe
             rand = rnd.Next(1,cmbDestino.Items.Count);
             cmbDestino.SelectedIndex = rand;
             btnConfirmarJogada_Click(new object(), new EventArgs());
+        }
+
+        public void movePersonagem(string personagem, int nivel)
+        {
+            string[] aux = { };
+            Control persona = null;
+            foreach (Control con in this.Controls)
+            {
+                if (con is PictureBox)
+                {
+                    if (Convert.ToString(con.Tag) == personagem)
+                    {
+                        persona = con;
+                        break;
+                    }
+                }
+            }
+                if (nivel == 10)
+            {
+                Rei = personagem;
+                persona.Location = posRei.Location;
+                return;
+            }
+            if (nivel == 0)
+            {
+                posicaoOperario = personagem;
+                persona.Location = posOperario.Location;
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    aux = this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i].Split(',');
+                    if (aux[2] == "false")
+                    {
+
+                        persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
+                        
+                    }
+                }
+            }
         }
 
         public int movimentaPersonagem(string personagem, int nivel, bool servidor)
@@ -185,6 +237,7 @@ namespace KingMe
                     }
                 }
             }
+            
             if (persona is null)
             {
                 return -1;
@@ -193,21 +246,25 @@ namespace KingMe
                 Rei = personagem;
                 persona.Location = posRei.Location;
                 this.cmbPersonagens.Items.Remove(personagem);
+                return 0;
 
             } else if (nivel == 0)
             {
                 posicaoOperario = personagem;
                 persona.Location = posOperario.Location;
                 this.cmbPersonagens.Items.Remove(personagem);
+                return 0;
             } else
             {
-                for (int i = 0; i < 4; i++)
+                for ( int i = 0; i < 4; i++)
                 {
                     aux = this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i].Split(',');
                     if (aux[2] == "false")
                     {
+
                         persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                        this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i] = aux[0] + ',' + aux[0] + ',' + cmbPersonagens.Text;
+                        this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i] = aux[0] + ',' + aux[1] + ',' + cmbPersonagens.Text;
+
                         this.cmbPersonagens.Items.Remove(personagem);
                         return 1;
                     }
@@ -273,7 +330,24 @@ namespace KingMe
                 MessageBox.Show("Selecione o personagem e o destino.");
                 return;
             }
-            movimentaPersonagem(this.cmbPersonagens.Text.Substring(0,1), Convert.ToInt32(this.cmbDestino.Text), true);
+            switch (inGame)
+            {
+                case 0:
+                    //caso ingame = 0, verifica o inicio da partida
+                    //aguardando inicio da partida
+                    verificaInicio();
+                    break;
+                case 1:
+                    //case ingame = 1, verifica se é a vez do jogador de posicionar o personagem
+                    //fase de setup
+                    movimentaPersonagem(this.cmbPersonagens.Text.Substring(0, 1), Convert.ToInt32(this.cmbDestino.Text), true);
+                    break;
+                case 2:
+                    //caso ingame = 2, verifica se é a vez do jogador de promover um personagem
+                    //fase promoção dos personagens
+                    promovePersonagem(this.cmbPersonagens.Text.Substring(0, 1));
+                    break;
+            }
 
         }
 
@@ -294,6 +368,7 @@ namespace KingMe
                 case 2:
                     //caso ingame = 2, verifica se é a vez do jogador de promover um personagem
                     //fase promoção dos personagens
+                    verificaPosicionar();
                     break;
             }
         }
