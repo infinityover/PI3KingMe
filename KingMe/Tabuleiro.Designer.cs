@@ -50,7 +50,7 @@
             this.pos11 = new System.Windows.Forms.PictureBox();
             this.pos12 = new System.Windows.Forms.PictureBox();
             this.pos13 = new System.Windows.Forms.PictureBox();
-            this.posOperario = new System.Windows.Forms.PictureBox();
+            this.pos00 = new System.Windows.Forms.PictureBox();
             this.posRei = new System.Windows.Forms.PictureBox();
             this.A = new System.Windows.Forms.PictureBox();
             this.B = new System.Windows.Forms.PictureBox();
@@ -77,6 +77,9 @@
             this.btnIniciar_partida = new System.Windows.Forms.Button();
             this.afterInitialize = new System.Windows.Forms.GroupBox();
             this.chkAuto = new System.Windows.Forms.CheckBox();
+            this.pos01 = new System.Windows.Forms.PictureBox();
+            this.pos02 = new System.Windows.Forms.PictureBox();
+            this.pos03 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -97,7 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pos11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posOperario)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pos00)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.posRei)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.A)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.B)).BeginInit();
@@ -113,6 +116,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.L)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.M)).BeginInit();
             this.afterInitialize.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pos01)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pos02)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pos03)).BeginInit();
             this.SuspendLayout();
             // 
             // pos50
@@ -295,14 +301,14 @@
             this.pos13.TabIndex = 1;
             this.pos13.TabStop = false;
             // 
-            // posOperario
+            // pos00
             // 
-            this.posOperario.BackColor = System.Drawing.Color.Transparent;
-            this.posOperario.Location = new System.Drawing.Point(155, 448);
-            this.posOperario.Name = "posOperario";
-            this.posOperario.Size = new System.Drawing.Size(47, 50);
-            this.posOperario.TabIndex = 1;
-            this.posOperario.TabStop = false;
+            this.pos00.BackColor = System.Drawing.Color.Transparent;
+            this.pos00.Location = new System.Drawing.Point(80, 448);
+            this.pos00.Name = "pos00";
+            this.pos00.Size = new System.Drawing.Size(47, 50);
+            this.pos00.TabIndex = 1;
+            this.pos00.TabStop = false;
             // 
             // posRei
             // 
@@ -596,6 +602,33 @@
             this.chkAuto.Text = "Automatico";
             this.chkAuto.UseVisualStyleBackColor = true;
             // 
+            // pos01
+            // 
+            this.pos01.BackColor = System.Drawing.Color.Transparent;
+            this.pos01.Location = new System.Drawing.Point(133, 448);
+            this.pos01.Name = "pos01";
+            this.pos01.Size = new System.Drawing.Size(47, 50);
+            this.pos01.TabIndex = 1;
+            this.pos01.TabStop = false;
+            // 
+            // pos02
+            // 
+            this.pos02.BackColor = System.Drawing.Color.Transparent;
+            this.pos02.Location = new System.Drawing.Point(186, 448);
+            this.pos02.Name = "pos02";
+            this.pos02.Size = new System.Drawing.Size(47, 50);
+            this.pos02.TabIndex = 1;
+            this.pos02.TabStop = false;
+            // 
+            // pos03
+            // 
+            this.pos03.BackColor = System.Drawing.Color.Transparent;
+            this.pos03.Location = new System.Drawing.Point(239, 448);
+            this.pos03.Name = "pos03";
+            this.pos03.Size = new System.Drawing.Size(47, 50);
+            this.pos03.TabIndex = 1;
+            this.pos03.TabStop = false;
+            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -629,7 +662,10 @@
             this.Controls.Add(this.pos43);
             this.Controls.Add(this.pos53);
             this.Controls.Add(this.posRei);
-            this.Controls.Add(this.posOperario);
+            this.Controls.Add(this.pos03);
+            this.Controls.Add(this.pos02);
+            this.Controls.Add(this.pos01);
+            this.Controls.Add(this.pos00);
             this.Controls.Add(this.pos12);
             this.Controls.Add(this.pos22);
             this.Controls.Add(this.pos32);
@@ -669,7 +705,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pos11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos13)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.posOperario)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pos00)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.posRei)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.A)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.B)).EndInit();
@@ -686,6 +722,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.M)).EndInit();
             this.afterInitialize.ResumeLayout(false);
             this.afterInitialize.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pos01)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pos02)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pos03)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -713,7 +752,7 @@
         private System.Windows.Forms.PictureBox pos11;
         private System.Windows.Forms.PictureBox pos12;
         private System.Windows.Forms.PictureBox pos13;
-        private System.Windows.Forms.PictureBox posOperario;
+        private System.Windows.Forms.PictureBox pos00;
         private System.Windows.Forms.PictureBox posRei;
         private System.Windows.Forms.PictureBox A;
         private System.Windows.Forms.PictureBox B;
@@ -736,9 +775,12 @@
         private System.Windows.Forms.Button btnConfirmarJogada;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtSenha;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnIniciar_partida;
         private System.Windows.Forms.GroupBox afterInitialize;
         private System.Windows.Forms.CheckBox chkAuto;
+        private System.Windows.Forms.PictureBox pos01;
+        private System.Windows.Forms.PictureBox pos02;
+        private System.Windows.Forms.PictureBox pos03;
+        private System.Windows.Forms.Timer timer1;
     }
 }

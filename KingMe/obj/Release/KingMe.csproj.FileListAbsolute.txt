@@ -1,0 +1,8 @@
+C:\Users\lmarquesc\source\repos\PI3KingMe\KingMe\obj\Release\KingMe.csprojResolveAssemblyReference.cache
+C:\Users\lmarquesc\source\repos\PI3KingMe\KingMe\obj\Release\KingMe.Criar_Partida.resources
+C:\Users\lmarquesc\source\repos\PI3KingMe\KingMe\obj\Release\KingMe.Entrar_Nova.resources
+C:\Users\lmarquesc\source\repos\PI3KingMe\KingMe\obj\Release\KingMe.Tabuleiro.resources
+C:\Users\lmarquesc\source\repos\PI3KingMe\KingMe\obj\Release\KingMe.Inicio.resources
+C:\Users\lmarquesc\source\repos\PI3KingMe\KingMe\obj\Release\KingMe.Properties.Resources.resources
+C:\Users\lmarquesc\source\repos\PI3KingMe\KingMe\obj\Release\KingMe.csproj.GenerateResource.Cache
+C:\Users\lmarquesc\source\repos\PI3KingMe\KingMe\obj\Release\KingMe.csproj.CoreCompileInputs.cache

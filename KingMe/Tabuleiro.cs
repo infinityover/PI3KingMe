@@ -19,9 +19,12 @@ namespace KingMe
         public string idJogador { get; set; }
         public string senhaJogador { get; set; }
         public string jogadorDaVez { get; set; }
-        public string[,] matrizTabuleiro { get; set; } = new string[5, 4];
+        public string[,] matrizTabuleiro { get; set; } = new string[30, 30];
         public string posicaoOperario { get; set; }
         public string Rei { get; private set; }
+        public bool FimSetup { get; private set; }
+        public bool aguardandoJogada { get; private set; }
+        public string voto = "S";
 
         public Tabuleiro(string Form)
         {
@@ -54,63 +57,103 @@ namespace KingMe
             }
         }
 
-        public int promovePersonagem(string personagem)
+        public void setarMatriz()
         {
-            setarMatriz();
-            string tabuleiro = Jogo.Promover(Convert.ToInt32(this.idJogador), this.senhaJogador, personagem);
-            if (tabuleiro.Contains("ERRO"))
-            {
-                MessageBox.Show(tabuleiro);
-                return -1;
-            }
-            setaTabuleiro(tabuleiro);
+            this.matrizTabuleiro[0, 0] = Convert.ToString(this.pos00.Location.X) + "," + Convert.ToString(this.pos00.Location.Y) + ",false";
+            this.matrizTabuleiro[0, 1] = Convert.ToString(this.pos00.Location.X) + "," + Convert.ToString(this.pos00.Location.Y) + ",false";
+            this.matrizTabuleiro[0, 2] = Convert.ToString(this.pos02.Location.X) + "," + Convert.ToString(this.pos02.Location.Y) + ",false";
+            this.matrizTabuleiro[0, 3] = Convert.ToString(this.pos03.Location.X) + "," + Convert.ToString(this.pos03.Location.Y) + ",false";
+            this.matrizTabuleiro[1, 0] = Convert.ToString(this.pos10.Location.X) + "," + Convert.ToString(this.pos10.Location.Y) + ",false";
+            this.matrizTabuleiro[1, 1] = Convert.ToString(this.pos11.Location.X) + "," + Convert.ToString(this.pos11.Location.Y) + ",false";
+            this.matrizTabuleiro[1, 2] = Convert.ToString(this.pos12.Location.X) + "," + Convert.ToString(this.pos12.Location.Y) + ",false";
+            this.matrizTabuleiro[1, 3] = Convert.ToString(this.pos13.Location.X) + "," + Convert.ToString(this.pos13.Location.Y) + ",false";
+            this.matrizTabuleiro[2, 0] = Convert.ToString(this.pos20.Location.X) + "," + Convert.ToString(this.pos20.Location.Y) + ",false";
+            this.matrizTabuleiro[2, 1] = Convert.ToString(this.pos21.Location.X) + "," + Convert.ToString(this.pos21.Location.Y) + ",false";
+            this.matrizTabuleiro[2, 2] = Convert.ToString(this.pos22.Location.X) + "," + Convert.ToString(this.pos22.Location.Y) + ",false";
+            this.matrizTabuleiro[2, 3] = Convert.ToString(this.pos23.Location.X) + "," + Convert.ToString(this.pos23.Location.Y) + ",false";
+            this.matrizTabuleiro[3, 0] = Convert.ToString(this.pos30.Location.X) + "," + Convert.ToString(this.pos30.Location.Y) + ",false";
+            this.matrizTabuleiro[3, 1] = Convert.ToString(this.pos31.Location.X) + "," + Convert.ToString(this.pos31.Location.Y) + ",false";
+            this.matrizTabuleiro[3, 2] = Convert.ToString(this.pos32.Location.X) + "," + Convert.ToString(this.pos32.Location.Y) + ",false";
+            this.matrizTabuleiro[3, 3] = Convert.ToString(this.pos33.Location.X) + "," + Convert.ToString(this.pos33.Location.Y) + ",false";
+            this.matrizTabuleiro[4, 0] = Convert.ToString(this.pos40.Location.X) + "," + Convert.ToString(this.pos40.Location.Y) + ",false";
+            this.matrizTabuleiro[4, 1] = Convert.ToString(this.pos41.Location.X) + "," + Convert.ToString(this.pos41.Location.Y) + ",false";
+            this.matrizTabuleiro[4, 2] = Convert.ToString(this.pos42.Location.X) + "," + Convert.ToString(this.pos42.Location.Y) + ",false";
+            this.matrizTabuleiro[4, 3] = Convert.ToString(this.pos43.Location.X) + "," + Convert.ToString(this.pos43.Location.Y) + ",false";
+            this.matrizTabuleiro[5, 0] = Convert.ToString(this.pos50.Location.X) + "," + Convert.ToString(this.pos50.Location.Y) + ",false";
+            this.matrizTabuleiro[5, 1] = Convert.ToString(this.pos51.Location.X) + "," + Convert.ToString(this.pos51.Location.Y) + ",false";
+            this.matrizTabuleiro[5, 2] = Convert.ToString(this.pos52.Location.X) + "," + Convert.ToString(this.pos52.Location.Y) + ",false";
+            this.matrizTabuleiro[5, 3] = Convert.ToString(this.pos53.Location.X) + "," + Convert.ToString(this.pos53.Location.Y) + ",false";
 
-            return 0;
+            Rei = "";
         }
 
-        public void setaTabuleiro(string tabuleiro)
+        public void criaPersonagens()
         {
+            cmbPersonagens.Items.Clear();
+            string personagens = Jogo.ListarPersonagens();
+            personagens = personagens.Replace("\r", "");
+            string[] aux = personagens.Split('\n');
+
+            for (int i = 0; i < aux.Length - 1; i++)
+            {
+                cmbPersonagens.Items.Add(aux[i].Substring(0, 1));
+            }
+
+        }
+
+        public void setaTabuleiro()
+        {
+            string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(idJogador)); 
             tabuleiro = tabuleiro.Replace("\r", "");
             string[] posicoes = tabuleiro.Split('\n');
             string[] personagem;
-            if (tabuleiro.Length > 2)
+            if (posicoes.Length > 1)
             {
-                for (int i = 0; i < posicoes.Length - 1; i++)
+                for (int i = 1; i < posicoes.Length - 1; i++)
                 {
                     personagem = posicoes[i].Split(',');
-                    if(inGame == 1) {
-                        movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]),false);
-                    }else
-                    {
-                        movePersonagem(personagem[1], Convert.ToInt32(personagem[0]));
-                    }
-
+                    atualizaTabuleiro(personagem[1], Convert.ToInt32(personagem[0]));
                 }
             }
         }
 
-        public void setarMatriz()
+        public void atualizaTabuleiro(string personagem, int nivel)
         {
-            this.matrizTabuleiro[0, 0] = Convert.ToString(this.pos10.Location.X) + "," + Convert.ToString(this.pos10.Location.Y) + ",false";
-            this.matrizTabuleiro[0, 1] = Convert.ToString(this.pos11.Location.X) + "," + Convert.ToString(this.pos11.Location.Y) + ",false";
-            this.matrizTabuleiro[0, 2] = Convert.ToString(this.pos12.Location.X) + "," + Convert.ToString(this.pos12.Location.Y) + ",false";
-            this.matrizTabuleiro[0, 3] = Convert.ToString(this.pos13.Location.X) + "," + Convert.ToString(this.pos13.Location.Y) + ",false";
-            this.matrizTabuleiro[1, 0] = Convert.ToString(this.pos20.Location.X) + "," + Convert.ToString(this.pos20.Location.Y) + ",false";
-            this.matrizTabuleiro[1, 1] = Convert.ToString(this.pos21.Location.X) + "," + Convert.ToString(this.pos21.Location.Y) + ",false";
-            this.matrizTabuleiro[1, 2] = Convert.ToString(this.pos22.Location.X) + "," + Convert.ToString(this.pos22.Location.Y) + ",false";
-            this.matrizTabuleiro[1, 3] = Convert.ToString(this.pos23.Location.X) + "," + Convert.ToString(this.pos23.Location.Y) + ",false";
-            this.matrizTabuleiro[2, 0] = Convert.ToString(this.pos30.Location.X) + "," + Convert.ToString(this.pos30.Location.Y) + ",false";
-            this.matrizTabuleiro[2, 1] = Convert.ToString(this.pos31.Location.X) + "," + Convert.ToString(this.pos31.Location.Y) + ",false";
-            this.matrizTabuleiro[2, 2] = Convert.ToString(this.pos32.Location.X) + "," + Convert.ToString(this.pos32.Location.Y) + ",false";
-            this.matrizTabuleiro[2, 3] = Convert.ToString(this.pos33.Location.X) + "," + Convert.ToString(this.pos33.Location.Y) + ",false";
-            this.matrizTabuleiro[3, 0] = Convert.ToString(this.pos40.Location.X) + "," + Convert.ToString(this.pos40.Location.Y) + ",false";
-            this.matrizTabuleiro[3, 1] = Convert.ToString(this.pos41.Location.X) + "," + Convert.ToString(this.pos41.Location.Y) + ",false";
-            this.matrizTabuleiro[3, 2] = Convert.ToString(this.pos42.Location.X) + "," + Convert.ToString(this.pos42.Location.Y) + ",false";
-            this.matrizTabuleiro[3, 3] = Convert.ToString(this.pos43.Location.X) + "," + Convert.ToString(this.pos43.Location.Y) + ",false";
-            this.matrizTabuleiro[4, 0] = Convert.ToString(this.pos50.Location.X) + "," + Convert.ToString(this.pos50.Location.Y) + ",false";
-            this.matrizTabuleiro[4, 1] = Convert.ToString(this.pos51.Location.X) + "," + Convert.ToString(this.pos51.Location.Y) + ",false";
-            this.matrizTabuleiro[4, 2] = Convert.ToString(this.pos52.Location.X) + "," + Convert.ToString(this.pos52.Location.Y) + ",false";
-            this.matrizTabuleiro[4, 3] = Convert.ToString(this.pos53.Location.X) + "," + Convert.ToString(this.pos53.Location.Y) + ",false";
+            string[] aux = { };
+            Control persona = null;
+            foreach (Control con in this.Controls)
+            {
+                if (con is PictureBox)
+                {
+                    if (Convert.ToString(con.Tag) == personagem)
+                    {
+                        persona = con;
+                        break;
+                    }
+                }
+            }
+
+            if (nivel == 10)
+            {
+                Rei = personagem;
+                persona.Location = posRei.Location;
+                inGame = 3;
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    aux = this.matrizTabuleiro[Convert.ToInt32(nivel), i].Split(',');
+                    if (aux[2] == "false")
+                    {
+                        persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
+                        this.matrizTabuleiro[Convert.ToInt32(nivel), i] = aux[0] + ',' + aux[1] + ',' + personagem;
+                        if (inGame != 2) this.cmbPersonagens.Items.Remove(personagem);
+                        break;
+                    }                 
+                }
+            }
         }
 
         public void verificaInicio()
@@ -136,9 +179,19 @@ namespace KingMe
 
             }
         }
+
         public void verificaPosicionar()
-        {
-            if (this.cmbPersonagens.Items.Count == 0)
+        {           
+            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            string[] tabuleiro;
+
+            if (verificavez.Contains("ERRO")) {  MessageBox.Show(verificavez); return; }
+
+            verificavez = verificavez.Replace("\r", "");
+            tabuleiro = verificavez.Split('\n');
+            this.jogadorDaVez = tabuleiro[0];
+
+            if (cmbPersonagens.Items.Count == 0)
             {
                 this.inGame = 2;
                 this.label3.Visible = false;
@@ -147,217 +200,123 @@ namespace KingMe
                 return;
             }
             
-            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-            if (verificavez.Contains("ERRO"))
-            {
-                MessageBox.Show(verificavez);
-                return;
-            }
-
-            verificavez = verificavez.Replace("\r", "");
-            string[] tabuleiro = verificavez.Split('\n');
-            this.jogadorDaVez = tabuleiro[0];
 
             if (this.jogadorDaVez.Contains(this.idJogador))
             {
                 mensagem.Text = "Sua Vez, Faça uma Jogada";
                 mensagem.ForeColor = Color.LimeGreen;
                 this.btnConfirmarJogada.Enabled = true;
-                if (this.chkAuto.Checked && inGame== 1) autoMovePersonagem();
-            }
-            else
+                if (this.aguardandoJogada == false)
+                {
+                    setarMatriz();
+                    setaTabuleiro();
+                    this.aguardandoJogada = true;
+                }
+
+                if (this.chkAuto.Checked && inGame == 1) autoMovePersonagem();
+            } else
             {
+                setarMatriz();
+                setaTabuleiro();
                 mensagem.Text = "Aguarde sua Vez!";
                 mensagem.ForeColor = Color.Red;
                 this.btnConfirmarJogada.Enabled = false;
             }
+        }
 
-            string[] personagem;
-            if (tabuleiro.Length > 2)
+        private void verificaVotar()
+        {
+            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            string[] tabuleiro;
+
+            if (verificavez.Contains("ERRO")) { MessageBox.Show(verificavez); return; }
+
+            verificavez = verificavez.Replace("\r", "");
+            tabuleiro = verificavez.Split('\n');
+            this.jogadorDaVez = tabuleiro[0];
+
+            if (this.jogadorDaVez.Contains(this.idJogador))
             {
-                for (int i = 1; i < tabuleiro.Length - 1; i++)
-                {
-                    personagem = tabuleiro[i].Split(',');
-                    if (this.cmbPersonagens.Items.Contains(personagem[1]) && inGame == 1) movimentaPersonagem(personagem[1], Convert.ToInt32(personagem[0]), false);
-                    else if (inGame == 2) movePersonagem(personagem[1], Convert.ToInt32(personagem[0]));
-                }
+                mensagem.Text = "Sua Vez, Informe seu Voto";
+                mensagem.ForeColor = Color.LimeGreen;
+                this.btnConfirmarJogada.Enabled = true;
+            }
+            else
+            {
+                mensagem.Text = "Aguarde sua Vez de Votar!";
+                mensagem.ForeColor = Color.Red;
+                this.btnConfirmarJogada.Enabled = false;
             }
         }
 
         private void autoMovePersonagem()
         {
+            if (cmbPersonagens.Items.Count == 0)
+            {
+                this.inGame = 2;
+                this.label3.Visible = false;
+                this.cmbDestino.Visible = false;
+                criaPersonagens();
+                return;
+            }
             Random rnd = new Random();
-            int rand = rnd.Next(0,cmbPersonagens.Items.Count);
+            int rand = rnd.Next(0, cmbPersonagens.Items.Count);
             cmbPersonagens.SelectedIndex = rand;
             rand = rnd.Next(0,cmbDestino.Items.Count);
             cmbDestino.SelectedIndex = rand;
             btnConfirmarJogada_Click(new object(), new EventArgs());
+        }        
+
+        public void movimentaPersonagem(string personagem, int nivel)
+        {
+            string tabuleiro = Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, nivel, personagem);
+
+            setarMatriz();
+            setaTabuleiro();
+            if (tabuleiro.Contains("ERRO")) { MessageBox.Show(tabuleiro);}
+            this.aguardandoJogada = false;
+            return;
         }
 
-        public void movePersonagem(string personagem, int nivel)
+        public void promovePersonagem(string personagem)
         {
-            string[] aux = { };
-            Control persona = null;
-            foreach (Control con in this.Controls)
+            string tabuleiro = Jogo.Promover(Convert.ToInt32(this.idJogador), this.senhaJogador, personagem);
+            if (tabuleiro.Contains("ERRO"))
             {
-                if (con is PictureBox)
-                {
-                    if (Convert.ToString(con.Tag) == personagem)
-                    {
-                        persona = con;
-                        break;
-                    }
-                }
-            }
-                if (nivel == 10)
-            {
-                Rei = personagem;
-                persona.Location = posRei.Location;
+                MessageBox.Show(tabuleiro);
                 return;
             }
-            if (nivel == 0)
+            setarMatriz();
+            setaTabuleiro();
+            this.aguardandoJogada = false;
+            return;
+        }
+
+        public void votarRei(string voto)
+        { 
+            string retorno = Jogo.Votar(Convert.ToInt32(this.idJogador), this.senhaJogador, voto);
+
+            if (retorno.Contains("ERRO"))
             {
-                posicaoOperario = personagem;
-                persona.Location = posOperario.Location;
+                MessageBox.Show(retorno);
                 return;
             }
-            else
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    aux = this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i].Split(',');
 
-                    for (int j = 0; j < 4; j++)
-                    {
-                        matrizTabuleiro[nivel - 1, j].Replace(personagem, "false");
-                    }
-
-                    if (aux[2] == "false")
-                    {   
-                        persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                        this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i] = aux[0] + ',' + aux[1] + ',' + cmbPersonagens.Text;
-                    }
-                }
-            }
-        }
-
-        public int movimentaPersonagem(string personagem, int nivel, bool servidor)
-        {
-            if (servidor)
-            {
-                string Tabuleiro = Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, nivel, personagem);
-                if (Tabuleiro.Contains("ERRO"))
-                {
-                    MessageBox.Show(Tabuleiro);
-                    return -1;
-                }
-            }
-            string[] aux = { };
-            Control persona = null;
-            foreach (Control con in this.Controls)
-            {
-                if (con is PictureBox)
-                {
-                    if (Convert.ToString(con.Tag) == personagem)
-                    {
-                        persona = con;
-                        break;
-                    }
-                }
-            }
-            
-            if (persona is null)
-            {
-                return -1;
-            } else if (nivel == 10)
-            {
-                Rei = personagem;
-                persona.Location = posRei.Location;
-                this.cmbPersonagens.Items.Remove(personagem);
-                return 0;
-
-            } else if (nivel == 0)
-            {
-                posicaoOperario = personagem;
-                persona.Location = posOperario.Location;
-                this.cmbPersonagens.Items.Remove(personagem);
-                return 0;
-            } else
-            {
-                for ( int i = 0; i < 4; i++)
-                {
-                    aux = this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i].Split(',');
-                    if (aux[2] == "false")
-                    {
-
-                        persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                        this.matrizTabuleiro[(Convert.ToInt32(nivel) - 1), i] = aux[0] + ',' + aux[1] + ',' + cmbPersonagens.Text;
-                        if(inGame == 1) this.cmbPersonagens.Items.Remove(personagem);
-                        return 1;
-                    }
-                }
-            }
-            return 0;
-        }
-
-        public void criaPersonagens (){
-
-            cmbPersonagens.Items.Clear();
-            string personagens = Jogo.ListarPersonagens();
-            personagens = personagens.Replace("\r","");
-            string[] aux = personagens.Split('\n');
-
-            for(int i = 0; i < aux.Length-1; i++)
-            {
-                cmbPersonagens.Items.Add(aux[i].Substring(0,1));
-            }
-            
+            inGame = 2;
         }
 
         private void Tabuleiro_Load(object sender, EventArgs e)
         {
-            //PORRA LEO ASSIM VC ME FODE
-            //MessageBox.Show(Jogo.ListarPersonagens());
-
             criaPersonagens();
+            setarMatriz();
 
             cmbDestino.Items.Add("1");
             cmbDestino.Items.Add("2");
             cmbDestino.Items.Add("3");
             cmbDestino.Items.Add("4");
 
-            setarMatriz();
-
             txtId.Text = this.idJogador;
             txtSenha.Text = this.senhaJogador;
-        }
-
-        private void btnConfirmarJogada_Click(object sender, EventArgs e)
-        {
-            if (String.IsNullOrEmpty(this.cmbPersonagens.Text) || String.IsNullOrEmpty(this.cmbDestino.Text))
-            {
-                MessageBox.Show("Selecione o personagem e o destino.");
-                return;
-            }
-            switch (inGame)
-            {
-                case 0:
-                    //caso ingame = 0, verifica o inicio da partida
-                    //aguardando inicio da partida
-                    verificaInicio();
-                    break;
-                case 1:
-                    //case ingame = 1, verifica se é a vez do jogador de posicionar o personagem
-                    //fase de setup
-                    movimentaPersonagem(this.cmbPersonagens.Text.Substring(0, 1), Convert.ToInt32(this.cmbDestino.Text), true);
-                    break;
-                case 2:
-                    //caso ingame = 2, verifica se é a vez do jogador de promover um personagem
-                    //fase promoção dos personagens
-                    promovePersonagem(this.cmbPersonagens.Text.Substring(0, 1));
-                    break;
-            }
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -379,6 +338,11 @@ namespace KingMe
                     //fase promoção dos personagens
                     verificaPosicionar();
                     break;
+                case 3:
+                    //caso ingame = 3, votar o Rei
+                    //fase promoção dos personagens
+                    verificaVotar();
+                    break;
             }
         }
 
@@ -392,7 +356,35 @@ namespace KingMe
                 return;
             }
             this.btnIniciar_partida.Visible = false;
-            this.afterInitialize.Visible = true;
+            this.afterInitialize.Visible = true;           
+        }
+
+        private void btnConfirmarJogada_Click(object sender, EventArgs e)
+        {
+            switch (inGame)
+            {
+                case 0:
+                    //caso ingame = 0, verifica o inicio da partida
+                    //aguardando inicio da partida
+                    verificaInicio();
+                    break;
+                case 1:
+                    //case ingame = 1, verifica se é a vez do jogador de posicionar o personagem
+                    //fase de setup
+                    movimentaPersonagem(this.cmbPersonagens.Text.Substring(0, 1), Convert.ToInt32(this.cmbDestino.Text));
+                    break;
+                case 2:
+                    //caso ingame = 2, verifica se é a vez do jogador de promover um personagem
+                    //fase promoção dos personagens
+                    promovePersonagem(this.cmbPersonagens.Text.Substring(0, 1));
+                    break;
+                case 3:
+                    //caso ingame = 2, verifica se é a vez do jogador de promover um personagem
+                    //fase promoção dos personagens
+                    votarRei(this.voto);
+                    break;
+            }
+
         }
     }
 }
