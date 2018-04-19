@@ -24,7 +24,7 @@ namespace KingMe
         public string Rei { get; private set; }
         public bool FimSetup { get; private set; }
         public bool aguardandoJogada { get; private set; }
-        public string voto = "S";
+        public string voto = "N";
 
         public Tabuleiro(string Form)
         {
@@ -103,57 +103,56 @@ namespace KingMe
 
         public void setaTabuleiro()
         {
-            string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(idJogador)); 
+            string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(idJogador));
             tabuleiro = tabuleiro.Replace("\r", "");
             string[] posicoes = tabuleiro.Split('\n');
             string[] personagem;
+            string[] aux = { };
+            Control persona = null;
+
             if (posicoes.Length > 1)
             {
                 for (int i = 1; i < posicoes.Length - 1; i++)
                 {
                     personagem = posicoes[i].Split(',');
-                    atualizaTabuleiro(personagem[1], Convert.ToInt32(personagem[0]));
-                }
-            }
-        }
-
-        public void atualizaTabuleiro(string personagem, int nivel)
-        {
-            string[] aux = { };
-            Control persona = null;
-            foreach (Control con in this.Controls)
-            {
-                if (con is PictureBox)
-                {
-                    if (Convert.ToString(con.Tag) == personagem)
+                    
+                    foreach (Control con in this.Controls)
                     {
-                        persona = con;
-                        break;
+                        if (con is PictureBox)
+                        {
+                            if (Convert.ToString(con.Tag) == personagem[1])
+                            {
+                                persona = con;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (Convert.ToInt32(personagem[0]) == 10)
+                    {
+                        Rei = personagem[1];
+                        persona.Location = posRei.Location;
+                        inGame = 3;
+                        return;
+                    }
+                    else
+                    {
+                        for (int j = 0; j < 4; j++)
+                        {
+                            aux = this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j].Split(',');
+                            if (aux[2] == "false")
+                            {
+                                persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
+                                this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j] = aux[0] + ',' + aux[1] + ',' + personagem[1];
+                                if (inGame == 1) this.cmbPersonagens.Items.Remove(personagem[1]);
+                                break;
+                            }
+                        }
                     }
                 }
             }
-
-            if (nivel == 10)
-            {
-                Rei = personagem;
-                persona.Location = posRei.Location;
-                inGame = 3;
-                return;
-            }
-            else
-            {
-                for (int i = 0; i < 4; i++)
-                {
-                    aux = this.matrizTabuleiro[Convert.ToInt32(nivel), i].Split(',');
-                    if (aux[2] == "false")
-                    {
-                        persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                        this.matrizTabuleiro[Convert.ToInt32(nivel), i] = aux[0] + ',' + aux[1] + ',' + personagem;
-                        if (inGame != 2) this.cmbPersonagens.Items.Remove(personagem);
-                        break;
-                    }                 
-                }
-            }
+            
+            
         }
 
         public void verificaInicio()
@@ -230,6 +229,9 @@ namespace KingMe
             string[] tabuleiro;
 
             if (verificavez.Contains("ERRO")) { MessageBox.Show(verificavez); return; }
+
+            setarMatriz();
+            setaTabuleiro();
 
             verificavez = verificavez.Replace("\r", "");
             tabuleiro = verificavez.Split('\n');
@@ -340,7 +342,7 @@ namespace KingMe
                     break;
                 case 3:
                     //caso ingame = 3, votar o Rei
-                    //fase promoção dos personagens
+                    //fase promoção dos personagens 
                     verificaVotar();
                     break;
             }
