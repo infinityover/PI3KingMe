@@ -43,7 +43,7 @@ namespace KingMe
             listView1.Columns.Add("NOME", 150, HorizontalAlignment.Center);
             listView1.Columns.Add("CRIAÇÃO", 78, HorizontalAlignment.Center);
 
-            Aux1 = MePresidentaServidor.Jogo.ListarPartidas();
+            Aux1 = Jogo.ListarPartidas();
             Aux1 = Aux1.Replace("\r", "");
             Aux2 = Aux1.Split('\n');
  
@@ -81,7 +81,7 @@ namespace KingMe
                     }
                 }
 
-                Aux1 = MePresidentaServidor.Jogo.Entrar(Convert.ToInt32(this.idPartida), this.txtNomeJogador.Text, this.senhaPartida);
+                Aux1 = Jogo.Entrar(Convert.ToInt32(this.idPartida), this.txtNomeJogador.Text, this.senhaPartida);
                 Aux2 = Aux1.Split(',');
                 if (Aux1.Substring(0,4) == "ERRO")
                 {
@@ -117,6 +117,37 @@ namespace KingMe
             if (!char.IsLetter(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string Aux1;
+            string[] Aux2;
+            string[] Aux3;
+            string[] Aux4;
+
+            listView1.Items.Clear();
+
+            Aux1 = Jogo.ListarPartidas();
+            Aux1 = Aux1.Replace("\r", "");
+            Aux2 = Aux1.Split('\n');
+
+            ListViewItem itm;
+
+            for (int i = 0; i < Aux2.Length - 1; i++)
+            {
+                Aux3 = Aux2[i].Split(',');
+                Aux4 = Aux3;
+                if (Aux3[0] == "A")
+                {
+                    Aux4[0] = Aux3[1];
+                    Aux4[1] = Aux3[3];
+                    Aux4[2] = Aux3[2];
+
+                    itm = new ListViewItem(Aux4);
+                    listView1.Items.Add(itm);
+                }
             }
         }
     }

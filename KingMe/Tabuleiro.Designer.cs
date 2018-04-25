@@ -65,21 +65,25 @@
             this.N = new System.Windows.Forms.PictureBox();
             this.L = new System.Windows.Forms.PictureBox();
             this.M = new System.Windows.Forms.PictureBox();
-            this.mensagem = new System.Windows.Forms.Label();
+            this.statusVez = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbPersonagens = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbDestino = new System.Windows.Forms.ComboBox();
+            this.lblSetor = new System.Windows.Forms.Label();
+            this.cmbSetor = new System.Windows.Forms.ComboBox();
             this.btnConfirmarJogada = new System.Windows.Forms.Button();
             this.txtId = new System.Windows.Forms.TextBox();
-            this.txtSenha = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.btnIniciar_partida = new System.Windows.Forms.Button();
             this.afterInitialize = new System.Windows.Forms.GroupBox();
+            this.rdbNao = new System.Windows.Forms.RadioButton();
+            this.rdbSim = new System.Windows.Forms.RadioButton();
             this.chkAuto = new System.Windows.Forms.CheckBox();
             this.pos01 = new System.Windows.Forms.PictureBox();
             this.pos02 = new System.Windows.Forms.PictureBox();
             this.pos03 = new System.Windows.Forms.PictureBox();
+            this.txtSenha = new System.Windows.Forms.TextBox();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -476,16 +480,16 @@
             this.M.TabStop = false;
             this.M.Tag = "M";
             // 
-            // mensagem
+            // statusVez
             // 
-            this.mensagem.AutoSize = true;
-            this.mensagem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mensagem.ForeColor = System.Drawing.Color.Red;
-            this.mensagem.Location = new System.Drawing.Point(368, 252);
-            this.mensagem.Name = "mensagem";
-            this.mensagem.Size = new System.Drawing.Size(138, 18);
-            this.mensagem.TabIndex = 0;
-            this.mensagem.Text = "Aguarde sua Vez!";
+            this.statusVez.AutoSize = true;
+            this.statusVez.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusVez.ForeColor = System.Drawing.Color.Red;
+            this.statusVez.Location = new System.Drawing.Point(368, 252);
+            this.statusVez.Name = "statusVez";
+            this.statusVez.Size = new System.Drawing.Size(138, 18);
+            this.statusVez.TabIndex = 0;
+            this.statusVez.Text = "Aguarde sua Vez!";
             // 
             // label2
             // 
@@ -499,6 +503,7 @@
             // 
             // cmbPersonagens
             // 
+            this.cmbPersonagens.BackColor = System.Drawing.Color.White;
             this.cmbPersonagens.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPersonagens.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbPersonagens.FormattingEnabled = true;
@@ -508,26 +513,27 @@
             this.cmbPersonagens.Size = new System.Drawing.Size(206, 21);
             this.cmbPersonagens.TabIndex = 3;
             // 
-            // label3
+            // lblSetor
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(8, 68);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Escolha o destino";
+            this.lblSetor.AutoSize = true;
+            this.lblSetor.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSetor.Location = new System.Drawing.Point(8, 68);
+            this.lblSetor.Name = "lblSetor";
+            this.lblSetor.Size = new System.Drawing.Size(107, 15);
+            this.lblSetor.TabIndex = 4;
+            this.lblSetor.Text = "Escolha o destino";
             // 
-            // cmbDestino
+            // cmbSetor
             // 
-            this.cmbDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDestino.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.cmbDestino.FormattingEnabled = true;
-            this.cmbDestino.Location = new System.Drawing.Point(11, 86);
-            this.cmbDestino.MaxDropDownItems = 20;
-            this.cmbDestino.Name = "cmbDestino";
-            this.cmbDestino.Size = new System.Drawing.Size(206, 21);
-            this.cmbDestino.TabIndex = 5;
+            this.cmbSetor.BackColor = System.Drawing.Color.White;
+            this.cmbSetor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSetor.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cmbSetor.FormattingEnabled = true;
+            this.cmbSetor.Location = new System.Drawing.Point(11, 86);
+            this.cmbSetor.MaxDropDownItems = 20;
+            this.cmbSetor.Name = "cmbSetor";
+            this.cmbSetor.Size = new System.Drawing.Size(206, 21);
+            this.cmbSetor.TabIndex = 5;
             // 
             // btnConfirmarJogada
             // 
@@ -545,17 +551,11 @@
             // 
             // txtId
             // 
+            this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(3, 3);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(100, 20);
             this.txtId.TabIndex = 7;
-            // 
-            // txtSenha
-            // 
-            this.txtSenha.Location = new System.Drawing.Point(3, 29);
-            this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(100, 20);
-            this.txtSenha.TabIndex = 7;
             // 
             // timer1
             // 
@@ -579,11 +579,13 @@
             // afterInitialize
             // 
             this.afterInitialize.BackColor = System.Drawing.SystemColors.Window;
-            this.afterInitialize.Controls.Add(this.label3);
+            this.afterInitialize.Controls.Add(this.lblSetor);
             this.afterInitialize.Controls.Add(this.label2);
-            this.afterInitialize.Controls.Add(this.cmbPersonagens);
-            this.afterInitialize.Controls.Add(this.cmbDestino);
+            this.afterInitialize.Controls.Add(this.cmbSetor);
             this.afterInitialize.Controls.Add(this.btnConfirmarJogada);
+            this.afterInitialize.Controls.Add(this.cmbPersonagens);
+            this.afterInitialize.Controls.Add(this.rdbNao);
+            this.afterInitialize.Controls.Add(this.rdbSim);
             this.afterInitialize.Location = new System.Drawing.Point(363, 283);
             this.afterInitialize.Margin = new System.Windows.Forms.Padding(0);
             this.afterInitialize.Name = "afterInitialize";
@@ -591,6 +593,30 @@
             this.afterInitialize.TabIndex = 9;
             this.afterInitialize.TabStop = false;
             this.afterInitialize.Visible = false;
+            // 
+            // rdbNao
+            // 
+            this.rdbNao.AutoSize = true;
+            this.rdbNao.Location = new System.Drawing.Point(119, 39);
+            this.rdbNao.Name = "rdbNao";
+            this.rdbNao.Size = new System.Drawing.Size(45, 17);
+            this.rdbNao.TabIndex = 11;
+            this.rdbNao.TabStop = true;
+            this.rdbNao.Text = "Não";
+            this.rdbNao.UseVisualStyleBackColor = true;
+            this.rdbNao.CheckedChanged += new System.EventHandler(this.rdbNao_CheckedChanged);
+            // 
+            // rdbSim
+            // 
+            this.rdbSim.AutoSize = true;
+            this.rdbSim.Location = new System.Drawing.Point(61, 39);
+            this.rdbSim.Name = "rdbSim";
+            this.rdbSim.Size = new System.Drawing.Size(42, 17);
+            this.rdbSim.TabIndex = 11;
+            this.rdbSim.TabStop = true;
+            this.rdbSim.Text = "Sim";
+            this.rdbSim.UseVisualStyleBackColor = true;
+            this.rdbSim.CheckedChanged += new System.EventHandler(this.rdbSim_CheckedChanged);
             // 
             // chkAuto
             // 
@@ -629,6 +655,33 @@
             this.pos03.TabIndex = 1;
             this.pos03.TabStop = false;
             // 
+            // txtSenha
+            // 
+            this.txtSenha.Enabled = false;
+            this.txtSenha.Location = new System.Drawing.Point(3, 29);
+            this.txtSenha.Name = "txtSenha";
+            this.txtSenha.Size = new System.Drawing.Size(100, 20);
+            this.txtSenha.TabIndex = 7;
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(512, 507);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(48, 13);
+            this.lblVersion.TabIndex = 11;
+            this.lblVersion.Text = "Version: ";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(537, 207);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(39, 31);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -637,8 +690,10 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(594, 526);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.chkAuto);
-            this.Controls.Add(this.mensagem);
+            this.Controls.Add(this.statusVez);
             this.Controls.Add(this.afterInitialize);
             this.Controls.Add(this.btnIniciar_partida);
             this.Controls.Add(this.txtSenha);
@@ -767,14 +822,13 @@
         private System.Windows.Forms.PictureBox N;
         private System.Windows.Forms.PictureBox L;
         private System.Windows.Forms.PictureBox M;
-        private System.Windows.Forms.Label mensagem;
+        private System.Windows.Forms.Label statusVez;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbPersonagens;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbDestino;
+        private System.Windows.Forms.Label lblSetor;
+        private System.Windows.Forms.ComboBox cmbSetor;
         private System.Windows.Forms.Button btnConfirmarJogada;
         private System.Windows.Forms.TextBox txtId;
-        private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.Button btnIniciar_partida;
         private System.Windows.Forms.GroupBox afterInitialize;
         private System.Windows.Forms.CheckBox chkAuto;
@@ -782,5 +836,10 @@
         private System.Windows.Forms.PictureBox pos02;
         private System.Windows.Forms.PictureBox pos03;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RadioButton rdbSim;
+        private System.Windows.Forms.RadioButton rdbNao;
+        private System.Windows.Forms.TextBox txtSenha;
+        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.Button button1;
     }
 }

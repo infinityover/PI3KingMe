@@ -20,7 +20,7 @@ namespace KingMe
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.txtPartidas.Text = MePresidentaServidor.Jogo.ListarPartidas();
+            this.txtPartidas.Text = Jogo.ListarPartidas();
         }
 
         private void btnCriarPartida_Click(object sender, EventArgs e)
@@ -31,14 +31,15 @@ namespace KingMe
                 return;
             }
            
-            this.idPartida = MePresidentaServidor.Jogo.CriarPartida(this.txtNomePartida.Text, this.senhaPartida);
+            this.idPartida = Jogo.CriarPartida(this.txtNomePartida.Text, this.senhaPartida);
             this.txtIdPartida.Text = this.idPartida;
             this.txtIdPartida.Enabled = false;
+            this.txtPartidas.Text = Jogo.ListarPartidas();
         }
 
         private void btnListarPartidas_Click(object sender, EventArgs e)
         {
-            this.txtPartidas.Text = MePresidentaServidor.Jogo.ListarPartidas();
+            this.txtPartidas.Text = Jogo.ListarPartidas();
         }
 
         private void btnEntrarJogo_Click(object sender, EventArgs e)
@@ -47,7 +48,7 @@ namespace KingMe
             {
                 string Aux1;
                 string[] Aux2;
-                Aux1 = MePresidentaServidor.Jogo.Entrar(Convert.ToInt32(this.idPartida), this.txtNomeJogador.Text, this.senhaPartida);
+                Aux1 = Jogo.Entrar(Convert.ToInt32(this.idPartida), this.txtNomeJogador.Text, this.senhaPartida);
                 Aux2 = Aux1.Split(',');
                 this.idJogador = Aux2[0];
                 this.senhaJogador = Aux2[1];
