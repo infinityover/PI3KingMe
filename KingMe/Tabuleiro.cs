@@ -25,6 +25,7 @@ namespace KingMe
         public bool FimSetup { get; private set; }
         public string voto = "";
         public bool aguardarJogada = false;
+        public string status_jogo = "";
 
         public Tabuleiro(string Form)
         {
@@ -89,7 +90,19 @@ namespace KingMe
 
         public void posicoesDefault()
         {
-
+            this.A.Location = new Point(371, 16);
+            this.B.Location = new Point(424, 16);
+            this.C.Location = new Point(477, 16);
+            this.D.Location = new Point(530, 16);
+            this.E.Location = new Point(371, 72);
+            this.G.Location = new Point(477, 72);
+            this.F.Location = new Point(424, 72);
+            this.P.Location = new Point(371, 184);
+            this.I.Location = new Point(533, 72);
+            this.O.Location = new Point(533, 128);
+            this.N.Location = new Point(477, 128);
+            this.L.Location = new Point(371, 128);
+            this.M.Location = new Point(424, 128);
         }
 
         public void resetarTabuleiro ()
@@ -222,7 +235,6 @@ namespace KingMe
 
         public void faseDeSetup()
         {
-            controlsProperts();
             string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
             string[] tabuleiro;
 
@@ -294,6 +306,11 @@ namespace KingMe
 
         private void faseDeVotacao()
         {
+            if (inGame[1] != status_jogo)
+            {
+                status_jogo = inGame[1];
+                this.posicoesDefault();
+            }
             controlsProperts();
             string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
             string[] tabuleiro;
@@ -419,6 +436,7 @@ namespace KingMe
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            this.timer1.Enabled = false;
             String Temp = Jogo.VerificarStatus(Convert.ToInt32(idJogador));
             inGame = Temp.Split(',');
 
@@ -434,6 +452,8 @@ namespace KingMe
                     fimDeJogo();
                     break;
             }
+
+            this.timer1.Enabled = true;
         }
 
         private void emJogo()
