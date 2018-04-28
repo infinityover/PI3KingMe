@@ -236,7 +236,7 @@ namespace KingMe
             string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
             string[] tabuleiro;
 
-            if (verificavez.Contains("ERRO")) {  MessageBox.Show(verificavez); return; }
+            if (verificavez.Contains("ERRO")) {  autoMovePersonagemSetup(); return; }
 
             verificavez = verificavez.Replace("\r", "");
             tabuleiro = verificavez.Split('\n');
@@ -272,7 +272,7 @@ namespace KingMe
             string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
             string[] tabuleiro;
 
-            if (verificavez.Contains("ERRO")) { MessageBox.Show(verificavez); return; }
+            if (verificavez.Contains("ERRO")) { autoMovePersonagemPromover(); return; }
 
             verificavez = verificavez.Replace("\r", "");
             tabuleiro = verificavez.Split('\n');
