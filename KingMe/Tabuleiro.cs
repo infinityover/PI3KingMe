@@ -105,17 +105,6 @@ namespace KingMe
             this.M.Location = new Point(424, 128);
         }
 
-        public void resetarTabuleiro ()
-        {
-            foreach (Control con in this.Controls)
-            {
-                if (con is PictureBox)
-                {
-                    con.Invalidate();
-                }
-            }            
-        }
-
         public void setarCmbPersonagens()
         {
             cmbPersonagens.Items.Clear();
@@ -203,6 +192,7 @@ namespace KingMe
                             afterInitialize.Visible = true;
                             lblSetor.Visible = true;
                             cmbSetor.Visible = true;
+                            lblPersonagem.Visible = true;
                             cmbPersonagens.Visible = true;
                             btnIniciar_partida.Visible = false;
                             statusVez.Visible = true;
@@ -211,6 +201,7 @@ namespace KingMe
                             afterInitialize.Visible = true;
                             lblSetor.Visible = false;
                             cmbSetor.Visible = false;
+                            lblPersonagem.Visible = true;
                             cmbPersonagens.Visible = true;
                             btnIniciar_partida.Visible = false;
                             statusVez.Visible = true;
@@ -219,6 +210,7 @@ namespace KingMe
                             afterInitialize.Visible = true;
                             lblSetor.Visible = false;
                             cmbSetor.Visible = false;
+                            lblPersonagem.Visible = false;
                             cmbPersonagens.Visible = false;
                             btnIniciar_partida.Visible = false;
                             statusVez.Visible = true;
@@ -235,6 +227,12 @@ namespace KingMe
 
         public void faseDeSetup()
         {
+            if (inGame[1] != status_jogo)
+            {
+                status_jogo = inGame[1];
+                this.posicoesDefault();
+            }
+            controlsProperts();
             string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
             string[] tabuleiro;
 
@@ -421,7 +419,6 @@ namespace KingMe
         {
             setarCmbPersonagens();
             setarMatriz();
-            posicoesDefault();
 
             cmbSetor.Items.Add("1");
             cmbSetor.Items.Add("2");
@@ -511,11 +508,6 @@ namespace KingMe
         private void rdbNao_CheckedChanged(object sender, EventArgs e)
         {
             this.voto = "N";
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            resetarTabuleiro();
         }
     }
 }

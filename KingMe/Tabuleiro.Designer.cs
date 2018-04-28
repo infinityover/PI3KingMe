@@ -66,7 +66,7 @@
             this.L = new System.Windows.Forms.PictureBox();
             this.M = new System.Windows.Forms.PictureBox();
             this.statusVez = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblPersonagem = new System.Windows.Forms.Label();
             this.cmbPersonagens = new System.Windows.Forms.ComboBox();
             this.lblSetor = new System.Windows.Forms.Label();
             this.cmbSetor = new System.Windows.Forms.ComboBox();
@@ -83,7 +83,6 @@
             this.pos03 = new System.Windows.Forms.PictureBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.lblVersion = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -483,23 +482,23 @@
             // statusVez
             // 
             this.statusVez.AutoSize = true;
-            this.statusVez.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusVez.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusVez.ForeColor = System.Drawing.Color.Red;
-            this.statusVez.Location = new System.Drawing.Point(368, 252);
+            this.statusVez.Location = new System.Drawing.Point(360, 252);
             this.statusVez.Name = "statusVez";
-            this.statusVez.Size = new System.Drawing.Size(138, 18);
+            this.statusVez.Size = new System.Drawing.Size(136, 17);
             this.statusVez.TabIndex = 0;
             this.statusVez.Text = "Aguarde sua Vez!";
             // 
-            // label2
+            // lblPersonagem
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(138, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Escolha o Personagem";
+            this.lblPersonagem.AutoSize = true;
+            this.lblPersonagem.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPersonagem.Location = new System.Drawing.Point(8, 17);
+            this.lblPersonagem.Name = "lblPersonagem";
+            this.lblPersonagem.Size = new System.Drawing.Size(138, 15);
+            this.lblPersonagem.TabIndex = 2;
+            this.lblPersonagem.Text = "Escolha o Personagem";
             // 
             // cmbPersonagens
             // 
@@ -559,7 +558,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 3000;
+            this.timer1.Interval = 500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // btnIniciar_partida
@@ -580,7 +579,7 @@
             // 
             this.afterInitialize.BackColor = System.Drawing.SystemColors.Window;
             this.afterInitialize.Controls.Add(this.lblSetor);
-            this.afterInitialize.Controls.Add(this.label2);
+            this.afterInitialize.Controls.Add(this.lblPersonagem);
             this.afterInitialize.Controls.Add(this.cmbSetor);
             this.afterInitialize.Controls.Add(this.btnConfirmarJogada);
             this.afterInitialize.Controls.Add(this.cmbPersonagens);
@@ -672,16 +671,6 @@
             this.lblVersion.TabIndex = 11;
             this.lblVersion.Text = "Version: ";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(537, 207);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(39, 31);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -690,7 +679,6 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(594, 526);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.chkAuto);
             this.Controls.Add(this.statusVez);
@@ -823,7 +811,7 @@
         private System.Windows.Forms.PictureBox L;
         private System.Windows.Forms.PictureBox M;
         private System.Windows.Forms.Label statusVez;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblPersonagem;
         private System.Windows.Forms.ComboBox cmbPersonagens;
         private System.Windows.Forms.Label lblSetor;
         private System.Windows.Forms.ComboBox cmbSetor;
@@ -840,6 +828,5 @@
         private System.Windows.Forms.RadioButton rdbNao;
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.Label lblVersion;
-        private System.Windows.Forms.Button button1;
     }
 }
