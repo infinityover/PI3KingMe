@@ -227,20 +227,19 @@ namespace KingMe
 
         public void faseDeSetup()
         {
+            controlsProperts();
+            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            string[] tabuleiro;
+
+            verificavez = verificavez.Replace("\r", "");
+            tabuleiro = verificavez.Split('\n');
+            jogadorDaVez = tabuleiro[0];
+
             if (inGame[1] != status_jogo)
             {
                 status_jogo = inGame[1];
                 this.posicoesDefault();
             }
-            controlsProperts();
-            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-            string[] tabuleiro;
-
-            if (verificavez.Contains("ERRO")) {  autoMovePersonagemSetup(); return; }
-
-            verificavez = verificavez.Replace("\r", "");
-            tabuleiro = verificavez.Split('\n');
-            jogadorDaVez = tabuleiro[0];          
 
             if (jogadorDaVez.Contains(idJogador))
             {
@@ -272,11 +271,15 @@ namespace KingMe
             string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
             string[] tabuleiro;
 
-            if (verificavez.Contains("ERRO")) { autoMovePersonagemPromover(); return; }
-
             verificavez = verificavez.Replace("\r", "");
             tabuleiro = verificavez.Split('\n');
             jogadorDaVez = tabuleiro[0];
+
+            if ("V" == status_jogo)
+            {
+                status_jogo = inGame[1];
+                this.posicoesDefault();
+            }
 
             if (jogadorDaVez.Contains(idJogador))
             {
@@ -304,16 +307,9 @@ namespace KingMe
 
         private void faseDeVotacao()
         {
-            if (inGame[1] != status_jogo)
-            {
-                status_jogo = inGame[1];
-                this.posicoesDefault();
-            }
             controlsProperts();
             string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
             string[] tabuleiro;
-
-            if (verificavez.Contains("ERRO")) { MessageBox.Show(verificavez); return; }
 
             setarMatriz();
             setarTabuleiro();
@@ -360,7 +356,10 @@ namespace KingMe
 
         private void autoVotar()
         {
-            voto = "S";
+            Random rnd = new Random();
+            int rand = rnd.Next(0, 3);
+            if (rand == 0) { rdbNao.Select(); }
+            else { rdbSim.Select(); }
             btnConfirmarJogada_Click(new object(), new EventArgs());
         }
 
@@ -371,7 +370,11 @@ namespace KingMe
 
             setarMatriz();
             setarTabuleiro();
-            if (tabuleiro.Contains("ERRO")) { MessageBox.Show(tabuleiro);}
+            if (tabuleiro.Contains("ERRO"))
+            {
+                //this.autoMovePersonagemSetup();
+                return;
+            }
             aguardarJogada = false;
             return;
         }
@@ -381,7 +384,7 @@ namespace KingMe
             string tabuleiro = Jogo.Promover(Convert.ToInt32(idJogador), senhaJogador, personagem);
             if (tabuleiro.Contains("ERRO"))
             {
-                MessageBox.Show(tabuleiro);
+                //autoMovePersonagemPromover();
                 return;
             }
             setarMatriz();
@@ -461,9 +464,11 @@ namespace KingMe
                     faseDeSetup();
                     break;
                 case "J":
+                    //status_jogo = inGame[1];
                     faseDePromocao();
                     break;
                 case "V":
+                    status_jogo = inGame[1];
                     faseDeVotacao();
                     break;
             }
