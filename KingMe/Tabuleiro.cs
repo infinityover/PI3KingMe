@@ -26,6 +26,7 @@ namespace KingMe
         public string voto = "";
         public bool aguardarJogada = false;
         public string status_jogo = "";
+        public int andar;
 
         public Tabuleiro(string Form)
         {
@@ -88,8 +89,38 @@ namespace KingMe
             Rei = "";
         }
 
+        public void gera_melhormov(string tabuleiro, string cartas) {
+            tabuleiro = tabuleiro.Replace("\r", "");
+            string[] matriz_tabuleiro = tabuleiro.Split('\n');
+            cartas = cartas.Replace("\r", "");
+            string[] matriz_cartas = tabuleiro.Split('\n');
+
+
+        }
+
+        public void gera_movaleatorio(string tabuleiro) {
+            tabuleiro = tabuleiro.Replace("\r", "");
+            string[] lista_tabuleiro = tabuleiro.Split('\n');
+            string[] personagem;
+
+            for(int i =0; i <lista_tabuleiro.Length; i++)
+            {
+                personagem = lista_tabuleiro[i].Split(',');
+                if (Convert.ToInt32(personagem[1]) <= 5)
+                {
+                    personagem[1] = Convert.ToString(Convert.ToInt32(personagem[1]) + 1);
+                }
+                else
+                {
+                    personagem[1] = "10";
+                }
+            }
+            
+        }
+
         public void posicoesDefault()
         {
+            txtVotos.Text = txtVotos.Text + Jogo.ExibirUltimaVotacao(Convert.ToInt32(this.idJogador), this.senhaJogador);
             this.A.Location = new Point(371, 16);
             this.B.Location = new Point(424, 16);
             this.C.Location = new Point(477, 16);
@@ -244,6 +275,7 @@ namespace KingMe
             try
             {
                 controlsProperts();
+                txtCartas.Text = Jogo.ListarCartas(Convert.ToInt32(this.idJogador), this.senhaJogador);
                 string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
                 string[] tabuleiro;
 
@@ -371,38 +403,55 @@ namespace KingMe
 
         private void autoMovePersonagemSetup()
         {
-            if (cmbPersonagens.Items.Count == 0) { return; }
+            string personagens = txtCartas.Text;
             Random rnd = new Random();
-            int rand = rnd.Next(0, cmbPersonagens.Items.Count);
-            cmbPersonagens.SelectedIndex = rand;
-            //cmbPersonagens.Items.IndexOf("A");
-            rand = rnd.Next(0,cmbSetor.Items.Count);
-            cmbSetor.SelectedIndex = rand;
-            btnConfirmarJogada_Click(new object(), new EventArgs());
+            int rand;
+            rand = rnd.Next(0, txtCartas.Text.Length);
+            cmbPersonagens.Text = personagens[rand].ToString();
+            for(int i = 4; i > 0; i--)
+            {
+                  
+                cmbSetor.Text = i.ToString();
+                btnConfirmarJogada_Click(new object(), new EventArgs());
+            }
         }    
         
         private void autoMovePersonagemPromover()
         {
-            if (cmbPersonagens.Items.Count == 0) { return; }
+            string[] personagens = txtCartas.Text.Split('\n');
             Random rnd = new Random();
-            int rand = rnd.Next(0, cmbPersonagens.Items.Count);
-            cmbPersonagens.SelectedIndex = rand;
+
+            int rand;
+            rand = rnd.Next(0, txtCartas.Text.Length);
+            cmbPersonagens.Text = personagens[rand].ToString();
             btnConfirmarJogada_Click(new object(), new EventArgs());
         }
 
         private void autoVotar()
         {
-            Random rnd = new Random();
-            int rand = rnd.Next(0, 3);
-            if (rand == 0) { rdbNao.Select(); }
-            else { rdbSim.Select(); }
+            string tabu = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            string[] posicoes = tabu.Split('\n');
+            string personagemrei = "";
+            for(int i = 0; i< posicoes.Length; i++)
+            {
+                if (posicoes[i].Contains("10")) personagemrei = posicoes[i];
+            }
+            string[] personagem;
+            personagem = personagemrei.Split(',');
+
+            if (txtCartas.Text.Contains(personagemrei[0])) {
+                rdbSim.Checked = true;
+            }else
+            {
+                rdbNao.Checked = true;
+            }
+
             btnConfirmarJogada_Click(new object(), new EventArgs());
         }
 
         public void movimentaPersonagem(string personagem, int setor)
         {
             try {
-                string teste = Jogo.VerificarVez(Convert.ToInt32(idJogador));
                 string tabuleiro = Jogo.ColocarPersonagem(Convert.ToInt32(idJogador), senhaJogador, setor, personagem);
 
                 setarMatriz();
@@ -566,5 +615,12 @@ namespace KingMe
         {
             this.voto = "N";
         }
+
+        private void N_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }

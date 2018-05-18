@@ -83,6 +83,12 @@
             this.pos03 = new System.Windows.Forms.PictureBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.lblVersion = new System.Windows.Forms.Label();
+            this.txtCartas = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtVotos = new System.Windows.Forms.TextBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -122,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pos01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos02)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos03)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pos50
@@ -454,6 +461,7 @@
             this.N.TabIndex = 1;
             this.N.TabStop = false;
             this.N.Tag = "N";
+            this.N.Click += new System.EventHandler(this.N_Click);
             // 
             // L
             // 
@@ -506,7 +514,7 @@
             this.cmbPersonagens.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPersonagens.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbPersonagens.FormattingEnabled = true;
-            this.cmbPersonagens.Location = new System.Drawing.Point(11, 35);
+            this.cmbPersonagens.Location = new System.Drawing.Point(11, 38);
             this.cmbPersonagens.MaxDropDownItems = 20;
             this.cmbPersonagens.Name = "cmbPersonagens";
             this.cmbPersonagens.Size = new System.Drawing.Size(206, 21);
@@ -528,7 +536,7 @@
             this.cmbSetor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSetor.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbSetor.FormattingEnabled = true;
-            this.cmbSetor.Location = new System.Drawing.Point(11, 86);
+            this.cmbSetor.Location = new System.Drawing.Point(13, 86);
             this.cmbSetor.MaxDropDownItems = 20;
             this.cmbSetor.Name = "cmbSetor";
             this.cmbSetor.Size = new System.Drawing.Size(206, 21);
@@ -567,7 +575,7 @@
             this.btnIniciar_partida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIniciar_partida.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciar_partida.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnIniciar_partida.Location = new System.Drawing.Point(371, 309);
+            this.btnIniciar_partida.Location = new System.Drawing.Point(371, 296);
             this.btnIniciar_partida.Name = "btnIniciar_partida";
             this.btnIniciar_partida.Size = new System.Drawing.Size(206, 32);
             this.btnIniciar_partida.TabIndex = 8;
@@ -585,7 +593,7 @@
             this.afterInitialize.Controls.Add(this.cmbPersonagens);
             this.afterInitialize.Controls.Add(this.rdbNao);
             this.afterInitialize.Controls.Add(this.rdbSim);
-            this.afterInitialize.Location = new System.Drawing.Point(363, 283);
+            this.afterInitialize.Location = new System.Drawing.Point(371, 296);
             this.afterInitialize.Margin = new System.Windows.Forms.Padding(0);
             this.afterInitialize.Name = "afterInitialize";
             this.afterInitialize.Size = new System.Drawing.Size(225, 167);
@@ -671,14 +679,83 @@
             this.lblVersion.TabIndex = 11;
             this.lblVersion.Text = "Version: ";
             // 
+            // txtCartas
+            // 
+            this.txtCartas.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCartas.Location = new System.Drawing.Point(638, 29);
+            this.txtCartas.Multiline = true;
+            this.txtCartas.Name = "txtCartas";
+            this.txtCartas.ReadOnly = true;
+            this.txtCartas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtCartas.Size = new System.Drawing.Size(227, 157);
+            this.txtCartas.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(635, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 17);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Suas cartas";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(10, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(330, 442);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(635, 212);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 17);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "Votos";
+            // 
+            // txtVotos
+            // 
+            this.txtVotos.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVotos.Location = new System.Drawing.Point(638, 238);
+            this.txtVotos.Multiline = true;
+            this.txtVotos.Name = "txtVotos";
+            this.txtVotos.ReadOnly = true;
+            this.txtVotos.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtVotos.Size = new System.Drawing.Size(227, 157);
+            this.txtVotos.TabIndex = 15;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(442, 146);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(85, 17);
+            this.radioButton1.TabIndex = 17;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "radioButton1";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(594, 526);
+            this.ClientSize = new System.Drawing.Size(911, 526);
+            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtVotos);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtCartas);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.chkAuto);
             this.Controls.Add(this.statusVez);
@@ -724,6 +801,7 @@
             this.Controls.Add(this.pos40);
             this.Controls.Add(this.pos51);
             this.Controls.Add(this.pos50);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Tabuleiro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tabuleiro";
@@ -768,6 +846,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pos01)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos02)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos03)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -828,5 +907,11 @@
         private System.Windows.Forms.RadioButton rdbNao;
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.TextBox txtCartas;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtVotos;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
