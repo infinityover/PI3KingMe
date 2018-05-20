@@ -12,5 +12,6 @@ namespace KingMe
         public string [][] tabuleiro;
         public int pontuacao;
         public string[] cartas;
+        public int votos;
     }
 }
