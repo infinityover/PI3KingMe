@@ -158,60 +158,63 @@ namespace KingMe
 
         public void setarTabuleiro()
         {
+            string tabuleiro;
             try
             {
-                string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(idJogador));
-                tabuleiro = tabuleiro.Replace("\r", "");
-                string[] posicoes = tabuleiro.Split('\n');
-                string[] personagem;
-                string[] aux = { };
-                Control persona = null;
-
-                if (posicoes.Length > 2)
-                {
-                    for (int i = 1; i < posicoes.Length - 1; i++)
-                    {
-                        personagem = posicoes[i].Split(',');
-
-                        foreach (Control con in this.Controls)
-                        {
-                            if (con is PictureBox)
-                            {
-                                if (Convert.ToString(con.Tag) == personagem[1])
-                                {
-                                    persona = con;
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (Convert.ToInt32(personagem[0]) == 10)
-                        {
-                            Rei = personagem[1];
-                            persona.Location = posRei.Location;
-                            return;
-                        }
-                        else
-                        {
-                            for (int j = 0; j < 4; j++)
-                            {
-                                aux = this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j].Split(',');
-                                if (aux[2] == "false")
-                                {
-                                    persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                                    this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j] = aux[0] + ',' + aux[1] + ',' + personagem[1];
-                                    if (inGame[1] == "S") this.cmbPersonagens.Items.Remove(personagem[1]);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
+                tabuleiro = Jogo.VerificarVez(Convert.ToInt32(idJogador));
             }catch(Exception e)
             {
+                System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Debugger.Launch();
                 MessageBox.Show(e.Message);
                 return;
             }
+        tabuleiro = tabuleiro.Replace("\r", "");
+        string[] posicoes = tabuleiro.Split('\n');
+        string[] personagem;
+        string[] aux = { };
+        Control persona = null;
+
+        if (posicoes.Length > 2)
+        {
+            for (int i = 1; i < posicoes.Length - 1; i++)
+            {
+                personagem = posicoes[i].Split(',');
+
+                foreach (Control con in this.Controls)
+                {
+                    if (con is PictureBox)
+                    {
+                        if (Convert.ToString(con.Tag) == personagem[1])
+                        {
+                            persona = con;
+                            break;
+                        }
+                    }
+                }
+
+                if (Convert.ToInt32(personagem[0]) == 10)
+                {
+                    Rei = personagem[1];
+                    persona.Location = posRei.Location;
+                    return;
+                }
+                else
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        aux = this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j].Split(',');
+                        if (aux[2] == "false")
+                        {
+                            persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
+                            this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j] = aux[0] + ',' + aux[1] + ',' + personagem[1];
+                            if (inGame[1] == "S") this.cmbPersonagens.Items.Remove(personagem[1]);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         }
 
@@ -272,58 +275,68 @@ namespace KingMe
 
         public void faseDeSetup()
         {
+            string verificavez;
             try
             {
                 controlsProperts();
                 txtCartas.Text = Jogo.ListarCartas(Convert.ToInt32(this.idJogador), this.senhaJogador);
-                string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-                string[] tabuleiro;
-
-                verificavez = verificavez.Replace("\r", "");
-                tabuleiro = verificavez.Split('\n');
-                jogadorDaVez = tabuleiro[0];
-
-                if (inGame[1] != status_jogo)
-                {
-                    status_jogo = inGame[1];
-                    this.posicoesDefault();
-                }
-
-                if (jogadorDaVez.Contains(idJogador))
-                {
-                    statusVez.Text = "Sua Vez, Coloque um Personagem";
-                    statusVez.ForeColor = Color.LimeGreen;
-                    btnConfirmarJogada.Enabled = true;
-                    if (aguardarJogada == false)
-                    {
-                        setarMatriz();
-                        setarTabuleiro();
-                        aguardarJogada = true;
-                    }
-
-                    if (chkAuto.Checked) autoMovePersonagemSetup();
-                }
-                else
-                {
-                    aguarda_vez();
-                }
-            }catch(Exception e)
-            {
+                verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            }catch(Exception e){
+                System.Diagnostics.Debugger.Break();
+                System.Diagnostics.Debugger.Launch();
                 MessageBox.Show(e.Message);
                 return;
+            }
+            string[] tabuleiro;
+
+            verificavez = verificavez.Replace("\r", "");
+            tabuleiro = verificavez.Split('\n');
+            jogadorDaVez = tabuleiro[0];
+
+            if (inGame[1] != status_jogo)
+            {
+                status_jogo = inGame[1];
+                this.posicoesDefault();
+            }
+
+            if (jogadorDaVez.Contains(idJogador))
+            {
+                statusVez.Text = "Sua Vez, Coloque um Personagem";
+                statusVez.ForeColor = Color.LimeGreen;
+                btnConfirmarJogada.Enabled = true;
+                if (aguardarJogada == false)
+                {
+                    setarMatriz();
+                    setarTabuleiro();
+                    aguardarJogada = true;
+                }
+
+                if (chkAuto.Checked) autoMovePersonagemSetup();
+            }
+            else
+            {
+                aguarda_vez();
             }
         }
 
         public void faseDePromocao()
         {
+            controlsProperts();
+            setarCmbPersonagens();
+            string verificavez;
+            string[] tabuleiro;
             try
             {
-                controlsProperts();
-                setarCmbPersonagens();
-                string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-                string[] tabuleiro;
+                verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debugger.Break();
+                MessageBox.Show(e.Message);
+                return;
+            }
 
-                verificavez = verificavez.Replace("\r", "");
+            verificavez = verificavez.Replace("\r", "");
                 tabuleiro = verificavez.Split('\n');
                 jogadorDaVez = tabuleiro[0];
 
@@ -351,11 +364,7 @@ namespace KingMe
                 {
                     aguarda_vez();
                 }
-            }catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return;
-            }
+            
         }
 
         private void aguarda_vez()
@@ -406,11 +415,10 @@ namespace KingMe
             string personagens = txtCartas.Text;
             Random rnd = new Random();
             int rand;
-            rand = rnd.Next(0, txtCartas.Text.Length);
+            rand = rnd.Next(0, personagens.Length);
             cmbPersonagens.Text = personagens[rand].ToString();
-            for(int i = 4; i > 0; i--)
+            for (int i = 4; i > 0; i--)
             {
-                  
                 cmbSetor.Text = i.ToString();
                 btnConfirmarJogada_Click(new object(), new EventArgs());
             }
@@ -422,7 +430,7 @@ namespace KingMe
             Random rnd = new Random();
 
             int rand;
-            rand = rnd.Next(0, txtCartas.Text.Length);
+            rand = rnd.Next(0, personagens.Length);
             cmbPersonagens.Text = personagens[rand].ToString();
             btnConfirmarJogada_Click(new object(), new EventArgs());
         }
@@ -451,9 +459,17 @@ namespace KingMe
 
         public void movimentaPersonagem(string personagem, int setor)
         {
-            try {
-                string tabuleiro = Jogo.ColocarPersonagem(Convert.ToInt32(idJogador), senhaJogador, setor, personagem);
+            string tabuleiro;
+            try
+            {
+                tabuleiro = Jogo.ColocarPersonagem(Convert.ToInt32(idJogador), senhaJogador, setor, personagem);
+            }catch(Exception e)
+            {
 
+                System.Diagnostics.Debugger.Break();
+                MessageBox.Show(e.Message);
+                return;
+            }
                 setarMatriz();
                 setarTabuleiro();
                 if (tabuleiro.Contains("ERRO"))
@@ -463,10 +479,6 @@ namespace KingMe
                 }
                 aguardarJogada = false;
                 return;
-            }catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
             }
 
         public void promovePersonagem(string personagem)
@@ -594,10 +606,10 @@ namespace KingMe
             switch (inGame[1])
             {
                 case "S":
-                    movimentaPersonagem(this.cmbPersonagens.Text.Substring(0, 1), Convert.ToInt32(this.cmbSetor.Text));
+                    movimentaPersonagem(this.cmbPersonagens.Text, Convert.ToInt32(this.cmbSetor.Text));
                     break;
                 case "J":
-                    promovePersonagem(this.cmbPersonagens.Text.Substring(0, 1));
+                    promovePersonagem(this.cmbPersonagens.Text);
                     break;
                 case "V":
                     votarRei();
@@ -614,13 +626,6 @@ namespace KingMe
         private void rdbNao_CheckedChanged(object sender, EventArgs e)
         {
             this.voto = "N";
-        }
-
-        private void N_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        
+        }        
     }
 }
