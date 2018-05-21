@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analisajogada.cs" />
     <Compile Include="Criar_Partida.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +76,7 @@
     <Compile Include="Entrar_Nova.Designer.cs">
       <DependentUpon>Entrar_Nova.cs</DependentUpon>
     </Compile>
+    <Compile Include="Personagem.cs" />
     <Compile Include="Tabuleiro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +91,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TabuleiroClass.cs" />
     <EmbeddedResource Include="Criar_Partida.resx">
       <DependentUpon>Criar_Partida.cs</DependentUpon>
     </EmbeddedResource>

@@ -412,17 +412,18 @@ namespace KingMe
 
         private void autoMovePersonagemSetup()
         {
-            string personagens = txtCartas.Text;
-            Random rnd = new Random();
-            int rand;
-            rand = rnd.Next(0, personagens.Length);
-            cmbPersonagens.Text = personagens[rand].ToString();
-            for (int i = 4; i > 0; i--)
-            {
-                cmbSetor.Text = i.ToString();
-                btnConfirmarJogada_Click(new object(), new EventArgs());
-            }
-        }    
+            string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            tabuleiro = tabuleiro.Substring(tabuleiro.IndexOf('\r'));
+            Analisajogada analisajogada = new Analisajogada();
+            analisajogada.tabuleiro = new TabuleiroClass(tabuleiro);
+            analisajogada.tabuleiro.cartas = txtCartas.Text.Replace("\r", "");
+            analisajogada.tabuleiro.cartas = analisajogada.tabuleiro.cartas.Replace("\n", "");
+            string[] jogadores  = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split(',');
+            analisajogada.Nivel = 5;
+            analisajogada.jogadores = jogadores.Length;
+            analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel, analisajogada.jogadores);
+            Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, analisajogada.proximaMelhorJogadaPosicao, analisajogada.proximaMelhorJogadaPersonagem);
+        }
         
         private void autoMovePersonagemPromover()
         {
@@ -488,7 +489,6 @@ namespace KingMe
                 string tabuleiro = Jogo.Promover(Convert.ToInt32(idJogador), senhaJogador, personagem);
                 if (tabuleiro.Contains("ERRO"))
                 {
-                    //autoMovePersonagemPromover();
                     return;
                 }
                 setarMatriz();
@@ -550,7 +550,14 @@ namespace KingMe
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.timer1.Enabled = false;
-            String Temp = Jogo.VerificarStatus(Convert.ToInt32(idJogador));
+            string Temp= "";
+            try
+            {
+
+               Temp = Jogo.VerificarStatus(Convert.ToInt32(idJogador));
+            }catch(Exception ex){
+                return;
+            }
             inGame = Temp.Split(',');
 
             switch (inGame[0])

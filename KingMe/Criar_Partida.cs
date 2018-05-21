@@ -20,7 +20,13 @@ namespace KingMe
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.txtPartidas.Text = Jogo.ListarPartidas();
+            try
+            {
+                this.txtPartidas.Text = Jogo.ListarPartidas();
+            }catch(Exception ex)
+            {
+                Form1_Load(new Object(), new EventArgs());
+            }
         }
 
         private void btnCriarPartida_Click(object sender, EventArgs e)
