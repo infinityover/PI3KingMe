@@ -107,81 +107,67 @@ namespace KingMe
 
         public void setarCmbPersonagens()
         {
-            try
-            {
-                cmbPersonagens.Items.Clear();
-                string personagens = Jogo.ListarPersonagens();
-                personagens = personagens.Replace("\r", "");
-                string[] aux = personagens.Split('\n');
+            cmbPersonagens.Items.Clear();
+            string personagens = Jogo.ListarPersonagens();
+            personagens = personagens.Replace("\r", "");
+            string[] aux = personagens.Split('\n');
 
-                for (int i = 0; i < aux.Length - 1; i++)
-                {
-                    cmbPersonagens.Items.Add(aux[i].Substring(0, 1));
-                }
-            }catch(Exception e)
+            for (int i = 0; i < aux.Length - 1; i++)
             {
-                MessageBox.Show(e.Message);
-                return;
+                cmbPersonagens.Items.Add(aux[i].Substring(0, 1));
             }
+
         }
 
         public void setarTabuleiro()
         {
-            try
+            string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(idJogador));
+            tabuleiro = tabuleiro.Replace("\r", "");
+            string[] posicoes = tabuleiro.Split('\n');
+            string[] personagem;
+            string[] aux = { };
+            Control persona = null;
+
+            if (posicoes.Length > 2)
             {
-                string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(idJogador));
-                tabuleiro = tabuleiro.Replace("\r", "");
-                string[] posicoes = tabuleiro.Split('\n');
-                string[] personagem;
-                string[] aux = { };
-                Control persona = null;
-
-                if (posicoes.Length > 2)
+                for (int i = 1; i < posicoes.Length - 1; i++)
                 {
-                    for (int i = 1; i < posicoes.Length - 1; i++)
+                    personagem = posicoes[i].Split(',');
+                    
+                    foreach (Control con in this.Controls)
                     {
-                        personagem = posicoes[i].Split(',');
-
-                        foreach (Control con in this.Controls)
+                        if (con is PictureBox)
                         {
-                            if (con is PictureBox)
+                            if (Convert.ToString(con.Tag) == personagem[1])
                             {
-                                if (Convert.ToString(con.Tag) == personagem[1])
-                                {
-                                    persona = con;
-                                    break;
-                                }
+                                persona = con;
+                                break;
                             }
                         }
+                    }
 
-                        if (Convert.ToInt32(personagem[0]) == 10)
+                    if (Convert.ToInt32(personagem[0]) == 10)
+                    {
+                        Rei = personagem[1];
+                        persona.Location = posRei.Location;
+                        return;
+                    }
+                    else
+                    {
+                        for (int j = 0; j < 4; j++)
                         {
-                            Rei = personagem[1];
-                            persona.Location = posRei.Location;
-                            return;
-                        }
-                        else
-                        {
-                            for (int j = 0; j < 4; j++)
+                            aux = this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j].Split(',');
+                            if (aux[2] == "false")
                             {
-                                aux = this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j].Split(',');
-                                if (aux[2] == "false")
-                                {
-                                    persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
-                                    this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j] = aux[0] + ',' + aux[1] + ',' + personagem[1];
-                                    if (inGame[1] == "S") this.cmbPersonagens.Items.Remove(personagem[1]);
-                                    break;
-                                }
+                                persona.Location = new Point(Convert.ToInt32(aux[0]), Convert.ToInt32(aux[1]));
+                                this.matrizTabuleiro[Convert.ToInt32(Convert.ToInt32(personagem[0])), j] = aux[0] + ',' + aux[1] + ',' + personagem[1];
+                                if (inGame[1] == "S") this.cmbPersonagens.Items.Remove(personagem[1]);
+                                break;
                             }
                         }
                     }
                 }
-            }catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return;
             }
-
         }
 
         public void aguardandoInicioDaPartida()
@@ -241,131 +227,110 @@ namespace KingMe
 
         public void faseDeSetup()
         {
-            try
+            controlsProperts();
+            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            string[] tabuleiro;
+
+            verificavez = verificavez.Replace("\r", "");
+            tabuleiro = verificavez.Split('\n');
+            jogadorDaVez = tabuleiro[0];
+
+            if (inGame[1] != status_jogo)
             {
-                controlsProperts();
-                string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-                string[] tabuleiro;
+                status_jogo = inGame[1];
+                this.posicoesDefault();
+            }
 
-                verificavez = verificavez.Replace("\r", "");
-                tabuleiro = verificavez.Split('\n');
-                jogadorDaVez = tabuleiro[0];
-
-                if (inGame[1] != status_jogo)
-                {
-                    status_jogo = inGame[1];
-                    this.posicoesDefault();
-                }
-
-                if (jogadorDaVez.Contains(idJogador))
-                {
-                    statusVez.Text = "Sua Vez, Coloque um Personagem";
-                    statusVez.ForeColor = Color.LimeGreen;
-                    btnConfirmarJogada.Enabled = true;
-                    if (aguardarJogada == false)
-                    {
-                        setarMatriz();
-                        setarTabuleiro();
-                        aguardarJogada = true;
-                    }
-
-                    if (chkAuto.Checked) autoMovePersonagemSetup();
-                }
-                else
-                {
-                    aguarda_vez();
-                }
-            }catch(Exception e)
+            if (jogadorDaVez.Contains(idJogador))
             {
-                MessageBox.Show(e.Message);
-                return;
+                statusVez.Text = "Sua Vez, Coloque um Personagem";
+                statusVez.ForeColor = Color.LimeGreen;
+                btnConfirmarJogada.Enabled = true;
+                if (aguardarJogada == false)
+                {
+                    setarMatriz();
+                    setarTabuleiro();
+                    aguardarJogada = true;
+                }
+
+                if (chkAuto.Checked) autoMovePersonagemSetup();
+            } else
+            {
+                setarMatriz();
+                setarTabuleiro();
+                statusVez.Text = "Aguarde sua Vez!";
+                statusVez.ForeColor = Color.Red;
+                btnConfirmarJogada.Enabled = false;
             }
         }
 
         public void faseDePromocao()
         {
-            try
+            controlsProperts();
+            setarCmbPersonagens();
+            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            string[] tabuleiro;
+
+            verificavez = verificavez.Replace("\r", "");
+            tabuleiro = verificavez.Split('\n');
+            jogadorDaVez = tabuleiro[0];
+
+            if ("V" == status_jogo)
             {
-                controlsProperts();
-                setarCmbPersonagens();
-                string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-                string[] tabuleiro;
+                status_jogo = inGame[1];
+                this.posicoesDefault();
+            }
 
-                verificavez = verificavez.Replace("\r", "");
-                tabuleiro = verificavez.Split('\n');
-                jogadorDaVez = tabuleiro[0];
-
-                if ("V" == status_jogo)
-                {
-                    status_jogo = inGame[1];
-                    this.posicoesDefault();
-                }
-
-                if (jogadorDaVez.Contains(idJogador))
-                {
-                    statusVez.Text = "Sua Vez, Promova um Personagem";
-                    statusVez.ForeColor = Color.LimeGreen;
-                    btnConfirmarJogada.Enabled = true;
-                    if (aguardarJogada == false)
-                    {
-                        setarMatriz();
-                        setarTabuleiro();
-                        aguardarJogada = true;
-                    }
-
-                    if (chkAuto.Checked) autoMovePersonagemPromover();
-                }
-                else
-                {
-                    aguarda_vez();
-                }
-            }catch(Exception e)
+            if (jogadorDaVez.Contains(idJogador))
             {
-                MessageBox.Show(e.Message);
-                return;
+                statusVez.Text = "Sua Vez, Promova um Personagem";
+                statusVez.ForeColor = Color.LimeGreen;
+                btnConfirmarJogada.Enabled = true;
+                if (aguardarJogada == false)
+                {
+                    setarMatriz();
+                    setarTabuleiro();
+                    aguardarJogada = true;
+                }
+
+                if (chkAuto.Checked) autoMovePersonagemPromover();
+            }
+            else
+            {
+                setarMatriz();
+                setarTabuleiro();
+                statusVez.Text = "Aguarde sua Vez!";
+                statusVez.ForeColor = Color.Red;
+                btnConfirmarJogada.Enabled = false;
             }
         }
 
-        private void aguarda_vez()
-        {
-            setarMatriz();
-            setarTabuleiro();
-            statusVez.Text = "Aguarde sua Vez!";
-            statusVez.ForeColor = Color.Red;
-            btnConfirmarJogada.Enabled = false;
-        }
         private void faseDeVotacao()
         {
-            try
+            controlsProperts();
+            string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            string[] tabuleiro;
+
+            setarMatriz();
+            setarTabuleiro();
+
+            verificavez = verificavez.Replace("\r", "");
+            tabuleiro = verificavez.Split('\n');
+            jogadorDaVez = tabuleiro[0];
+
+            if (jogadorDaVez.Contains(this.idJogador))
             {
-                controlsProperts();
-                string verificavez = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-                string[] tabuleiro;
-
-                setarMatriz();
-                setarTabuleiro();
-
-                verificavez = verificavez.Replace("\r", "");
-                tabuleiro = verificavez.Split('\n');
-                jogadorDaVez = tabuleiro[0];
-
-                if (jogadorDaVez.Contains(this.idJogador))
-                {
-                    statusVez.Text = "Sua Vez, Informe seu Voto";
-                    statusVez.ForeColor = Color.LimeGreen;
-                    btnConfirmarJogada.Enabled = true;
-                    if (chkAuto.Checked) autoVotar();
-                    return;
-                }
-                else
-                {
-                    statusVez.Text = "Aguarde sua vez!";
-                    statusVez.ForeColor = Color.Red;
-                    btnConfirmarJogada.Enabled = false;
-                }
-            }catch(Exception e)
+                statusVez.Text = "Sua Vez, Informe seu Voto";
+                statusVez.ForeColor = Color.LimeGreen;
+                btnConfirmarJogada.Enabled = true;
+                if (chkAuto.Checked) autoVotar();
+                return;
+            }
+            else
             {
-                MessageBox.Show(e.Message);
+                statusVez.Text = "Aguarde sua vez!";
+                statusVez.ForeColor = Color.Red;
+                btnConfirmarJogada.Enabled = false;
             }
         }
 
@@ -375,7 +340,6 @@ namespace KingMe
             Random rnd = new Random();
             int rand = rnd.Next(0, cmbPersonagens.Items.Count);
             cmbPersonagens.SelectedIndex = rand;
-            //cmbPersonagens.Items.IndexOf("A");
             rand = rnd.Next(0,cmbSetor.Items.Count);
             cmbSetor.SelectedIndex = rand;
             btnConfirmarJogada_Click(new object(), new EventArgs());
@@ -401,64 +365,48 @@ namespace KingMe
 
         public void movimentaPersonagem(string personagem, int setor)
         {
-            try {
-                string teste = Jogo.VerificarVez(Convert.ToInt32(idJogador));
-                string tabuleiro = Jogo.ColocarPersonagem(Convert.ToInt32(idJogador), senhaJogador, setor, personagem);
+            string teste = Jogo.VerificarVez(Convert.ToInt32(idJogador));
+            string tabuleiro = Jogo.ColocarPersonagem(Convert.ToInt32(idJogador), senhaJogador, setor, personagem);
 
-                setarMatriz();
-                setarTabuleiro();
-                if (tabuleiro.Contains("ERRO"))
-                {
-                    //this.autoMovePersonagemSetup();
-                    return;
-                }
-                aguardarJogada = false;
-                return;
-            }catch(Exception e)
+            setarMatriz();
+            setarTabuleiro();
+            if (tabuleiro.Contains("ERRO"))
             {
-                MessageBox.Show(e.Message);
+                //this.autoMovePersonagemSetup();
+                return;
             }
-            }
+            aguardarJogada = false;
+            return;
+        }
 
         public void promovePersonagem(string personagem)
         {
-            try
+            string tabuleiro = Jogo.Promover(Convert.ToInt32(idJogador), senhaJogador, personagem);
+            if (tabuleiro.Contains("ERRO"))
             {
-                string tabuleiro = Jogo.Promover(Convert.ToInt32(idJogador), senhaJogador, personagem);
-                if (tabuleiro.Contains("ERRO"))
-                {
-                    //autoMovePersonagemPromover();
-                    return;
-                }
-                setarMatriz();
-                setarTabuleiro();
-                aguardarJogada = false;
+                //autoMovePersonagemPromover();
                 return;
-            }catch(Exception e)
-            {
-                MessageBox.Show(e.Message);
             }
+            setarMatriz();
+            setarTabuleiro();
+            aguardarJogada = false;
+            return;
         }
 
         public void votarRei()
         {
-            try {
-                if (voto == "")
-                {
-                    MessageBox.Show("Escolha uma opção de voto!");
-                    return;
-                }
-
-                string retorno = Jogo.Votar(Convert.ToInt32(idJogador), senhaJogador, voto);
-
-                if (retorno.Contains("ERRO"))
-                {
-                    MessageBox.Show(retorno);
-                    return;
-                }
-            }catch(Exception e)
+            if (voto == "")
             {
-                MessageBox.Show(e.Message);
+                MessageBox.Show("Escolha uma opção de voto!");
+                return;
+            }
+
+            string retorno = Jogo.Votar(Convert.ToInt32(idJogador), senhaJogador, voto);
+
+            if (retorno.Contains("ERRO"))
+            {
+                MessageBox.Show(retorno);
+                return;
             }
         }
 
