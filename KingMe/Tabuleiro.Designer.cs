@@ -128,7 +128,7 @@
             // 
             this.pos50.BackColor = System.Drawing.Color.Transparent;
             this.pos50.Location = new System.Drawing.Point(107, 117);
-            this.pos50.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos50.Margin = new System.Windows.Forms.Padding(4);
             this.pos50.Name = "pos50";
             this.pos50.Size = new System.Drawing.Size(63, 62);
             this.pos50.TabIndex = 1;
@@ -138,7 +138,7 @@
             // 
             this.pos51.BackColor = System.Drawing.Color.Transparent;
             this.pos51.Location = new System.Drawing.Point(177, 117);
-            this.pos51.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos51.Margin = new System.Windows.Forms.Padding(4);
             this.pos51.Name = "pos51";
             this.pos51.Size = new System.Drawing.Size(63, 62);
             this.pos51.TabIndex = 1;
@@ -148,7 +148,7 @@
             // 
             this.pos52.BackColor = System.Drawing.Color.Transparent;
             this.pos52.Location = new System.Drawing.Point(248, 117);
-            this.pos52.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos52.Margin = new System.Windows.Forms.Padding(4);
             this.pos52.Name = "pos52";
             this.pos52.Size = new System.Drawing.Size(63, 62);
             this.pos52.TabIndex = 1;
@@ -158,7 +158,7 @@
             // 
             this.pos53.BackColor = System.Drawing.Color.Transparent;
             this.pos53.Location = new System.Drawing.Point(319, 117);
-            this.pos53.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos53.Margin = new System.Windows.Forms.Padding(4);
             this.pos53.Name = "pos53";
             this.pos53.Size = new System.Drawing.Size(63, 62);
             this.pos53.TabIndex = 1;
@@ -168,7 +168,7 @@
             // 
             this.pos40.BackColor = System.Drawing.Color.Transparent;
             this.pos40.Location = new System.Drawing.Point(107, 209);
-            this.pos40.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos40.Margin = new System.Windows.Forms.Padding(4);
             this.pos40.Name = "pos40";
             this.pos40.Size = new System.Drawing.Size(63, 62);
             this.pos40.TabIndex = 1;
@@ -178,7 +178,7 @@
             // 
             this.pos41.BackColor = System.Drawing.Color.Transparent;
             this.pos41.Location = new System.Drawing.Point(177, 209);
-            this.pos41.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos41.Margin = new System.Windows.Forms.Padding(4);
             this.pos41.Name = "pos41";
             this.pos41.Size = new System.Drawing.Size(63, 62);
             this.pos41.TabIndex = 1;
@@ -188,7 +188,7 @@
             // 
             this.pos42.BackColor = System.Drawing.Color.Transparent;
             this.pos42.Location = new System.Drawing.Point(248, 209);
-            this.pos42.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos42.Margin = new System.Windows.Forms.Padding(4);
             this.pos42.Name = "pos42";
             this.pos42.Size = new System.Drawing.Size(63, 62);
             this.pos42.TabIndex = 1;
@@ -198,7 +198,7 @@
             // 
             this.pos43.BackColor = System.Drawing.Color.Transparent;
             this.pos43.Location = new System.Drawing.Point(319, 209);
-            this.pos43.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos43.Margin = new System.Windows.Forms.Padding(4);
             this.pos43.Name = "pos43";
             this.pos43.Size = new System.Drawing.Size(63, 62);
             this.pos43.TabIndex = 1;
@@ -208,7 +208,7 @@
             // 
             this.pos30.BackColor = System.Drawing.Color.Transparent;
             this.pos30.Location = new System.Drawing.Point(107, 293);
-            this.pos30.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos30.Margin = new System.Windows.Forms.Padding(4);
             this.pos30.Name = "pos30";
             this.pos30.Size = new System.Drawing.Size(63, 62);
             this.pos30.TabIndex = 1;
@@ -218,7 +218,7 @@
             // 
             this.pos31.BackColor = System.Drawing.Color.Transparent;
             this.pos31.Location = new System.Drawing.Point(177, 293);
-            this.pos31.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos31.Margin = new System.Windows.Forms.Padding(4);
             this.pos31.Name = "pos31";
             this.pos31.Size = new System.Drawing.Size(63, 62);
             this.pos31.TabIndex = 1;
@@ -228,7 +228,7 @@
             // 
             this.pos32.BackColor = System.Drawing.Color.Transparent;
             this.pos32.Location = new System.Drawing.Point(248, 293);
-            this.pos32.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos32.Margin = new System.Windows.Forms.Padding(4);
             this.pos32.Name = "pos32";
             this.pos32.Size = new System.Drawing.Size(63, 62);
             this.pos32.TabIndex = 1;
@@ -238,7 +238,7 @@
             // 
             this.pos33.BackColor = System.Drawing.Color.Transparent;
             this.pos33.Location = new System.Drawing.Point(319, 293);
-            this.pos33.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos33.Margin = new System.Windows.Forms.Padding(4);
             this.pos33.Name = "pos33";
             this.pos33.Size = new System.Drawing.Size(63, 62);
             this.pos33.TabIndex = 1;
@@ -248,7 +248,7 @@
             // 
             this.pos20.BackColor = System.Drawing.Color.Transparent;
             this.pos20.Location = new System.Drawing.Point(107, 380);
-            this.pos20.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos20.Margin = new System.Windows.Forms.Padding(4);
             this.pos20.Name = "pos20";
             this.pos20.Size = new System.Drawing.Size(63, 62);
             this.pos20.TabIndex = 1;
@@ -258,7 +258,7 @@
             // 
             this.pos21.BackColor = System.Drawing.Color.Transparent;
             this.pos21.Location = new System.Drawing.Point(177, 380);
-            this.pos21.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos21.Margin = new System.Windows.Forms.Padding(4);
             this.pos21.Name = "pos21";
             this.pos21.Size = new System.Drawing.Size(63, 62);
             this.pos21.TabIndex = 1;
@@ -268,7 +268,7 @@
             // 
             this.pos22.BackColor = System.Drawing.Color.Transparent;
             this.pos22.Location = new System.Drawing.Point(248, 380);
-            this.pos22.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos22.Margin = new System.Windows.Forms.Padding(4);
             this.pos22.Name = "pos22";
             this.pos22.Size = new System.Drawing.Size(63, 62);
             this.pos22.TabIndex = 1;
@@ -278,7 +278,7 @@
             // 
             this.pos23.BackColor = System.Drawing.Color.Transparent;
             this.pos23.Location = new System.Drawing.Point(319, 380);
-            this.pos23.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos23.Margin = new System.Windows.Forms.Padding(4);
             this.pos23.Name = "pos23";
             this.pos23.Size = new System.Drawing.Size(63, 62);
             this.pos23.TabIndex = 1;
@@ -288,7 +288,7 @@
             // 
             this.pos10.BackColor = System.Drawing.Color.Transparent;
             this.pos10.Location = new System.Drawing.Point(107, 466);
-            this.pos10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos10.Margin = new System.Windows.Forms.Padding(4);
             this.pos10.Name = "pos10";
             this.pos10.Size = new System.Drawing.Size(63, 62);
             this.pos10.TabIndex = 1;
@@ -298,7 +298,7 @@
             // 
             this.pos11.BackColor = System.Drawing.Color.Transparent;
             this.pos11.Location = new System.Drawing.Point(177, 466);
-            this.pos11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos11.Margin = new System.Windows.Forms.Padding(4);
             this.pos11.Name = "pos11";
             this.pos11.Size = new System.Drawing.Size(63, 62);
             this.pos11.TabIndex = 1;
@@ -308,7 +308,7 @@
             // 
             this.pos12.BackColor = System.Drawing.Color.Transparent;
             this.pos12.Location = new System.Drawing.Point(248, 466);
-            this.pos12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos12.Margin = new System.Windows.Forms.Padding(4);
             this.pos12.Name = "pos12";
             this.pos12.Size = new System.Drawing.Size(63, 62);
             this.pos12.TabIndex = 1;
@@ -318,7 +318,7 @@
             // 
             this.pos13.BackColor = System.Drawing.Color.Transparent;
             this.pos13.Location = new System.Drawing.Point(319, 466);
-            this.pos13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos13.Margin = new System.Windows.Forms.Padding(4);
             this.pos13.Name = "pos13";
             this.pos13.Size = new System.Drawing.Size(63, 62);
             this.pos13.TabIndex = 1;
@@ -328,7 +328,7 @@
             // 
             this.pos00.BackColor = System.Drawing.Color.Transparent;
             this.pos00.Location = new System.Drawing.Point(107, 551);
-            this.pos00.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos00.Margin = new System.Windows.Forms.Padding(4);
             this.pos00.Name = "pos00";
             this.pos00.Size = new System.Drawing.Size(63, 62);
             this.pos00.TabIndex = 1;
@@ -338,7 +338,7 @@
             // 
             this.posRei.BackColor = System.Drawing.Color.Transparent;
             this.posRei.Location = new System.Drawing.Point(207, 36);
-            this.posRei.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.posRei.Margin = new System.Windows.Forms.Padding(4);
             this.posRei.Name = "posRei";
             this.posRei.Size = new System.Drawing.Size(63, 62);
             this.posRei.TabIndex = 1;
@@ -349,7 +349,7 @@
             this.A.BackColor = System.Drawing.Color.Transparent;
             this.A.Image = ((System.Drawing.Image)(resources.GetObject("A.Image")));
             this.A.Location = new System.Drawing.Point(495, 20);
-            this.A.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.A.Margin = new System.Windows.Forms.Padding(4);
             this.A.Name = "A";
             this.A.Size = new System.Drawing.Size(63, 62);
             this.A.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -362,7 +362,7 @@
             this.B.BackColor = System.Drawing.Color.Transparent;
             this.B.Image = ((System.Drawing.Image)(resources.GetObject("B.Image")));
             this.B.Location = new System.Drawing.Point(565, 20);
-            this.B.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.B.Margin = new System.Windows.Forms.Padding(4);
             this.B.Name = "B";
             this.B.Size = new System.Drawing.Size(63, 62);
             this.B.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -375,7 +375,7 @@
             this.C.BackColor = System.Drawing.Color.Transparent;
             this.C.Image = ((System.Drawing.Image)(resources.GetObject("C.Image")));
             this.C.Location = new System.Drawing.Point(636, 20);
-            this.C.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.C.Margin = new System.Windows.Forms.Padding(4);
             this.C.Name = "C";
             this.C.Size = new System.Drawing.Size(63, 62);
             this.C.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -388,7 +388,7 @@
             this.D.BackColor = System.Drawing.Color.Transparent;
             this.D.Image = ((System.Drawing.Image)(resources.GetObject("D.Image")));
             this.D.Location = new System.Drawing.Point(707, 20);
-            this.D.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.D.Margin = new System.Windows.Forms.Padding(4);
             this.D.Name = "D";
             this.D.Size = new System.Drawing.Size(63, 62);
             this.D.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -401,7 +401,7 @@
             this.E.BackColor = System.Drawing.Color.Transparent;
             this.E.Image = ((System.Drawing.Image)(resources.GetObject("E.Image")));
             this.E.Location = new System.Drawing.Point(495, 89);
-            this.E.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.E.Margin = new System.Windows.Forms.Padding(4);
             this.E.Name = "E";
             this.E.Size = new System.Drawing.Size(63, 62);
             this.E.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -414,7 +414,7 @@
             this.G.BackColor = System.Drawing.Color.Transparent;
             this.G.Image = ((System.Drawing.Image)(resources.GetObject("G.Image")));
             this.G.Location = new System.Drawing.Point(636, 89);
-            this.G.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.G.Margin = new System.Windows.Forms.Padding(4);
             this.G.Name = "G";
             this.G.Size = new System.Drawing.Size(63, 62);
             this.G.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -427,7 +427,7 @@
             this.F.BackColor = System.Drawing.Color.Transparent;
             this.F.Image = ((System.Drawing.Image)(resources.GetObject("F.Image")));
             this.F.Location = new System.Drawing.Point(565, 89);
-            this.F.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.F.Margin = new System.Windows.Forms.Padding(4);
             this.F.Name = "F";
             this.F.Size = new System.Drawing.Size(63, 62);
             this.F.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -441,7 +441,7 @@
             this.P.BackColor = System.Drawing.Color.Transparent;
             this.P.Image = ((System.Drawing.Image)(resources.GetObject("P.Image")));
             this.P.Location = new System.Drawing.Point(495, 226);
-            this.P.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.P.Margin = new System.Windows.Forms.Padding(4);
             this.P.Name = "P";
             this.P.Size = new System.Drawing.Size(63, 62);
             this.P.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -454,7 +454,7 @@
             this.I.BackColor = System.Drawing.Color.Transparent;
             this.I.Image = ((System.Drawing.Image)(resources.GetObject("I.Image")));
             this.I.Location = new System.Drawing.Point(711, 89);
-            this.I.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.I.Margin = new System.Windows.Forms.Padding(4);
             this.I.Name = "I";
             this.I.Size = new System.Drawing.Size(63, 62);
             this.I.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -467,7 +467,7 @@
             this.O.BackColor = System.Drawing.Color.Transparent;
             this.O.Image = ((System.Drawing.Image)(resources.GetObject("O.Image")));
             this.O.Location = new System.Drawing.Point(711, 158);
-            this.O.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.O.Margin = new System.Windows.Forms.Padding(4);
             this.O.Name = "O";
             this.O.Size = new System.Drawing.Size(63, 62);
             this.O.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -480,7 +480,7 @@
             this.N.BackColor = System.Drawing.Color.Transparent;
             this.N.Image = ((System.Drawing.Image)(resources.GetObject("N.Image")));
             this.N.Location = new System.Drawing.Point(636, 158);
-            this.N.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.N.Margin = new System.Windows.Forms.Padding(4);
             this.N.Name = "N";
             this.N.Size = new System.Drawing.Size(63, 62);
             this.N.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -493,7 +493,7 @@
             this.L.BackColor = System.Drawing.Color.Transparent;
             this.L.Image = ((System.Drawing.Image)(resources.GetObject("L.Image")));
             this.L.Location = new System.Drawing.Point(495, 158);
-            this.L.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.L.Margin = new System.Windows.Forms.Padding(4);
             this.L.Name = "L";
             this.L.Size = new System.Drawing.Size(63, 62);
             this.L.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -506,7 +506,7 @@
             this.M.BackColor = System.Drawing.Color.Transparent;
             this.M.Image = ((System.Drawing.Image)(resources.GetObject("M.Image")));
             this.M.Location = new System.Drawing.Point(565, 158);
-            this.M.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.M.Margin = new System.Windows.Forms.Padding(4);
             this.M.Name = "M";
             this.M.Size = new System.Drawing.Size(63, 62);
             this.M.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -544,7 +544,7 @@
             this.cmbPersonagens.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbPersonagens.FormattingEnabled = true;
             this.cmbPersonagens.Location = new System.Drawing.Point(15, 43);
-            this.cmbPersonagens.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbPersonagens.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPersonagens.MaxDropDownItems = 20;
             this.cmbPersonagens.Name = "cmbPersonagens";
             this.cmbPersonagens.Size = new System.Drawing.Size(273, 24);
@@ -568,7 +568,7 @@
             this.cmbSetor.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.cmbSetor.FormattingEnabled = true;
             this.cmbSetor.Location = new System.Drawing.Point(15, 106);
-            this.cmbSetor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbSetor.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSetor.MaxDropDownItems = 20;
             this.cmbSetor.Name = "cmbSetor";
             this.cmbSetor.Size = new System.Drawing.Size(273, 24);
@@ -581,7 +581,7 @@
             this.btnConfirmarJogada.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmarJogada.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnConfirmarJogada.Location = new System.Drawing.Point(15, 159);
-            this.btnConfirmarJogada.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConfirmarJogada.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirmarJogada.Name = "btnConfirmarJogada";
             this.btnConfirmarJogada.Size = new System.Drawing.Size(275, 39);
             this.btnConfirmarJogada.TabIndex = 6;
@@ -593,7 +593,7 @@
             // 
             this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(4, 4);
-            this.txtId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtId.Margin = new System.Windows.Forms.Padding(4);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(132, 22);
             this.txtId.TabIndex = 7;
@@ -610,7 +610,7 @@
             this.btnIniciar_partida.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIniciar_partida.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnIniciar_partida.Location = new System.Drawing.Point(495, 380);
-            this.btnIniciar_partida.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnIniciar_partida.Margin = new System.Windows.Forms.Padding(4);
             this.btnIniciar_partida.Name = "btnIniciar_partida";
             this.btnIniciar_partida.Size = new System.Drawing.Size(275, 39);
             this.btnIniciar_partida.TabIndex = 8;
@@ -631,7 +631,7 @@
             this.afterInitialize.Location = new System.Drawing.Point(484, 348);
             this.afterInitialize.Margin = new System.Windows.Forms.Padding(0);
             this.afterInitialize.Name = "afterInitialize";
-            this.afterInitialize.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.afterInitialize.Padding = new System.Windows.Forms.Padding(4);
             this.afterInitialize.Size = new System.Drawing.Size(300, 206);
             this.afterInitialize.TabIndex = 9;
             this.afterInitialize.TabStop = false;
@@ -641,7 +641,7 @@
             // 
             this.rdbNao.AutoSize = true;
             this.rdbNao.Location = new System.Drawing.Point(159, 48);
-            this.rdbNao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbNao.Margin = new System.Windows.Forms.Padding(4);
             this.rdbNao.Name = "rdbNao";
             this.rdbNao.Size = new System.Drawing.Size(55, 21);
             this.rdbNao.TabIndex = 11;
@@ -654,7 +654,7 @@
             // 
             this.rdbSim.AutoSize = true;
             this.rdbSim.Location = new System.Drawing.Point(81, 48);
-            this.rdbSim.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbSim.Margin = new System.Windows.Forms.Padding(4);
             this.rdbSim.Name = "rdbSim";
             this.rdbSim.Size = new System.Drawing.Size(52, 21);
             this.rdbSim.TabIndex = 11;
@@ -667,7 +667,7 @@
             // 
             this.chkAuto.AutoSize = true;
             this.chkAuto.Location = new System.Drawing.Point(484, 592);
-            this.chkAuto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkAuto.Margin = new System.Windows.Forms.Padding(4);
             this.chkAuto.Name = "chkAuto";
             this.chkAuto.Size = new System.Drawing.Size(100, 21);
             this.chkAuto.TabIndex = 10;
@@ -678,7 +678,7 @@
             // 
             this.pos01.BackColor = System.Drawing.Color.Transparent;
             this.pos01.Location = new System.Drawing.Point(177, 551);
-            this.pos01.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos01.Margin = new System.Windows.Forms.Padding(4);
             this.pos01.Name = "pos01";
             this.pos01.Size = new System.Drawing.Size(63, 62);
             this.pos01.TabIndex = 1;
@@ -688,7 +688,7 @@
             // 
             this.pos02.BackColor = System.Drawing.Color.Transparent;
             this.pos02.Location = new System.Drawing.Point(248, 551);
-            this.pos02.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos02.Margin = new System.Windows.Forms.Padding(4);
             this.pos02.Name = "pos02";
             this.pos02.Size = new System.Drawing.Size(63, 62);
             this.pos02.TabIndex = 1;
@@ -698,7 +698,7 @@
             // 
             this.pos03.BackColor = System.Drawing.Color.Transparent;
             this.pos03.Location = new System.Drawing.Point(319, 551);
-            this.pos03.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pos03.Margin = new System.Windows.Forms.Padding(4);
             this.pos03.Name = "pos03";
             this.pos03.Size = new System.Drawing.Size(63, 62);
             this.pos03.TabIndex = 1;
@@ -708,7 +708,7 @@
             // 
             this.txtSenha.Enabled = false;
             this.txtSenha.Location = new System.Drawing.Point(4, 36);
-            this.txtSenha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSenha.Margin = new System.Windows.Forms.Padding(4);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(132, 22);
             this.txtSenha.TabIndex = 7;
@@ -776,7 +776,7 @@
             this.Controls.Add(this.pos40);
             this.Controls.Add(this.pos51);
             this.Controls.Add(this.pos50);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Tabuleiro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tabuleiro";
