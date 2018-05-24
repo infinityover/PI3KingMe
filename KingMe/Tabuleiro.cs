@@ -422,12 +422,12 @@ namespace KingMe
         {
             setarCmbPersonagens();
             setarMatriz();
-
             cmbSetor.Items.Add("1");
             cmbSetor.Items.Add("2");
             cmbSetor.Items.Add("3");
             cmbSetor.Items.Add("4");
 
+            cmbTempo.SelectedIndex = 1;
             txtId.Text = this.idJogador;
             txtSenha.Text = this.senhaJogador;
             lblVersion.Text = "Version: "+Jogo.versao;
@@ -436,6 +436,10 @@ namespace KingMe
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            this.txtcartas.Text = Jogo.ListarCartas(Convert.ToInt32(this.idJogador), this.senhaJogador);
+            this.txtjogadores.Text = Jogo.ListarJogadores(Convert.ToInt32( this.idPartida));
+            string votos = Jogo.ExibirUltimaVotacao(Convert.ToInt32(this.idJogador), this.senhaJogador);
+            if (!votos.Contains("ERRO")) txtVotos.Text = votos;
             this.timer1.Enabled = false;
             String Temp = Jogo.VerificarStatus(Convert.ToInt32(idJogador));
             inGame = Temp.Split(',');
@@ -515,5 +519,9 @@ namespace KingMe
             this.voto = "N";
         }
 
+        private void cmbTempo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.timer1.Interval = Convert.ToInt32(cmbTempo.Text) * 1000;
+        }
     }
 }
