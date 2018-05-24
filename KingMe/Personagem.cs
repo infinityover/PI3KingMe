@@ -8,7 +8,6 @@ namespace KingMe
 {
     class Personagem
     {
-        public string Nome;
         public string Apelido;
 
         public Personagem (string nome)

@@ -27,6 +27,7 @@ namespace KingMe
         public bool aguardarJogada = false;
         public string status_jogo = "";
         public int andar;
+        public int dificuldade = 5;
 
         public Tabuleiro(string Form)
         {
@@ -98,25 +99,6 @@ namespace KingMe
 
         }
 
-        public void gera_movaleatorio(string tabuleiro) {
-            tabuleiro = tabuleiro.Replace("\r", "");
-            string[] lista_tabuleiro = tabuleiro.Split('\n');
-            string[] personagem;
-
-            for(int i =0; i <lista_tabuleiro.Length; i++)
-            {
-                personagem = lista_tabuleiro[i].Split(',');
-                if (Convert.ToInt32(personagem[1]) <= 5)
-                {
-                    personagem[1] = Convert.ToString(Convert.ToInt32(personagem[1]) + 1);
-                }
-                else
-                {
-                    personagem[1] = "10";
-                }
-            }
-            
-        }
 
         public void posicoesDefault()
         {
@@ -152,7 +134,7 @@ namespace KingMe
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message);
-                return;
+                //return;
             }
         }
 
@@ -197,7 +179,7 @@ namespace KingMe
                 {
                     Rei = personagem[1];
                     persona.Location = posRei.Location;
-                    return;
+                    //return;
                 }
                 else
                 {
@@ -418,11 +400,24 @@ namespace KingMe
             analisajogada.tabuleiro = new TabuleiroClass(tabuleiro);
             analisajogada.tabuleiro.cartas = txtCartas.Text.Replace("\r", "");
             analisajogada.tabuleiro.cartas = analisajogada.tabuleiro.cartas.Replace("\n", "");
-            string[] jogadores  = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split(',');
-            analisajogada.Nivel = 5;
-            analisajogada.jogadores = jogadores.Length;
+            string[] jogadores  = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
+            analisajogada.Nivel = this.dificuldade;
+            analisajogada.jogadores = jogadores.Length-1;
             analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel, analisajogada.jogadores);
-            Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, analisajogada.proximaMelhorJogadaPosicao, analisajogada.proximaMelhorJogadaPersonagem);
+            try
+            {
+                this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
+                this.cmbSetor.SelectedIndex = this.cmbSetor.FindString(analisajogada.proximaMelhorJogadaPosicao.ToString());
+                btnConfirmarJogada_Click(new object(), new EventArgs());
+                //Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, analisajogada.proximaMelhorJogadaPosicao, analisajogada.proximaMelhorJogadaPersonagem);
+            }
+            catch(Exception e)
+            {
+                this.dificuldade--;
+                autoMovePersonagemSetup();
+            }
+
+
         }
         
         private void autoMovePersonagemPromover()
@@ -556,6 +551,7 @@ namespace KingMe
 
                Temp = Jogo.VerificarStatus(Convert.ToInt32(idJogador));
             }catch(Exception ex){
+                MessageBox.Show(ex.Message);
                 return;
             }
             inGame = Temp.Split(',');

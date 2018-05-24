@@ -43,12 +43,12 @@ namespace KingMe
                     proximaMelhorJogadaPersonagem = melhorJogada.ultimaJogada.Split(',')[0];
                     proximaMelhorJogadaPosicao = Convert.ToInt32(melhorJogada.ultimaJogada.Split(',')[1]);
                 }
-                return geraSetup(melhorJogada, nivel--, vez--);
+                return geraSetup(melhorJogada, nivel-1, vez-1);
             }
             else{
                 //Caso seja a vez do jogador deve gerar a pior jogada para mim
                 geraJogadaSetup(tabuleiroAtual,-1);
-                return geraSetup(piorJogada, nivel--, vez--);
+                return geraSetup(piorJogada, (nivel-1), (vez-1));
             }
         }
 
@@ -75,6 +75,7 @@ namespace KingMe
                         if (String.IsNullOrEmpty(tabuleiroAtual.tabuleiro[i][j]))
                         {
                             novaJogada = (TabuleiroClass)tabuleiroAtual.Clone();
+                            novaJogada.tabuleiro = tabuleiro.tabuleiro;
 
                             novaJogada.tabuleiro[i][j] = novaJogada.personagensPossiveis[qtPersonagens].Apelido;
                             novaJogada.pontuacao = gerapontuacao(novaJogada);
@@ -84,11 +85,15 @@ namespace KingMe
                                 novaJogada.personagensPossiveis.RemoveRange(qtPersonagens,1);
                                 this.melhorJogada = novaJogada;
                             }
-                            else if(novaJogada.pontuacao < melhorJogada.pontuacao && melhorPior == -1)
+                            else if(novaJogada.pontuacao <= melhorJogada.pontuacao && melhorPior == -1)
                             {
                                 novaJogada.ultimaJogada = novaJogada.personagensPossiveis[qtPersonagens].Apelido + "," + i.ToString();
                                 novaJogada.personagensPossiveis.RemoveRange(qtPersonagens, 1);
                                 this.piorJogada = novaJogada;
+                            }
+                            else
+                            {
+
                             }
                         }
                     }
