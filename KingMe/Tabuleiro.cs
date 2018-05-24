@@ -91,18 +91,18 @@ namespace KingMe
         public void posicoesDefault()
         {
             this.A.Location = new Point(371, 16);
-            this.B.Location = new Point(424, 16);
-            this.C.Location = new Point(477, 16);
-            this.D.Location = new Point(530, 16);
-            this.E.Location = new Point(371, 72);
-            this.G.Location = new Point(477, 72);
+            this.B.Location = new Point(371, 72);
+            this.C.Location = new Point(371, 128);
+            this.D.Location = new Point(371, 184);
+            this.E.Location = new Point(424, 16);
+            this.G.Location = new Point(424, 128);
             this.F.Location = new Point(424, 72);
-            this.P.Location = new Point(371, 184);
-            this.I.Location = new Point(533, 72);
-            this.O.Location = new Point(533, 128);
+            this.P.Location = new Point(530, 16);
+            this.I.Location = new Point(424, 184);
+            this.O.Location = new Point(477, 184);
             this.N.Location = new Point(477, 128);
-            this.L.Location = new Point(371, 128);
-            this.M.Location = new Point(424, 128);
+            this.L.Location = new Point(477, 16);
+            this.M.Location = new Point(477, 72);
         }
 
         public void setarCmbPersonagens()
