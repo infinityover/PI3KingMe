@@ -83,6 +83,9 @@
             this.pos03 = new System.Windows.Forms.PictureBox();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.lblVersion = new System.Windows.Forms.Label();
+            this.txtcartas = new System.Windows.Forms.TextBox();
+            this.txtjogadores = new System.Windows.Forms.TextBox();
+            this.txtVotos = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -723,6 +726,29 @@
             this.lblVersion.TabIndex = 11;
             this.lblVersion.Text = "Version: ";
             // 
+            // txtcartas
+            // 
+            this.txtcartas.Location = new System.Drawing.Point(686, 237);
+            this.txtcartas.Name = "txtcartas";
+            this.txtcartas.Size = new System.Drawing.Size(100, 22);
+            this.txtcartas.TabIndex = 12;
+            // 
+            // txtjogadores
+            // 
+            this.txtjogadores.Location = new System.Drawing.Point(686, 266);
+            this.txtjogadores.Multiline = true;
+            this.txtjogadores.Name = "txtjogadores";
+            this.txtjogadores.Size = new System.Drawing.Size(100, 22);
+            this.txtjogadores.TabIndex = 13;
+            // 
+            // txtVotos
+            // 
+            this.txtVotos.Location = new System.Drawing.Point(683, 308);
+            this.txtVotos.Multiline = true;
+            this.txtVotos.Name = "txtVotos";
+            this.txtVotos.Size = new System.Drawing.Size(100, 22);
+            this.txtVotos.TabIndex = 14;
+            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -730,7 +756,10 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(792, 647);
+            this.ClientSize = new System.Drawing.Size(795, 647);
+            this.Controls.Add(this.txtVotos);
+            this.Controls.Add(this.txtjogadores);
+            this.Controls.Add(this.txtcartas);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.chkAuto);
             this.Controls.Add(this.statusVez);
@@ -881,5 +910,8 @@
         private System.Windows.Forms.RadioButton rdbNao;
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.TextBox txtcartas;
+        private System.Windows.Forms.TextBox txtjogadores;
+        private System.Windows.Forms.TextBox txtVotos;
     }
 }

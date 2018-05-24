@@ -514,5 +514,6 @@ namespace KingMe
         {
             this.voto = "N";
         }
+
     }
 }
