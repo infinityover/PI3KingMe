@@ -28,6 +28,9 @@ namespace KingMe
 
         private void Entrar_Nova_Load(object sender, EventArgs e)
         {
+
+            this.txtNomeJogador.Text = "askjdhg";
+            this.txtSenhaPartida.Text = "123";
             listView1.View = View.Details;
             listView1.GridLines = true;
             listView1.FullRowSelect = true;

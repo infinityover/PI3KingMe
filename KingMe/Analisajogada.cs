@@ -18,84 +18,81 @@ namespace KingMe
 
 
 
-        public int geraSetup(TabuleiroClass tabuleiroAtual, int nivel, int vez){
-
-            this.melhorJogada = (TabuleiroClass)tabuleiroAtual.Clone();
-            this.melhorJogada.pontuacao = 0;
-
-
-            this.piorJogada = (TabuleiroClass)tabuleiroAtual.Clone();
-            this.piorJogada.pontuacao = 1000;
-            if (nivel == 0)
-            {   
-                //fim da execução deve retornar a pontuação
-                return gerapontuacao(tabuleiroAtual);
-            }
+        public void geraSetup(TabuleiroClass tabuleiroAtual, int nivel){
+            //Gera arvore de possibilidade
+            //Até quando possivel;
+            int jogadorVez = jogadores;
             //se a vez for = 0  significa que é a minha vez de jogar
-            if (vez == 0) vez = jogadores;
+            if (nivel == 0) return;
+            //Caso seja a vez do jogador deve gerar a pior jogada para mim
+            geraJogadaSetup(tabuleiroAtual);
+            if(tabuleiroAtual.melhorJogada != null) geraSetup(tabuleiroAtual.melhorJogada, (nivel - 1));
+            if(tabuleiroAtual.piorJogada != null) geraSetup(tabuleiroAtual.piorJogada, (nivel-1));
 
-            if(vez == jogadores)
+
+
+           if(nivel == this.Nivel)
             {
-                //Caso seja a minha vez deve gerar a melhor jogada para mim
-                geraJogadaSetup((TabuleiroClass)tabuleiroAtual.Clone(),1);
-                if (this.Nivel == nivel)
+                this.novaJogada = tabuleiroAtual.melhorJogada;
+                while (true)
                 {
-                    proximaMelhorJogadaPersonagem = melhorJogada.ultimaJogada.Split(',')[0];
-                    proximaMelhorJogadaPosicao = Convert.ToInt32(melhorJogada.ultimaJogada.Split(',')[1]);
+                    if (this.novaJogada.melhorJogada == null || this.novaJogada.piorJogada == null)
+                    {
+                        break;
+                    }
+
+                    if (jogadorVez == 0) jogadorVez = jogadores;
+
+                    if (jogadorVez == jogadores)
+                    {
+                        this.novaJogada = this.novaJogada.melhorJogada;
+                    }
+                    else this.novaJogada = this.novaJogada.piorJogada;
                 }
-                return geraSetup(melhorJogada, nivel-1, vez-1);
-            }
-            else{
-                //Caso seja a vez do jogador deve gerar a pior jogada para mim
-                geraJogadaSetup(tabuleiroAtual,-1);
-                return geraSetup(piorJogada, (nivel-1), (vez-1));
+                jogadorVez--;
+                this.proximaMelhorJogadaPersonagem = this.novaJogada.ultimaJogada.Substring(0, 1);
+                this.proximaMelhorJogadaPosicao = Convert.ToInt32(this.novaJogada.ultimaJogada.Substring(2, 1));
             }
         }
 
         //Função de geração da proxima jogada
         //Gera apenas a proxima jogada, sendo ela a melhor/pior possivel dependendo do segundo parametro passado
-        public void geraJogadaSetup(TabuleiroClass tabuleiroAtual,int melhorPior)
+        public void geraJogadaSetup(TabuleiroClass tabuleiroAtual)
             //int melhorPior - 1 = melhor caso, -1 pior caso
         {
-            int jogadoresSetor = 0;
-            for (int qtPersonagens = 0; qtPersonagens <= tabuleiroAtual.personagensPossiveis.Count; qtPersonagens++)
+            //Verificando setores com disponibilidade dentro do tabuleiro
+            int[] setores = new int[6];
+            for(int i =0; i < tabuleiroAtual.tabuleiro.Length; i++)
             {
-                for (int i = 1; i <= 4; i++)
+                for (int j = 0; j < 4; j++) if (!String.IsNullOrEmpty(tabuleiroAtual.tabuleiro[i][j])) setores[i]++;
+            }
+
+            for (int i = 1; i < tabuleiroAtual.tabuleiro.Length -1; i++)
+            {
+                //caso o setor esteja cheio reinicia
+                if (setores[i] == 4) continue;
+
+                for (int j = 0; j < 4; j++)
                 {
-                    //Caso ja esteja totalmente preenchido deve pular
-                    jogadoresSetor = 0;
-                    for (int x = 0; x < 4; x++)
+                    for (int qtPersonagens = 0; qtPersonagens < tabuleiroAtual.personagensPossiveis.Count; qtPersonagens++)
                     {
-                        if (!String.IsNullOrEmpty(tabuleiroAtual.tabuleiro[i][x])) jogadoresSetor++;
-                    }
-                    if (jogadoresSetor == 4) continue;
+                        TabuleiroClass jogadaAtual = new TabuleiroClass(tabuleiroAtual.estadoAtual);
+                        jogadaAtual.cartas = tabuleiroAtual.cartas;
 
-                    for (int j = 0; j <= 3; j++)
-                    {
-                        if (String.IsNullOrEmpty(tabuleiroAtual.tabuleiro[i][j]))
+                        jogadaAtual.tabuleiro[i][j] = tabuleiroAtual.personagensPossiveis[qtPersonagens].Apelido;
+                        jogadaAtual.ultimaJogada = tabuleiroAtual.personagensPossiveis[qtPersonagens].Apelido + "," + i.ToString();
+                        jogadaAtual.pontuacao = gerapontuacao(jogadaAtual);
+
+
+                        if (tabuleiroAtual.melhorJogada == null || jogadaAtual.pontuacao > tabuleiroAtual.melhorJogada.pontuacao)
                         {
-                            novaJogada = (TabuleiroClass)tabuleiroAtual.Clone();
-                            novaJogada.tabuleiro = tabuleiro.tabuleiro;
-
-                            novaJogada.tabuleiro[i][j] = novaJogada.personagensPossiveis[qtPersonagens].Apelido;
-                            novaJogada.pontuacao = gerapontuacao(novaJogada);
-                            if (novaJogada.pontuacao > melhorJogada.pontuacao && melhorPior == 1)
-                            {
-                                novaJogada.ultimaJogada = novaJogada.personagensPossiveis[qtPersonagens].Apelido +"," + i.ToString() ;
-                                novaJogada.personagensPossiveis.RemoveRange(qtPersonagens,1);
-                                this.melhorJogada = novaJogada;
-                            }
-                            else if(novaJogada.pontuacao <= melhorJogada.pontuacao && melhorPior == -1)
-                            {
-                                novaJogada.ultimaJogada = novaJogada.personagensPossiveis[qtPersonagens].Apelido + "," + i.ToString();
-                                novaJogada.personagensPossiveis.RemoveRange(qtPersonagens, 1);
-                                this.piorJogada = novaJogada;
-                            }
-                            else
-                            {
-
-                            }
+                            tabuleiroAtual.melhorJogada = jogadaAtual;
                         }
+                        else if(jogadaAtual.pontuacao < tabuleiroAtual.melhorJogada.pontuacao)
+                        {
+                            tabuleiroAtual.piorJogada = jogadaAtual;
+                        }
+
                     }
                 }
             }

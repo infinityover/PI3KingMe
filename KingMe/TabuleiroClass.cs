@@ -10,11 +10,16 @@ namespace KingMe
     {
         public string rei;
         public string[][] tabuleiro = new string[6][];
-        public int pontuacao;
+        public int pontuacao = 0;
         public string cartas;
         public int votos;
         public int statusJogo;
         public string ultimaJogada;
+        public TabuleiroClass melhorJogada;
+        public TabuleiroClass piorJogada;
+        public string estadoAtual;
+
+
         public List<Personagem> personagensPossiveis = new List<Personagem> {
             new Personagem("A"),
             new Personagem("B"),
@@ -31,8 +36,9 @@ namespace KingMe
             new Personagem("P")};
 
         public TabuleiroClass(string estadoAtual) {
+            this.estadoAtual = estadoAtual;
             for (int i = 0; i < 6; i++) tabuleiro[i] = new string[4];
-            if(estadoAtual.Replace("\n","").Replace("\r","") != "") montaTabuleiro(estadoAtual);
+            if (estadoAtual.Replace("\n", "").Replace("\r", "") != "") montaTabuleiro(estadoAtual.Substring(2, estadoAtual.Length-4));
         }
 
         public object Clone()
@@ -50,9 +56,11 @@ namespace KingMe
             int posicaopersonagem;
             for (int i = 0; i < matriz.Length; i++){
                 personagem = matriz[i].Split(',');
-                proximovazio = this.tabuleiro.GetLength(Convert.ToInt32(personagem[0])) +1;
+                proximovazio = 0;
                 posicaopersonagem = Convert.ToInt32(personagem[0]);
+                for (int j = 0; j < this.tabuleiro[posicaopersonagem].Length; j++) if (!String.IsNullOrEmpty(this.tabuleiro[posicaopersonagem][j])) proximovazio++;
                 this.tabuleiro[posicaopersonagem][proximovazio] = personagem[1];
+                for (int j = 0; j < this.personagensPossiveis.Count; j++) if (this.personagensPossiveis[j].Apelido == personagem[1]) this.personagensPossiveis.RemoveAt(j);
             }
            
         }

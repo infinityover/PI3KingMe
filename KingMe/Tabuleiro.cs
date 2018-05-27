@@ -403,12 +403,13 @@ namespace KingMe
             string[] jogadores  = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
             analisajogada.Nivel = this.dificuldade;
             analisajogada.jogadores = jogadores.Length-1;
-            analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel, analisajogada.jogadores);
+            analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel);
+
+            this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
+            this.cmbSetor.SelectedIndex = this.cmbSetor.FindString(analisajogada.proximaMelhorJogadaPosicao.ToString());
+            btnConfirmarJogada_Click(new object(), new EventArgs());
             try
             {
-                this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
-                this.cmbSetor.SelectedIndex = this.cmbSetor.FindString(analisajogada.proximaMelhorJogadaPosicao.ToString());
-                btnConfirmarJogada_Click(new object(), new EventArgs());
                 //Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, analisajogada.proximaMelhorJogadaPosicao, analisajogada.proximaMelhorJogadaPersonagem);
             }
             catch(Exception e)

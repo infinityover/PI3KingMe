@@ -20,6 +20,12 @@ namespace KingMe
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            this.txtNomeJogador.Text = "aa";
+            this.txtNomePartida.Text = "TokyoWins";
+            this.txtSenha.Text = "123";
+            btnCriarPartida_Click(new object(), new EventArgs());
+            btnEntrarJogo_Click(new object(), new EventArgs());
             try
             {
                 this.txtPartidas.Text = Jogo.ListarPartidas();
@@ -83,6 +89,11 @@ namespace KingMe
             {
                 e.Handled = true;
             }
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
