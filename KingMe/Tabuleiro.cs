@@ -27,7 +27,7 @@ namespace KingMe
         public bool aguardarJogada = false;
         public string status_jogo = "";
         public int andar;
-        public int dificuldade = 5;
+        public int dificuldade = 10;
 
         public Tabuleiro(string Form)
         {
@@ -394,27 +394,26 @@ namespace KingMe
 
         private void autoMovePersonagemSetup()
         {
-            string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-            tabuleiro = tabuleiro.Substring(tabuleiro.IndexOf('\r'));
-            Analisajogada analisajogada = new Analisajogada();
-            analisajogada.tabuleiro = new TabuleiroClass(tabuleiro);
-            analisajogada.tabuleiro.cartas = txtCartas.Text.Replace("\r", "");
-            analisajogada.tabuleiro.cartas = analisajogada.tabuleiro.cartas.Replace("\n", "");
-            string[] jogadores  = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
-            analisajogada.Nivel = this.dificuldade;
-            analisajogada.jogadores = jogadores.Length-1;
-            analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel);
-
-            this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
-            this.cmbSetor.SelectedIndex = this.cmbSetor.FindString(analisajogada.proximaMelhorJogadaPosicao.ToString());
-            btnConfirmarJogada_Click(new object(), new EventArgs());
             try
             {
-                //Jogo.ColocarPersonagem(Convert.ToInt32(this.idJogador), this.senhaJogador, analisajogada.proximaMelhorJogadaPosicao, analisajogada.proximaMelhorJogadaPersonagem);
+                string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+                tabuleiro = tabuleiro.Substring(tabuleiro.IndexOf('\r'));
+                Analisajogada analisajogada = new Analisajogada();
+                analisajogada.tabuleiro = new TabuleiroClass(tabuleiro);
+                analisajogada.tabuleiro.cartas = txtCartas.Text.Replace("\r", "");
+                analisajogada.tabuleiro.cartas = analisajogada.tabuleiro.cartas.Replace("\n", "");
+                string[] jogadores = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
+                analisajogada.Nivel = this.dificuldade;
+                analisajogada.jogadores = jogadores.Length - 1;
+                analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel);
+
+                this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
+                this.cmbSetor.SelectedIndex = this.cmbSetor.FindString(analisajogada.proximaMelhorJogadaPosicao.ToString());
+                btnConfirmarJogada_Click(new object(), new EventArgs());
             }
             catch(Exception e)
             {
-                this.dificuldade--;
+                if (this.dificuldade > 0) this.dificuldade--;
                 autoMovePersonagemSetup();
             }
 

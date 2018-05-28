@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace KingMe
@@ -16,6 +17,8 @@ namespace KingMe
         public int proximaMelhorJogadaPosicao;
         public TabuleiroClass tabuleiro;
 
+        public List<TabuleiroClass> estadosFinais;
+
 
 
         public void geraSetup(TabuleiroClass tabuleiroAtual, int nivel){
@@ -27,32 +30,39 @@ namespace KingMe
             //Caso seja a vez do jogador deve gerar a pior jogada para mim
             geraJogadaSetup(tabuleiroAtual);
             if(tabuleiroAtual.melhorJogada != null) geraSetup(tabuleiroAtual.melhorJogada, (nivel - 1));
-            if(tabuleiroAtual.piorJogada != null) geraSetup(tabuleiroAtual.piorJogada, (nivel-1));
+            if (tabuleiroAtual.piorJogada != null) geraSetup(tabuleiroAtual.piorJogada, (nivel - 1));
 
+            //if(tabuleiroAtual.piorJogada != null) geraSetup(tabuleiroAtual.piorJogada, (nivel-1));
 
-
-           if(nivel == this.Nivel)
-            {
-                this.novaJogada = tabuleiroAtual.melhorJogada;
-                while (true)
-                {
-                    if (this.novaJogada.melhorJogada == null || this.novaJogada.piorJogada == null)
-                    {
-                        break;
-                    }
-
-                    if (jogadorVez == 0) jogadorVez = jogadores;
-
-                    if (jogadorVez == jogadores)
-                    {
-                        this.novaJogada = this.novaJogada.melhorJogada;
-                    }
-                    else this.novaJogada = this.novaJogada.piorJogada;
-                }
-                jogadorVez--;
+            if (nivel == this.Nivel) {
+                vasculhaJogadas(tabuleiroAtual, true, nivel);
                 this.proximaMelhorJogadaPersonagem = this.novaJogada.ultimaJogada.Substring(0, 1);
                 this.proximaMelhorJogadaPosicao = Convert.ToInt32(this.novaJogada.ultimaJogada.Substring(2, 1));
+                }
             }
+        
+
+
+        public int vasculhaJogadas(TabuleiroClass tabuleiroAtual, bool minmax, int nivel)
+        {
+            if((tabuleiroAtual.melhorJogada == null && tabuleiroAtual.piorJogada == null) || nivel == 0)
+                return tabuleiroAtual.pontuacao;
+
+            if (minmax)
+            {
+                if (vasculhaJogadas(tabuleiroAtual.piorJogada, false, nivel - 1) > vasculhaJogadas(tabuleiroAtual.melhorJogada, false, nivel - 1))
+                {
+                    if (this.Nivel == nivel) this.novaJogada = tabuleiroAtual.piorJogada;
+                    return vasculhaJogadas(tabuleiroAtual.piorJogada, false, nivel - 1);
+                }
+                else
+                {
+                    this.novaJogada = tabuleiroAtual.melhorJogada;
+                    return vasculhaJogadas(tabuleiroAtual.melhorJogada, false, nivel - 1);
+                }
+            }
+            else return vasculhaJogadas(tabuleiroAtual.piorJogada, true,nivel -1);
+
         }
 
         //Função de geração da proxima jogada
@@ -82,7 +92,9 @@ namespace KingMe
                         jogadaAtual.tabuleiro[i][j] = tabuleiroAtual.personagensPossiveis[qtPersonagens].Apelido;
                         jogadaAtual.ultimaJogada = tabuleiroAtual.personagensPossiveis[qtPersonagens].Apelido + "," + i.ToString();
                         jogadaAtual.pontuacao = gerapontuacao(jogadaAtual);
-
+                        tabuleiroAtual.jogadasPossiveis.Add(jogadaAtual);
+                        jogadaAtual.personagensPossiveis.RemoveAt(qtPersonagens);
+                        jogadaAtual.jogadaPai = tabuleiroAtual;
 
                         if (tabuleiroAtual.melhorJogada == null || jogadaAtual.pontuacao > tabuleiroAtual.melhorJogada.pontuacao)
                         {
@@ -98,72 +110,48 @@ namespace KingMe
             }
         }
 
-        //Revisar: gera jogada de promoção
-        /*public TabuleiroClass gerajogada(TabuleiroClass tabuleiroAtual, int nivel, int vez)
+        public void geraPromocao(TabuleiroClass tabuleiroAtual,int nivel)
         {
-            if(nivel == 0)
-            {
-                melhorjogada = tabuleiroAtual;
-                return melhorjogada;
-            }
-            if(vez == 0)
-            {
-                vez = jogadores;
-            }
-            if (tabuleiroAtual.rei != "")
-            {
-                tabuleiroAtual.pontuacao = gerapontuacao(tabuleiroAtual);
-                jogadas_possiveis[0] = tabuleiroAtual;
+            //Gera arvore de possibilidade
+            //Até quando possivel;
+            int jogadorVez = jogadores;
+            //se a vez for = 0  significa que é a minha vez de jogar
+            if (nivel == 0) return;
+            //Caso seja a vez do jogador deve gerar a pior jogada para mim
+            geraJogadaPromocao(tabuleiroAtual);
+            if (tabuleiroAtual.melhorJogada != null) geraSetup(tabuleiroAtual.melhorJogada, (nivel - 1));
+            if (tabuleiroAtual.piorJogada != null) geraSetup(tabuleiroAtual.piorJogada, (nivel - 1));
 
-                tabuleiroAtual.rei = "";
-                tabuleiroAtual.pontuacao = gerapontuacao(tabuleiroAtual);
-                jogadas_possiveis[1] = tabuleiroAtual;
 
-                if(jogadas_possiveis[0].pontuacao < jogadas_possiveis[1].pontuacao)
+
+            if (nivel == this.Nivel)
+            {
+                this.novaJogada = tabuleiroAtual.melhorJogada;
+                while (true)
                 {
-                    return gerajogada(jogadas_possiveis[1], nivel--, vez--);
-                }
-                else
-                {
-                    melhorjogada = jogadas_possiveis[0];
-                    return melhorjogada;
-                }
-
-            }
-            else
-            {
-
-                TabuleiroClass proximaJogada = tabuleiroAtual;
-                int indice = 0;
-                int posicaoPossivel = 0;
-                for(int i = 0; i<= 5; i++)
-                {
-                    if(tabuleiroAtual.tabuleiro.GetLength(i+1) == 4)
+                    if (this.novaJogada.melhorJogada == null || this.novaJogada.piorJogada == null)
                     {
-                        continue;
+                        break;
                     }
-                    for (int j = 0; j <= 4; j++)
+
+                    if (jogadorVez == 0) jogadorVez = jogadores;
+
+                    if (jogadorVez == jogadores)
                     {
-                        //reseta tabuleiro para condição inicial
-                        proximaJogada = tabuleiroAtual;
-                        posicaoPossivel = posicaolivre(proximaJogada, i + 1);
-                        if (posicaoPossivel < 0) continue;
-                        proximaJogada.tabuleiro[i + 1][posicaoPossivel] = proximaJogada.tabuleiro[i][j];
-                        proximaJogada.pontuacao = gerapontuacao(proximaJogada);
-                        jogadas_possiveis[++indice] = proximaJogada;
+                        this.novaJogada = this.novaJogada.melhorJogada;
                     }
+                    else this.novaJogada = this.novaJogada.piorJogada;
                 }
-                for(int i = 0; i <indice; i++)
-                {
-                    //caso seja a minha vez de jogar
-                    if(vez == jogadores)
-                    {
-                        
-                    }
-                }
+                jogadorVez--;
+                this.proximaMelhorJogadaPersonagem = this.novaJogada.ultimaJogada.Substring(0, 1);
+                this.proximaMelhorJogadaPosicao = Convert.ToInt32(this.novaJogada.ultimaJogada.Substring(2, 1));
             }
-            return gerajogada(jogadas_possiveis[0], nivel--, vez--);
-        }*/
+        }
+
+        public void geraJogadaPromocao(TabuleiroClass tabuleiroAtual)
+        {
+
+        }
 
         public int posicaolivre(TabuleiroClass tabuleiro, int i)
         {

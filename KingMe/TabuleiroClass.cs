@@ -18,7 +18,9 @@ namespace KingMe
         public TabuleiroClass melhorJogada;
         public TabuleiroClass piorJogada;
         public string estadoAtual;
-
+        public List<Personagem> personagemsUsados;
+        public List<TabuleiroClass> jogadasPossiveis = new List<TabuleiroClass>();
+        public TabuleiroClass jogadaPai;
 
         public List<Personagem> personagensPossiveis = new List<Personagem> {
             new Personagem("A"),
@@ -60,7 +62,15 @@ namespace KingMe
                 posicaopersonagem = Convert.ToInt32(personagem[0]);
                 for (int j = 0; j < this.tabuleiro[posicaopersonagem].Length; j++) if (!String.IsNullOrEmpty(this.tabuleiro[posicaopersonagem][j])) proximovazio++;
                 this.tabuleiro[posicaopersonagem][proximovazio] = personagem[1];
-                for (int j = 0; j < this.personagensPossiveis.Count; j++) if (this.personagensPossiveis[j].Apelido == personagem[1]) this.personagensPossiveis.RemoveAt(j);
+                for (int j = 0; j < this.personagensPossiveis.Count; j++)
+                {
+                    if (this.personagensPossiveis[j].Apelido == personagem[1])
+                    {
+                        //this.personagemsUsados.Add(new Personagem(this.personagensPossiveis[j].Apelido));
+                        this.personagensPossiveis.RemoveAt(j);
+                    }
+                    
+                }
             }
            
         }
