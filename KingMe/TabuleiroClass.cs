@@ -13,6 +13,7 @@ namespace KingMe
         public int pontuacao = 0;
         public string cartas;
         public int votos;
+        public string ultimoVoto;
         public int statusJogo;
         public string ultimaJogada;
         public TabuleiroClass melhorJogada;
@@ -61,6 +62,14 @@ namespace KingMe
                 proximovazio = 0;
                 posicaopersonagem = Convert.ToInt32(personagem[0]);
                 for (int j = 0; j < this.tabuleiro[posicaopersonagem].Length; j++) if (!String.IsNullOrEmpty(this.tabuleiro[posicaopersonagem][j])) proximovazio++;
+
+                if (personagem[0] == "10")
+                {
+                    this.rei = personagem[1];
+                    continue;
+                }
+
+
                 this.tabuleiro[posicaopersonagem][proximovazio] = personagem[1];
                 for (int j = 0; j < this.personagensPossiveis.Count; j++)
                 {

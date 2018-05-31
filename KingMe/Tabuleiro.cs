@@ -27,7 +27,7 @@ namespace KingMe
         public bool aguardarJogada = false;
         public string status_jogo = "";
         public int andar;
-        public int dificuldade = 10;
+        public int dificuldade = 15;
 
         public Tabuleiro(string Form)
         {
@@ -394,8 +394,8 @@ namespace KingMe
 
         private void autoMovePersonagemSetup()
         {
-            try
-            {
+            //try
+            //{
                 string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
                 tabuleiro = tabuleiro.Substring(tabuleiro.IndexOf('\r'));
                 Analisajogada analisajogada = new Analisajogada();
@@ -405,29 +405,35 @@ namespace KingMe
                 string[] jogadores = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
                 analisajogada.Nivel = this.dificuldade;
                 analisajogada.jogadores = jogadores.Length - 1;
-                analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel);
+                analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel, analisajogada.jogadores);
 
                 this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
                 this.cmbSetor.SelectedIndex = this.cmbSetor.FindString(analisajogada.proximaMelhorJogadaPosicao.ToString());
                 btnConfirmarJogada_Click(new object(), new EventArgs());
-            }
-            catch(Exception e)
-            {
-                if (this.dificuldade > 0) this.dificuldade--;
-                autoMovePersonagemSetup();
-            }
+            //}
+            //catch(Exception e)
+            //{
+            //    if (this.dificuldade > 0) this.dificuldade--;
+            //    autoMovePersonagemSetup();
+            //}
 
 
         }
         
         private void autoMovePersonagemPromover()
         {
-            string[] personagens = txtCartas.Text.Split('\n');
-            Random rnd = new Random();
+            string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            tabuleiro = tabuleiro.Substring(tabuleiro.IndexOf('\r'));
+            Analisajogada analisajogada = new Analisajogada();
+            analisajogada.tabuleiro = new TabuleiroClass(tabuleiro);
+            analisajogada.tabuleiro.cartas = txtCartas.Text.Replace("\r", "");
+            analisajogada.tabuleiro.cartas = analisajogada.tabuleiro.cartas.Replace("\n", "");
+            string[] jogadores = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
+            analisajogada.Nivel = this.dificuldade;
+            analisajogada.jogadores = jogadores.Length - 1;
+            analisajogada.geraPromocao(analisajogada.tabuleiro, analisajogada.Nivel,analisajogada.jogadores);
 
-            int rand;
-            rand = rnd.Next(0, personagens.Length);
-            cmbPersonagens.Text = personagens[rand].ToString();
+            this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
             btnConfirmarJogada_Click(new object(), new EventArgs());
         }
 
@@ -470,7 +476,6 @@ namespace KingMe
                 setarTabuleiro();
                 if (tabuleiro.Contains("ERRO"))
                 {
-                    //this.autoMovePersonagemSetup();
                     return;
                 }
                 aguardarJogada = false;
@@ -580,7 +585,6 @@ namespace KingMe
                     faseDeSetup();
                     break;
                 case "J":
-                    //status_jogo = inGame[1];
                     faseDePromocao();
                     break;
                 case "V":
