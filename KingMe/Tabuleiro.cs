@@ -28,6 +28,7 @@ namespace KingMe
         public string status_jogo = "";
         public int andar;
         public int dificuldade = 15;
+        public int votosUsados=0;
 
         public Tabuleiro(string Form)
         {
@@ -405,6 +406,9 @@ namespace KingMe
                 string[] jogadores = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
                 analisajogada.Nivel = this.dificuldade;
                 analisajogada.jogadores = jogadores.Length - 1;
+
+
+
                 analisajogada.geraSetup(analisajogada.tabuleiro, analisajogada.Nivel, analisajogada.jogadores);
 
                 this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
@@ -431,6 +435,24 @@ namespace KingMe
             string[] jogadores = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
             analisajogada.Nivel = this.dificuldade;
             analisajogada.jogadores = jogadores.Length - 1;
+            switch (analisajogada.jogadores)
+            {
+                case 2:
+                    analisajogada.tabuleiro.votos = 4;
+                    break;
+                case 3:
+                    analisajogada.tabuleiro.votos = 4;
+                    break;
+                case 4:
+                    analisajogada.tabuleiro.votos = 3;
+                    break;
+                case 5:
+                    analisajogada.tabuleiro.votos = 2;
+                    break;
+                case 6:
+                    analisajogada.tabuleiro.votos = 2;
+                    break;
+            }
             analisajogada.geraPromocao(analisajogada.tabuleiro, analisajogada.Nivel,analisajogada.jogadores);
 
             this.cmbPersonagens.SelectedIndex = this.cmbPersonagens.FindString(analisajogada.proximaMelhorJogadaPersonagem);
@@ -439,23 +461,36 @@ namespace KingMe
 
         private void autoVotar()
         {
-            string tabu = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
-            string[] posicoes = tabu.Split('\n');
-            string personagemrei = "";
-            for(int i = 0; i< posicoes.Length; i++)
+            string tabuleiro = Jogo.VerificarVez(Convert.ToInt32(this.idJogador));
+            tabuleiro = tabuleiro.Substring(tabuleiro.IndexOf('\r'));
+            Analisajogada analisajogada = new Analisajogada();
+            analisajogada.tabuleiro = new TabuleiroClass(tabuleiro);
+            analisajogada.tabuleiro.cartas = txtCartas.Text.Replace("\r", "");
+            analisajogada.tabuleiro.cartas = analisajogada.tabuleiro.cartas.Replace("\n", "");
+            string[] jogadores = Jogo.ListarJogadores(Convert.ToInt32(this.idPartida)).Split('\n');
+            analisajogada.Nivel = this.dificuldade;
+            analisajogada.jogadores = jogadores.Length - 1;
+            switch (analisajogada.jogadores)
             {
-                if (posicoes[i].Contains("10")) personagemrei = posicoes[i];
+                case 2:
+                    analisajogada.tabuleiro.votos = 4 - this.votosUsados;
+                    break;
+                case 3:
+                    analisajogada.tabuleiro.votos = 4 - this.votosUsados;
+                    break;
+                case 4:
+                    analisajogada.tabuleiro.votos = 3 - this.votosUsados;
+                    break;
+                case 5:
+                    analisajogada.tabuleiro.votos = 2 - this.votosUsados;
+                    break;
+                case 6:
+                    analisajogada.tabuleiro.votos = 2 - this.votosUsados;
+                    break;
             }
-            string[] personagem;
-            personagem = personagemrei.Split(',');
-
-            if (txtCartas.Text.Contains(personagemrei[0])) {
-                rdbSim.Checked = true;
-            }else
-            {
-                rdbNao.Checked = true;
-            }
-
+            analisajogada.geraJogadaVoto(analisajogada.tabuleiro);
+            this.voto = analisajogada.tabuleiro.ultimoVoto;
+            if (this.voto == "N") this.votosUsados++;
             btnConfirmarJogada_Click(new object(), new EventArgs());
         }
 
@@ -609,19 +644,23 @@ namespace KingMe
 
         private void btnConfirmarJogada_Click(object sender, EventArgs e)
         {
-            if (inGame[0] == "E" && inGame[0] == "A") { return; } 
-            switch (inGame[1])
-            {
-                case "S":
-                    movimentaPersonagem(this.cmbPersonagens.Text, Convert.ToInt32(this.cmbSetor.Text));
-                    break;
-                case "J":
-                    promovePersonagem(this.cmbPersonagens.Text);
-                    break;
-                case "V":
-                    votarRei();
-                    break;
+            try {
+
+                if (inGame[0] == "E" && inGame[0] == "A") { return; }
+                switch (inGame[1])
+                {
+                    case "S":
+                        movimentaPersonagem(this.cmbPersonagens.Text, Convert.ToInt32(this.cmbSetor.Text));
+                        break;
+                    case "J":
+                        promovePersonagem(this.cmbPersonagens.Text);
+                        break;
+                    case "V":
+                        votarRei();
+                        break;
+                }
             }
+            catch { }
 
         }
 

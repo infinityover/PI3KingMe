@@ -8,7 +8,7 @@ namespace KingMe
 {
     class TabuleiroClass : ICloneable
     {
-        public string rei;
+        public string rei ="";
         public string[][] tabuleiro = new string[6][];
         public int pontuacao = 0;
         public string cartas;
@@ -61,13 +61,13 @@ namespace KingMe
                 personagem = matriz[i].Split(',');
                 proximovazio = 0;
                 posicaopersonagem = Convert.ToInt32(personagem[0]);
-                for (int j = 0; j < this.tabuleiro[posicaopersonagem].Length; j++) if (!String.IsNullOrEmpty(this.tabuleiro[posicaopersonagem][j])) proximovazio++;
-
                 if (personagem[0] == "10")
                 {
                     this.rei = personagem[1];
                     continue;
                 }
+                for (int j = 0; j < this.tabuleiro[posicaopersonagem].Length; j++) if (!String.IsNullOrEmpty(this.tabuleiro[posicaopersonagem][j])) proximovazio++;
+
 
 
                 this.tabuleiro[posicaopersonagem][proximovazio] = personagem[1];

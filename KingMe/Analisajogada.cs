@@ -16,6 +16,7 @@ namespace KingMe
         public string proximaMelhorJogadaPersonagem;
         public int proximaMelhorJogadaPosicao;
         public TabuleiroClass tabuleiro;
+        public string Voto;
 
         public List<TabuleiroClass> estadosFinais;
 
@@ -57,6 +58,7 @@ namespace KingMe
         public int vasculhaJogadas(TabuleiroClass tabuleiroAtual, int jogadores, int nivel)
         {
             if (jogadores == 0) jogadores = this.jogadores;
+            if (tabuleiroAtual != null) geraPontuacao(tabuleiroAtual);
             if(tabuleiroAtual.melhorJogada == null || tabuleiroAtual.piorJogada == null || nivel == 0)
                 return tabuleiroAtual.pontuacao;
 
@@ -126,7 +128,8 @@ namespace KingMe
 
                         jogadaAtual.tabuleiro[i][j] = tabuleiroAtual.personagensPossiveis[qtPersonagens].Apelido;
                         jogadaAtual.ultimaJogada = tabuleiroAtual.personagensPossiveis[qtPersonagens].Apelido + "," + i.ToString();
-                        jogadaAtual.pontuacao = geraPontuacao(jogadaAtual);
+                        //jogadaAtual.pontuacao = geraPontuacao(jogadaAtual);
+                        geraPontuacao(jogadaAtual);
                         //tabuleiroAtual.jogadasPossiveis.Add(jogadaAtual);
                         jogadaAtual.personagensPossiveis.RemoveAt(qtPersonagens);
                         jogadaAtual.jogadaPai = tabuleiroAtual;
@@ -160,16 +163,24 @@ namespace KingMe
             if (nivel == this.Nivel)
             {
                 vasculhaJogadas(tabuleiroAtual, jogadorVez, nivel);
-                if (this.novaJogada != null)
+                if (String.IsNullOrEmpty(this.novaJogada.rei))
                 {
-                    this.proximaMelhorJogadaPersonagem = this.novaJogada.ultimaJogada.Substring(0, 1);
+                    if (this.novaJogada != null && this.novaJogada.ultimaJogada != null)
+                    {
+                        this.proximaMelhorJogadaPersonagem = this.novaJogada.ultimaJogada.Substring(0, 1);
+                    }
+                    else if (tabuleiroAtual.melhorJogada != null)
+                    {
+                        this.proximaMelhorJogadaPersonagem = tabuleiroAtual.melhorJogada.ultimaJogada.Substring(0, 1);
+                    }
+                    else
+                    {
+                        this.proximaMelhorJogadaPersonagem = tabuleiroAtual.piorJogada.ultimaJogada.Substring(0, 1);
+                    }
                 }
-                else if (tabuleiroAtual.melhorJogada != null)
+                else
                 {
-                    this.proximaMelhorJogadaPersonagem = tabuleiroAtual.melhorJogada.ultimaJogada.Substring(0, 1);
-                }else
-                {
-                    this.proximaMelhorJogadaPersonagem = tabuleiroAtual.piorJogada.ultimaJogada.Substring(0, 1);
+                    this.Voto = this.novaJogada.ultimoVoto;
                 }
             }
         }
@@ -184,10 +195,10 @@ namespace KingMe
             }
 
             if (String.IsNullOrEmpty(tabuleiroAtual.rei)) geraJogadaVoto(tabuleiroAtual);
-            for (int i = 1; i < tabuleiroAtual.tabuleiro.Length - 1; i++)
+            for (int i = 1; i <= tabuleiroAtual.tabuleiro.Length - 1; i++)
             {
                 //caso o setor esteja cheio reinicia
-                if (setores[i+1] == 4) continue;
+                if (i != 5 && setores[i+1] == 4) continue;
 
                 for (int j = 0; j < 4; j++)
                 {
@@ -201,31 +212,50 @@ namespace KingMe
                     }
 
                     jogadaAtual.cartas = tabuleiroAtual.cartas;
-
-                    if (String.IsNullOrEmpty(tabuleiroAtual.tabuleiro[i][j])) continue;
-                    int proximoLivre = posicaoLivre(tabuleiroAtual, i + 1);
-                    if (proximoLivre != -1)
+                    if (i == 5)
                     {
-                        jogadaAtual.tabuleiro[i + 1][proximoLivre] = tabuleiroAtual.tabuleiro[i][j];
+                        jogadaAtual.rei = tabuleiroAtual.tabuleiro[i][j];
+                        jogadaAtual.ultimaJogada = jogadaAtual.tabuleiro[i][j];
                         jogadaAtual.tabuleiro[i][j] = "";
-                        jogadaAtual.ultimaJogada = jogadaAtual.tabuleiro[i + 1][proximoLivre];
                     }
-                    else continue;
+                    else
+                    {
+                        if (String.IsNullOrEmpty(tabuleiroAtual.tabuleiro[i][j])) continue;
+                        int proximoLivre = posicaoLivre(tabuleiroAtual, i + 1);
+                        if (proximoLivre != -1)
+                        {
+                            jogadaAtual.tabuleiro[i + 1][proximoLivre] = tabuleiroAtual.tabuleiro[i][j];
+                            jogadaAtual.tabuleiro[i][j] = "";
+                            jogadaAtual.ultimaJogada = jogadaAtual.tabuleiro[i + 1][proximoLivre];
+                        }
+                        else continue;
 
-                    jogadaAtual.pontuacao = geraPontuacao(jogadaAtual);
-                    if(tabuleiroAtual.melhorJogada == null || jogadaAtual.pontuacao> tabuleiroAtual.melhorJogada.pontuacao)
+                    }
+                    //jogadaAtual.pontuacao = geraPontuacao(jogadaAtual);
+                    geraPontuacao(jogadaAtual);
+                    if (tabuleiroAtual.melhorJogada == null || jogadaAtual.pontuacao > tabuleiroAtual.melhorJogada.pontuacao)
                     {
                         tabuleiroAtual.melhorJogada = jogadaAtual;
-                    }else if (tabuleiroAtual.piorJogada == null || jogadaAtual.pontuacao < tabuleiroAtual.piorJogada.pontuacao)
+                    }
+                    else if (tabuleiroAtual.piorJogada == null || jogadaAtual.pontuacao < tabuleiroAtual.piorJogada.pontuacao)
                     {
                         tabuleiroAtual.piorJogada = jogadaAtual;
                     }
                 }
             }
         }
+
+
+        public void geraVoto(TabuleiroClass tabuleiroAtual) {
+
+            
+        }
+
+
         public void geraJogadaVoto(TabuleiroClass tabuleiroAtual)
         {
-            tabuleiroAtual.pontuacao = geraPontuacao(tabuleiroAtual);
+            //tabuleiroAtual.pontuacao = 
+                geraPontuacao(tabuleiroAtual);
 
             TabuleiroClass jogadaAtual = new TabuleiroClass(tabuleiroAtual.estadoAtual);
             for (int linha = 0; linha < 6; linha++)
@@ -237,9 +267,10 @@ namespace KingMe
             }
             jogadaAtual.cartas = tabuleiroAtual.cartas;
             jogadaAtual.rei = "";
-            jogadaAtual.pontuacao = geraPontuacao(jogadaAtual);
+            //jogadaAtual.pontuacao = 
+            geraPontuacao(jogadaAtual);
 
-            if(jogadaAtual.pontuacao > tabuleiroAtual.pontuacao)
+            if(jogadaAtual.pontuacao > tabuleiroAtual.pontuacao && jogadaAtual.votos <= 0)
             {
                 tabuleiroAtual.melhorJogada = jogadaAtual;
                 tabuleiroAtual.piorJogada = tabuleiroAtual;
@@ -251,6 +282,7 @@ namespace KingMe
                 tabuleiroAtual.melhorJogada = tabuleiroAtual;
                 tabuleiroAtual.piorJogada = jogadaAtual;
                 tabuleiroAtual.ultimoVoto = "N";
+                jogadaAtual.votos--;
             }
 
         }
@@ -275,8 +307,8 @@ namespace KingMe
                     if(tabuleiro.cartas.Contains(tabuleiro.tabuleiro[i][j])) pontuacao = pontuacao + i;
                 }
             }
-            if (tabuleiro.cartas.Contains(tabuleiro.rei)) pontuacao = pontuacao + 10;
-
+            if (!String.IsNullOrEmpty(tabuleiro.rei) && tabuleiro.cartas.Contains(tabuleiro.rei)) pontuacao = pontuacao + 10;
+            tabuleiro.pontuacao = pontuacao;
             return pontuacao;
         }
 
