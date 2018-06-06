@@ -100,6 +100,37 @@ namespace KingMe
         {
             if (tabuleiroAtual.personagensPossiveis.Count == 0) return;
             //Verificando setores com disponibilidade dentro do tabuleiro
+            if (tabuleiroAtual.personagensPossiveis.Count == 1)
+            {
+                TabuleiroClass jogadaAtual = new TabuleiroClass(tabuleiroAtual.estadoAtual);
+                for (int linha = 0; linha < 6; linha++)
+                {
+                    for (int coluna = 0; coluna < 4; coluna++)
+                    {
+                        jogadaAtual.tabuleiro[linha][coluna] = tabuleiroAtual.tabuleiro[linha][coluna];
+                    }
+                }
+                jogadaAtual.personagensPossiveis = new List<Personagem>();
+
+                for (int perso=0; perso< tabuleiroAtual.personagensPossiveis.Count; perso++)
+                {
+                    jogadaAtual.personagensPossiveis.Add(new Personagem(tabuleiroAtual.personagensPossiveis[perso].Apelido));
+                }
+
+                jogadaAtual.cartas = tabuleiroAtual.cartas;
+
+                jogadaAtual.tabuleiro[0][0] = tabuleiroAtual.personagensPossiveis[0].Apelido;
+                jogadaAtual.ultimaJogada = tabuleiroAtual.personagensPossiveis[0].Apelido + ",0";
+                //jogadaAtual.pontuacao = geraPontuacao(jogadaAtual);
+                geraPontuacao(jogadaAtual);
+                //tabuleiroAtual.jogadasPossiveis.Add(jogadaAtual);
+                jogadaAtual.personagensPossiveis.RemoveAt(0);
+                jogadaAtual.jogadaPai = tabuleiroAtual;
+                tabuleiroAtual.melhorJogada = jogadaAtual;
+                tabuleiroAtual.piorJogada = jogadaAtual;
+
+                return;
+            }
             int[] setores = new int[6];
             for(int i =0; i < tabuleiroAtual.tabuleiro.Length; i++)
             {
@@ -117,7 +148,13 @@ namespace KingMe
                     for (int qtPersonagens = 0; qtPersonagens < tabuleiroAtual.personagensPossiveis.Count; qtPersonagens++)
                     {
                         TabuleiroClass jogadaAtual = new TabuleiroClass(tabuleiroAtual.estadoAtual);
-                        for(int linha = 0; linha < 6; linha++){
+                        jogadaAtual.personagensPossiveis = new List<Personagem>();
+
+                        for (int perso = 0; perso < tabuleiroAtual.personagensPossiveis.Count; perso++)
+                        {
+                            jogadaAtual.personagensPossiveis.Add(new Personagem(tabuleiroAtual.personagensPossiveis[perso].Apelido));
+                        }
+                        for (int linha = 0; linha < 6; linha++){
                             for (int coluna = 0; coluna < 4; coluna++)
                             {
                                 jogadaAtual.tabuleiro[linha][coluna] = tabuleiroAtual.tabuleiro[linha][coluna];
@@ -156,14 +193,19 @@ namespace KingMe
             //se a vez for = 0  significa que é a minha vez de jogar
             if (nivel == 0) return;
             //Caso seja a vez do jogador deve gerar a pior jogada para mim
-            geraJogadaPromocao(tabuleiroAtual);
+            if (String.IsNullOrEmpty(tabuleiro.rei)) geraJogadaPromocao(tabuleiroAtual);
+            else geraJogadaVoto(tabuleiroAtual);
             if (tabuleiroAtual.melhorJogada != null) geraPromocao(tabuleiroAtual.melhorJogada, (nivel - 1), jogadorVez-1);
             if (tabuleiroAtual.piorJogada != null) geraPromocao(tabuleiroAtual.piorJogada, (nivel - 1), jogadorVez-1);
 
             if (nivel == this.Nivel)
             {
                 vasculhaJogadas(tabuleiroAtual, jogadorVez, nivel);
-                if (String.IsNullOrEmpty(this.novaJogada.rei))
+                if (!String.IsNullOrEmpty(this.novaJogada.rei) && this.novaJogada.rei != this.novaJogada.ultimaJogada)
+                {
+                    this.Voto = this.novaJogada.ultimoVoto;
+                }
+                else
                 {
                     if (this.novaJogada != null && this.novaJogada.ultimaJogada != null)
                     {
@@ -177,10 +219,6 @@ namespace KingMe
                     {
                         this.proximaMelhorJogadaPersonagem = tabuleiroAtual.piorJogada.ultimaJogada.Substring(0, 1);
                     }
-                }
-                else
-                {
-                    this.Voto = this.novaJogada.ultimoVoto;
                 }
             }
         }
@@ -203,6 +241,7 @@ namespace KingMe
                 for (int j = 0; j < 4; j++)
                 {
                     TabuleiroClass jogadaAtual = new TabuleiroClass(tabuleiroAtual.estadoAtual);
+                    jogadaAtual.votos = tabuleiroAtual.votos;
                     for (int linha = 0; linha < 6; linha++)
                     {
                         for (int coluna = 0; coluna < 4; coluna++)
@@ -270,7 +309,7 @@ namespace KingMe
             //jogadaAtual.pontuacao = 
             geraPontuacao(jogadaAtual);
 
-            if(jogadaAtual.pontuacao > tabuleiroAtual.pontuacao && jogadaAtual.votos <= 0)
+            if(tabuleiroAtual.pontuacao > jogadaAtual.pontuacao || tabuleiroAtual.votos <= 0)
             {
                 tabuleiroAtual.melhorJogada = jogadaAtual;
                 tabuleiroAtual.piorJogada = tabuleiroAtual;

@@ -27,7 +27,7 @@ namespace KingMe
         public bool aguardarJogada = false;
         public string status_jogo = "";
         public int andar;
-        public int dificuldade = 15;
+        public int dificuldade = 10;
         public int votosUsados=0;
 
         public Tabuleiro(string Form)
