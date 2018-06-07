@@ -103,7 +103,9 @@ namespace KingMe
 
         public void posicoesDefault()
         {
-            txtVotos.Text = txtVotos.Text + Jogo.ExibirUltimaVotacao(Convert.ToInt32(this.idJogador), this.senhaJogador);
+            string ultimaVotacao = Jogo.ExibirUltimaVotacao(Convert.ToInt32(this.idJogador), this.senhaJogador);
+            if (ultimaVotacao.Contains("ERRO")) ultimaVotacao = "";
+            txtVotos.Text = txtVotos.Text + ultimaVotacao;
             this.A.Location = new Point(371, 16);
             this.B.Location = new Point(424, 16);
             this.C.Location = new Point(477, 16);
@@ -576,6 +578,14 @@ namespace KingMe
             cmbSetor.Items.Add("3");
             cmbSetor.Items.Add("4");
 
+
+            cmbDelay.Items.Add(0.5);
+            cmbDelay.Items.Add(1);
+            cmbDelay.Items.Add(3);
+            cmbDelay.Items.Add(5);
+            cmbDelay.Items.Add(10);
+            cmbDelay.SelectedIndex = 0;
+
             txtId.Text = this.idJogador;
             txtSenha.Text = this.senhaJogador;
             lblVersion.Text = "Version: "+Jogo.versao;
@@ -672,6 +682,11 @@ namespace KingMe
         private void rdbNao_CheckedChanged(object sender, EventArgs e)
         {
             this.voto = "N";
-        }        
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            timer1.Interval = Convert.ToInt32( 1000 * (Convert.ToDouble(cmbDelay.Text)));
+        }
     }
 }

@@ -88,6 +88,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtVotos = new System.Windows.Forms.TextBox();
+            this.cmbDelay = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pos50)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pos52)).BeginInit();
@@ -415,7 +417,7 @@
             // 
             // P
             // 
-            this.P.BackColor = System.Drawing.Color.Chartreuse;
+            this.P.BackColor = System.Drawing.Color.Transparent;
             this.P.Image = ((System.Drawing.Image)(resources.GetObject("P.Image")));
             this.P.Location = new System.Drawing.Point(371, 184);
             this.P.Name = "P";
@@ -439,7 +441,7 @@
             // 
             // O
             // 
-            this.O.BackColor = System.Drawing.Color.Orange;
+            this.O.BackColor = System.Drawing.Color.Transparent;
             this.O.Image = ((System.Drawing.Image)(resources.GetObject("O.Image")));
             this.O.Location = new System.Drawing.Point(533, 128);
             this.O.Name = "O";
@@ -451,7 +453,7 @@
             // 
             // N
             // 
-            this.N.BackColor = System.Drawing.Color.Yellow;
+            this.N.BackColor = System.Drawing.Color.Transparent;
             this.N.Image = ((System.Drawing.Image)(resources.GetObject("N.Image")));
             this.N.Location = new System.Drawing.Point(477, 128);
             this.N.Name = "N";
@@ -488,6 +490,7 @@
             // statusVez
             // 
             this.statusVez.AutoSize = true;
+            this.statusVez.BackColor = System.Drawing.Color.Transparent;
             this.statusVez.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusVez.ForeColor = System.Drawing.Color.Red;
             this.statusVez.Location = new System.Drawing.Point(360, 252);
@@ -671,7 +674,7 @@
             // lblVersion
             // 
             this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(512, 507);
+            this.lblVersion.Location = new System.Drawing.Point(771, 506);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(48, 13);
             this.lblVersion.TabIndex = 11;
@@ -681,11 +684,10 @@
             // 
             this.txtCartas.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCartas.Location = new System.Drawing.Point(638, 29);
-            this.txtCartas.Multiline = true;
             this.txtCartas.Name = "txtCartas";
             this.txtCartas.ReadOnly = true;
             this.txtCartas.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtCartas.Size = new System.Drawing.Size(227, 157);
+            this.txtCartas.Size = new System.Drawing.Size(227, 21);
             this.txtCartas.TabIndex = 12;
             // 
             // label1
@@ -702,9 +704,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(10, 8);
+            this.pictureBox1.Location = new System.Drawing.Point(3, -5);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(330, 506);
+            this.pictureBox1.Size = new System.Drawing.Size(351, 532);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
@@ -714,7 +716,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(635, 212);
+            this.label2.Location = new System.Drawing.Point(635, 62);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 17);
             this.label2.TabIndex = 16;
@@ -723,7 +725,7 @@
             // txtVotos
             // 
             this.txtVotos.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVotos.Location = new System.Drawing.Point(638, 238);
+            this.txtVotos.Location = new System.Drawing.Point(638, 88);
             this.txtVotos.Multiline = true;
             this.txtVotos.Name = "txtVotos";
             this.txtVotos.ReadOnly = true;
@@ -731,13 +733,36 @@
             this.txtVotos.Size = new System.Drawing.Size(227, 157);
             this.txtVotos.TabIndex = 15;
             // 
+            // cmbDelay
+            // 
+            this.cmbDelay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDelay.FormattingEnabled = true;
+            this.cmbDelay.Location = new System.Drawing.Point(638, 309);
+            this.cmbDelay.Name = "cmbDelay";
+            this.cmbDelay.Size = new System.Drawing.Size(121, 21);
+            this.cmbDelay.TabIndex = 17;
+            this.cmbDelay.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(635, 279);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 17);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Delay";
+            // 
             // Tabuleiro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(911, 526);
+            this.ClientSize = new System.Drawing.Size(885, 528);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cmbDelay);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtVotos);
             this.Controls.Add(this.label1);
@@ -898,5 +923,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtVotos;
+        private System.Windows.Forms.ComboBox cmbDelay;
+        private System.Windows.Forms.Label label3;
     }
 }
